@@ -1,18 +1,21 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+C_FLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC_BUILT_IN = env.c pwd.c
+SRC_BUILT_IN = env.c pwd.c cd.c
+
+SRC_ENVIRONMENT = environment.c free_stuff.c
 
 SRC = minishell.c \
-	  $(addprefix Built_in/, $(SRC_BUILT_IN))
+	  $(addprefix Built_in/, $(SRC_BUILT_IN)) \
+	  $(addprefix Environment/, $(SRC_ENVIRONMENT))
 
 OBJ = $(SRC:.c=.o)
 
-INCLUDES = -I . -I $(LIBFT_DIR)
+INCLUDES = -I Includes -I $(LIBFT_DIR)
 
 all: $(LIBFT) $(NAME)
 
@@ -23,7 +26,7 @@ $(NAME): $(OBJ)
 	$(CC) $(C_FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(C_FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(BONUS_OBJS)

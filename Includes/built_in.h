@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/27 19:21:58 by grivault          #+#    #+#             */
-/*   Updated: 2026/04/30 18:37:00 by grivault         ###   ########.fr       */
+/*   Created: 2026/05/01 02:02:09 by grivault          #+#    #+#             */
+/*   Updated: 2026/05/01 02:07:10 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <minishell.h>
+#ifndef BUILT_IN_H
+# define BUILT_IN_H
 
-int main(void)
-{
-	env();
-	return (0);
-}
+# include <minishell.h>
+# include <environment.h>
+
+void	env(t_env *head);
+void	pwd(t_env *head);
+void	cd(char *path, t_env *head);
+
+#endif

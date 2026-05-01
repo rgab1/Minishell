@@ -6,10 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:40:49 by grivault          #+#    #+#             */
-/*   Updated: 2026/04/27 18:58:03 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/01 02:09:10 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <minishell.h>
+
+#include <built_in.h>
 
 extern char	**environ;
 

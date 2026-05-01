@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/27 19:21:58 by grivault          #+#    #+#             */
-/*   Updated: 2026/04/30 18:37:00 by grivault         ###   ########.fr       */
+/*   Created: 2026/05/01 01:49:31 by grivault          #+#    #+#             */
+/*   Updated: 2026/05/01 02:07:58 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <minishell.h>
 
-int main(void)
-{
-	env();
-	return (0);
-}
+#ifndef ENVIRONMENT_H
+# define ENVIRONMENT_H
+
+# include <minishell.h>
+
+int		del_env_node(t_env **head, char *key);
+t_env	*new_env_node(t_env *head, char **key_and_value);
+t_env	*env_init(char **envp);
+
+#endif
