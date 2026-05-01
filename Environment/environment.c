@@ -6,13 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:32:09 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 01:59:08 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/01 02:59:43 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <environment.h>
-
-static extern char	**environ;
 
 int	del_env_node(t_env **head, char *key)
 {
@@ -42,35 +40,37 @@ int	del_env_node(t_env **head, char *key)
 	return (0);
 }
 
-t_env	*new_env_node(t_env *head, char	**key_and_value)
+void	new_env_node(t_env **head, char	**key_and_value)
 {
 	t_env	*current;
+	t_env	*temp;
 
 	current = (t_env *)malloc(sizeof(t_env));
+	if (!current)
+		return ;
 	current->key = key_and_value[0];
 	current->value = key_and_value[1];
 	current->next = NULL;
 	free(key_and_value);
-	if (!head)
-		head = current;
+	if (!*head)
+		*head = current;
 	else
 	{
-		while (head->next)
-			head = head->next;
-		head->next = current;
+		temp = *head;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = current;
 	}
 }
 
 t_env	*env_init(char **envp)
 {
 	t_env	*head;
-	int		i;
+	size_t	i;
 
-	head = (t_env *)malloc(sizeof(t_env));
-	if (!head)
-		return (exit(4), NULL);
-	while (environ[i])
-		new_env_node(head, ft_split(eviron[i++], "="));
-
+	i = 0;
+	head = NULL;
+	while (envp[i])
+		new_env_node(&head, ft_split(envp[i++], '='));
 	return (head);
 }

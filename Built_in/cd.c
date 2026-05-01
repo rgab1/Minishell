@@ -6,14 +6,15 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:08:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 02:08:42 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/01 02:19:40 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <built_in.h>
 
-void	cd(char *path)
+void	cd(char *path, t_env *head)
 {
+	(void)head;
 	if (!path)
 		path = "~";
 	chdir(path);

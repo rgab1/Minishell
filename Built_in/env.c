@@ -6,20 +6,17 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:40:49 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 02:09:10 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/01 03:05:58 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <built_in.h>
 
-extern char	**environ;
-
-void	env(void)
+void	env(t_env *head)
 {
-	size_t	i;
-
-
-	i = 0;
-	while (environ[i])
-		ft_printf("%s\n", environ[i++]);
+	while (head)
+	{
+		printf("%s=%s\n", head->key, head->value);
+		head = head->next;
+	}
 }
