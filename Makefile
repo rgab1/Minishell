@@ -15,9 +15,13 @@ SRC = minishell.c \
 
 OBJ = $(SRC:.c=.o)
 
+DEPENDENCIES = $(OBJ:.o=.d)
+
 INCLUDES = -I Includes -I $(LIBFT_DIR)
 
 all: $(LIBFT) $(NAME)
+
+-include $(DEPENDENCIES)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
@@ -29,10 +33,12 @@ $(NAME): $(OBJ)
 	$(CC) $(C_FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(BONUS_OBJS)
+	rm -f $(OBJ) $(DEPENDENCIES)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

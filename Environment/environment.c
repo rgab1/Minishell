@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:32:09 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 02:59:43 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/01 19:45:37 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	del_env_node(t_env **head, char *key)
 	length = ft_strlen(key);
 	if (ft_strncmp(temp->key, key, length + 1) == 0)
 	{
-		*head = temp->next;  // Shift the head pointer to the next node
+		*head = temp->next;
 		return (free_env_node(temp), 0);
 	}
 	while (temp)
@@ -34,8 +34,8 @@ int	del_env_node(t_env **head, char *key)
 			prev->next = temp->next;
 			return (free_env_node(temp), 0);
 		}
-		prev = temp;       // Save the current node as 'prev' before moving on
-		temp = temp->next; // Advance to the next node
+		prev = temp;
+		temp = temp->next;
 	}
 	return (0);
 }
@@ -63,6 +63,31 @@ void	new_env_node(t_env **head, char	**key_and_value)
 	}
 }
 
+static char	**extract_key_value(char *env_str)
+{
+	char	**pair;
+	char	*equal_pos;
+	size_t	key_len;
+
+	pair = (char **)malloc(sizeof(char *) * 3);
+	if (!pair)
+		return (NULL);
+	equal_pos = ft_strchr(env_str, '=');
+	if (equal_pos)
+	{
+		key_len = equal_pos - env_str;
+		pair[0] = ft_substr(env_str, 0, key_len);
+		pair[1] = ft_strdup(equal_pos + 1);
+	}
+	else
+	{
+		pair[0] = ft_strdup(env_str);
+		pair[1] = NULL;
+	}
+	pair[2] = NULL;
+	return (pair);
+}
+
 t_env	*env_init(char **envp)
 {
 	t_env	*head;
@@ -71,6 +96,6 @@ t_env	*env_init(char **envp)
 	i = 0;
 	head = NULL;
 	while (envp[i])
-		new_env_node(&head, ft_split(envp[i++], '='));
+		new_env_node(&head, extract_key_value(envp[i++]));
 	return (head);
 }

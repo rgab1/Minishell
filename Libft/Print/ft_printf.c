@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 10:23:07 by grivault          #+#    #+#             */
-/*   Updated: 2026/04/27 17:53:23 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/01 19:20:00 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-static void	conversion_choice(const char *input, t_printf *data, va_list args)
+static void	conversion_choice(const char *input, t_printf *data, va_list *args)
 {
 	char	conversion_char;
 
 	conversion_char = input[++data->index];
-	data->index ++;
+	data->index++;
 	if (conversion_char == 'c')
-		ft_putchar_data(va_arg(args, int), data);
+		ft_putchar_data(va_arg(*args, int), data);
 	else if (conversion_char == 's')
-		ft_putstr_data(va_arg(args, char *), data);
+		ft_putstr_data(va_arg(*args, char *), data);
 	else if (conversion_char == 'd' || conversion_char == 'i')
-		ft_putnbr_data(va_arg(args, long), data);
+		ft_putnbr_data(va_arg(*args, int), data);
 	else if (conversion_char == '%')
 		ft_putpercent_data(data);
 	else if (conversion_char == 'u')
-		ft_putud_data(va_arg(args, unsigned int), data);
+		ft_putud_data(va_arg(*args, unsigned int), data);
 	else if (conversion_char == 'x')
-		ft_putx_data(va_arg(args, unsigned int), data);
+		ft_putx_data(va_arg(*args, unsigned int), data);
 	else if (conversion_char == 'X')
-		ft_putxup_data(va_arg(args, unsigned int), data);
+		ft_putxup_data(va_arg(*args, unsigned int), data);
 	else if (conversion_char == 'p')
-		ft_putptr_data(va_arg(args, void *), data);
+		ft_putptr_data(va_arg(*args, void *), data);
 	else
 		data->index--;
 }
@@ -54,7 +54,7 @@ int	ft_printf(const char *input, ...)
 	while (input[data->index])
 	{
 		if (input[data->index] == '%')
-			conversion_choice(input, data, args);
+			conversion_choice(input, data, &args);
 		else
 		{
 			ft_putchar_data(input[data->index], data);

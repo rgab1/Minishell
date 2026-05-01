@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:40:49 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 03:05:58 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/01 19:20:29 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	env(t_env *head)
 {
 	while (head)
 	{
-		printf("%s=%s\n", head->key, head->value);
+		ft_printf("%s=%s\n", head->key, head->value);
 		head = head->next;
 	}
 }
