@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:32:09 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 19:45:37 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/02 21:23:26 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	new_env_node(t_env **head, char	**key_and_value)
 	}
 }
 
-static char	**extract_key_value(char *env_str)
+char	**extract_key_value(char *env_str)
 {
 	char	**pair;
 	char	*equal_pos;

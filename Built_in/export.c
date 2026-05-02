@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_error.c                                       :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/10 21:00:04 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 22:26:16 by grivault         ###   ########.fr       */
+/*   Created: 2026/05/02 21:09:27 by grivault          #+#    #+#             */
+/*   Updated: 2026/05/02 21:51:24 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-
-void	exit_error(char *error_msg, int error_code)
+static void	print_env_alphabetical(t_env *head)
 {
-	ft_putstr_fd(error_msg, 2);
-	exit(error_code);
+}
+
+void	export(char	*key_and_value, t_env **head)
+{
+	if (key_and_value)
+		new_env_node(head, extract_key_value(key_and_value));
+	else
+		print_env_alphabetical(*head);
 }

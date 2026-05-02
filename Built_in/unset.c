@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_error.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/10 21:00:04 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 22:26:16 by grivault         ###   ########.fr       */
+/*   Created: 2026/05/02 21:04:10 by grivault          #+#    #+#             */
+/*   Updated: 2026/05/02 21:09:00 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-
-void	exit_error(char *error_msg, int error_code)
+void	unset(char *key, t_env **head)
 {
-	ft_putstr_fd(error_msg, 2);
-	exit(error_code);
+	del_env_node(head, key);
 }

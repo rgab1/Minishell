@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_error.c                                       :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/10 21:00:04 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 22:26:16 by grivault         ###   ########.fr       */
+/*   Created: 2026/05/01 22:06:52 by grivault          #+#    #+#             */
+/*   Updated: 2026/05/01 22:09:42 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#ifndef ERRORS_H
+# define ERRORS_H
 
-void	exit_error(char *error_msg, int error_code)
-{
-	ft_putstr_fd(error_msg, 2);
-	exit(error_code);
-}
+# define ERROR_3 "minishell: cd: HOME not set\n"
+
+#endif
+

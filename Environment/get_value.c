@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_error.c                                       :+:      :+:    :+:   */
+/*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/10 21:00:04 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 22:26:16 by grivault         ###   ########.fr       */
+/*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
+/*   Updated: 2026/05/01 20:05:31 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <environment.h>
 
-void	exit_error(char *error_msg, int error_code)
+char *get_value(char *key, t_env *head)
 {
-	ft_putstr_fd(error_msg, 2);
-	exit(error_code);
+	size_t key_len;
+
+	key_len = ft_strlen(key);
+	while (head)
+	{
+		if (!ft_strncmp(key, head->key, key_len + 1))
+			return (head->value);
+		head = head->next;
+	}
+	return (NULL); // gerer l'erreur ou la key n'est pas trouve
 }
