@@ -5,9 +5,11 @@ C_FLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC_BUILT_IN = env.c pwd.c cd.c
+SRC_BUILT_IN = env.c pwd.c cd.c export.c unset.c
 
-SRC_ENVIRONMENT = environment.c free_stuff.c
+SRC_ENVIRONMENT = environment.c free_stuff.c get_value.c set_value.c
+
+SRC_PIPEX = 
 
 SRC = minishell.c \
 	  $(addprefix Built_in/, $(SRC_BUILT_IN)) \

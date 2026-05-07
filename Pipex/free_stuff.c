@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   free_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/27 19:21:58 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/07 17:57:28 by grivault         ###   ########.fr       */
+/*   Created: 2026/03/18 17:47:53 by grivault          #+#    #+#             */
+/*   Updated: 2026/03/18 17:47:58 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <minishell.h>
-#include <built_in.h>
 
-t_shell	*shell_init(char **envp)
+#include <stdlib.h>
+#include <pipex.h>
+
+void	free_split(char **split)
 {
-	t_shell	*shell;
+	int	i;
 
-	shell = (t_shell *)malloc(sizeof(t_shell));
-	if (!shell)
-		return (exit_error("Code erreur a definir: malloc failed", 3), NULL);
-	shell->env = env_init(envp);
-	return (shell);
+	i = 0;
+	if (!split)
+		return ;
+	while (split[i])
+		free(split[i++]);
+	free(split);
 }
 
-int main(int ac, char **av, char **envp)
+void	free_list(t_cmd *head)
 {
-	t_shell	*shell;
+	t_cmd	*tmp;
 
-	(void)ac;
-	(void)av;
-	shell = shell_init(envp);
-	env(shell);
-	return (0);
+	while (head)
+	{
+		tmp = head->next;
+		free_split(head->cmd);
+		free(head);
+		head = tmp;
+	}
 }

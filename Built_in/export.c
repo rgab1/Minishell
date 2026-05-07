@@ -6,18 +6,22 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 21:09:27 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/02 21:51:24 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/07 18:11:55 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static void	print_env_alphabetical(t_env *head)
-{
-}
+#include <minishell.h>
+#include <environment.h>
 
-void	export(char	*key_and_value, t_env **head)
+//a coder: print_env_alphabetical
+
+void	export(t_shell *shell)
 {
-	if (key_and_value)
-		new_env_node(head, extract_key_value(key_and_value));
-	else
-		print_env_alphabetical(*head);
+	if (!shell->cmd)
+		exit_error("Error a definir", 3);
+	if (shell->cmd->cmd[1])
+		new_env_node(&shell->env, extract_key_value(shell->cmd->cmd[1]));
+//	else
+//		print_env_alphabetical(shell->env);
+	exit(0);
 }

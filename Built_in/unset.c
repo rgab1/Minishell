@@ -6,11 +6,14 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 21:04:10 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/02 21:09:00 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/07 18:00:22 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	unset(char *key, t_env **head)
+void	unset(t_shell *shell)
 {
-	del_env_node(head, key);
+	if (ft_tablen(shell->cmd) != 2)
+		exit_error("Error code a definir, cmd a pas le bon nombre d'arg", 3);
+	del_env_node(&shell->env, shell->cmd[1]);
+	exit(0);
 }

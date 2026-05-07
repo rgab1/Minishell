@@ -6,18 +6,19 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 19:46:14 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 02:20:20 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/07 17:39:59 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <built_in.h>
 
-void	pwd(t_env *head)
+void	pwd(t_shell *shell)
 {
 	char	*cwd;
 
-	(void)head;
+	(void)shell;
 	cwd = getcwd(NULL, 0);
 	ft_printf("%s\n", cwd);
 	free(cwd);
+	exit(0);
 }
