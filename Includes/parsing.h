@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/05/10 22:50:09 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/05/11 01:41:50 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+#define SINGLE_COT 39
+#define DOUBLE_COT 34
+#define ESPACE 32
+#define TAB	9
 
 typedef enum e_tokens_type
 {
