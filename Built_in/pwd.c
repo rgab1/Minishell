@@ -6,13 +6,13 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 19:46:14 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/07 17:39:59 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/11 03:05:39 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <built_in.h>
+#include <minishell.h>
 
-void	pwd(t_shell *shell)
+int	pwd(t_shell *shell)
 {
 	char	*cwd;
 
@@ -20,5 +20,5 @@ void	pwd(t_shell *shell)
 	cwd = getcwd(NULL, 0);
 	ft_printf("%s\n", cwd);
 	free(cwd);
-	exit(0);
+	return (0);
 }

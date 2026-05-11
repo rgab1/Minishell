@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 21:09:27 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/11 03:05:20 by grivault         ###   ########.fr       */
+/*   Created: 2026/05/11 01:23:55 by grivault          #+#    #+#             */
+/*   Updated: 2026/05/11 01:27:45 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <environment.h>
 #include <minishell.h>
+#include <pipex.h>
 
-//a coder: print_env_alphabetical
-
-int	export(t_shell *shell)
+void	free_shell(t_shell *shell)
 {
-	if (!shell->cmd->cmd)
-		return (exit_error("Error a definir", 3), 1);
-	if (shell->cmd->cmd[1])
-		new_env_node(&shell->env, extract_key_value(shell->cmd->cmd[1]));
-//	else
-//		print_env_alphabetical(shell->env);
-	return (0);
+	free_env(shell->env);
+	free_list(shell->cmd);
+	free(shell);
 }

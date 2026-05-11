@@ -7,7 +7,9 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_BUILT_IN = env.c pwd.c cd.c export.c unset.c
 
-SRC_ENVIRONMENT = environment.c free_stuff.c get_value.c set_value.c
+SRC_ENVIRONMENT = environment.c free_env.c get_value.c set_value.c
+
+SRC_UTILS = free_shell.c
 
 SRC_PIPEX = 
 

@@ -6,12 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:08:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/07 18:09:42 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/11 03:04:51 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <built_in.h>
-#include <environment.h>
+#include <minishell.h>
 
 static char	*path_resolution(char *path, t_env *head)
 {
@@ -56,19 +55,18 @@ static void	update_wd_vars(t_env **head)
 		perror("minishell: cd");
 }
 
-void	cd(t_shell *shell)
+int	cd(t_shell *shell)
 {
 	char	*path;
 
 	path = path_resolution(shell->cmd->cmd[1], shell->env);
 	if (!path)
-		return ;
+		return (1);
 	if (chdir(path) != 0)
-		perror("minishell: cd");
-	else
-	{
-		ft_printf("%s\n", get_value("OLDPWD", shell->env));
-		update_wd_vars(&shell->env);
-	}
+		return (perror("minishell: cd"), free(path), 1);
+	if (shell->cmd->cmd[1] && ft_strncmp(shell->cmd->cmd[1], "-", 2) == 0)
+		ft_printf("%s\n", path);
+	update_wd_vars(&shell->env);
 	free(path);
+	return (0);
 }
