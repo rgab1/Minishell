@@ -6,11 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/05/11 01:41:47 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/05/12 06:07:27 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/parsing.h"
+#include "parsing.h"
 
 t_tokens    *create_tokens(int i, char *str, t_token_type type, 
                 t_tokens *head)
@@ -88,4 +88,4 @@ int main (int ac, char **av, char **envp)
     }
     free(line);
     return  (0);
-}fix: gestion des noeuds et creation des tokens, pas encore tester, a MAJ. feat: readline au debut du parsing pour recuperer l'input du user
+}
