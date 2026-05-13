@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/05/12 06:40:18 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/05/14 00:43:38 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ typedef struct s_tokens
 	struct s_tokens	*next;
 }					t_tokens;
 
+size_t  manage_lex(const char **s, size_t start);
+size_t	index_in_cot(const char *str, size_t i, int car);
 
 #endif
