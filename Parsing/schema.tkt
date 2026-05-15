@@ -41,13 +41,15 @@ My_SHELL>
 rappel enum :
 typedef enum e_tokens_type
 {
-	WORD,
-	CMD,
-	FLAGS,
-	ARGS,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	HREDIR_IN,
-	HREDIR_OUT,
+	WORD,  // = 0
+	CMD,   // = 1
+	FLAGS, // = 2
+	ARGS,  // = 3
+	PIPE,  // = 4
+	REDIR_IN,   // = 5
+	REDIR_OUT,  // = 6
+	HREDIR_IN,  // = 7
+	HREDIR_OUT, // = 8
 }					t_token_type;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
