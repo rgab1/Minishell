@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/05/12 06:07:27 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/05/15 06:23:01 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_tokens    *create_tokens(int i, char *str, t_token_type type, 
-                t_tokens *head)
+t_tokens    *create_tokens(char *str, t_token_type type)
 {
     t_tokens *new;
     
@@ -23,34 +22,54 @@ t_tokens    *create_tokens(int i, char *str, t_token_type type,
     new->data = str;
     new->type = type;
     new->next = NULL;
-    if (i == 1)
-        head = new;
-    new->head = head;
     return (new);    
 }
 
-void    lexer(char *tab, t_tokens *nodes, t_tokens *head)
+void    ft_lstadd_token(t_tokens **lst, t_tokens *new)
+{
+    t_tokens    *temp;
+
+    if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+        (*lst)->head = *lst;
+		return ;
+	}
+    temp = *lst;
+	while (temp->next != NULL)
+        temp = temp->next;
+	temp->next = new;
+    new->head = *lst;
+}
+
+t_tokens    *manage_token(char **tab)
 {
     int i;
-    
-    i = 1;
+    t_tokens    *temp;
+    t_tokens    *lst;
+
+    lst = NULL;
+    i = 0;
     while (tab[i])
     {
-        if (tab[i] == "|")
-            nodes = create_tokens(i, tab[i], PIPE, head);
-        else if (tab[i] == "<")
-            nodes = create_tokens(i, tab[i], REDIR_IN, head);
-        else if (tab[i] == ">")
-            nodes = create_tokens(i, tab[i], REDIR_OUT, head);
-        else if (tab[i] == "<<")
-            nodes = create_tokens(i, tab[i], HREDIR_IN, head);
-        else if (tab[i] == ">>")
-            nodes = create_tokens(i, tab[i], HREDIR_OUT, head);
+        if (ft_strcmp(tab[i], "|") == 0)
+            temp = create_tokens(tab[i], PIPE);
+        else if (ft_strcmp(tab[i], "<") == 0)
+            temp = create_tokens(tab[i], REDIR_IN);
+        else if (ft_strcmp(tab[i], ">") == 0)
+            temp = create_tokens(tab[i], REDIR_OUT);
+        else if (ft_strcmp(tab[i], "<<") == 0)
+            temp = create_tokens(tab[i], HREDIR_IN);
+        else if (ft_strcmp(tab[i], ">>") == 0)
+            temp = create_tokens(tab[i], HREDIR_OUT);
         else
-            nodes = create_tokens(i, tab[i], WORD, head);
-        nodes = nodes->next;
+            temp = create_tokens(tab[i], WORD);
+        ft_lstadd_token(&lst, temp);
         i++;
     }
+    return (lst);
 }
 
 void    print_lst(t_tokens  *nodes)
@@ -68,11 +87,10 @@ void    print_lst(t_tokens  *nodes)
 int main (int ac, char **av, char **envp)
 {
     t_tokens    *nodes;
-    t_tokens    *head;
     char        *line;
+    char        **tab;
 
     nodes = NULL;
-    head = NULL;
     (void) ac;
     (void) av;
     while (1)
@@ -83,7 +101,9 @@ int main (int ac, char **av, char **envp)
             printf("exit\n");
             break;
         }
-        lexer(line, nodes, head);
+        tab = split_star(line);
+        nodes = manage_token(tab);
+        
         print_lst(nodes);
     }
     free(line);

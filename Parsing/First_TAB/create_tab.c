@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   create_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/05/14 00:45:03 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/05/15 05:04:32 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 // 	return (sub_str);
 // }
 
+// POUR COUNT WORD ET MALLOC
 size_t	manage_count_cot(char const *s, size_t *i)
 {
 	size_t	res;
@@ -82,29 +83,6 @@ static size_t	count_word(char const *s)
 	return (count);
 }
 
-size_t	index_in_cot(const char *str, size_t i, int car)
-{
-	size_t	add;
-
-	add = i;
-	if (car == SINGLE_COT)
-	{
-		i++;
-		while (str[i] != SINGLE_COT)
-			i++;
-		i++;
-	}
-	else if (car == DOUBLE_COT)
-	{
-		i++;
-		while (str[i] != DOUBLE_COT)
-			i++;
-		i++;
-	}
-	add = i - add;
-	return (add);
-}
-
 static char	*ft_next_word(const char **s)
 {
 	size_t	start;
@@ -146,34 +124,22 @@ char	**split_star(char const *str)
 	return (tab);
 }
 
-int	main(void)
-{
-	const char	*str = " car'Hello' 'World' c'est' Hassan 'eheheh' bye bye";
-	char		**tab;
-	int			i;
+// int	main(void)
+// {
+// 	const char	*str = " car'Hello' < << > >> | 'World' c'est' Hassan 'eheheh' bye bye";
+// 	char		**tab;
+// 	int			i;
 
-	i = 0;
-	tab = split_star(str);
-	// while (tab[i] != NULL)
-	// {
-	// 	printf("%s\n", tab[i]);
-	// 	i++;
-	// }
-    printf("%s\n", tab[2]);
-    printf("%s\n", tab[5]);
-    printf("%s\n", tab[1]);
-	free(tab);
-	return (0);
-}
-
-/* actuellement sur next word pour recuperer chaque mots.
-	l'objectif est de recuperer "..." ou '...'
-	par consequent :
-	- quand ' trouver chercher jusqu'a ' prochain
-	- inversement avec "
-
-	(une autre fonction dedier a cela ?)
-	(creer une variable char pour verifier si oui mettre le car dedans jusqu'a
-	trouver la meme ?)
-
-*/
+// 	i = 0;
+// 	tab = split_star(str);
+// 	// while (tab[i] != NULL)
+// 	// {
+// 	// 	printf("%s\n", tab[i]);
+// 	// 	i++;
+// 	// }
+//     printf("%s\n", tab[2]);
+//     printf("%s\n", tab[5]);
+//     printf("%s\n", tab[1]);
+// 	free(tab);
+// 	return (0);
+// }
