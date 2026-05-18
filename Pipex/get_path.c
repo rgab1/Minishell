@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:17 by grivault          #+#    #+#             */
-/*   Updated: 2026/04/10 20:54:09 by grivault         ###   ########.fr       */
+/*   Updated: 2026/05/14 19:30:02 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,27 @@
 #include <pipex.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <minishell.h>
 
 // Helper to grab the PATH array and save lines in get_path
-static char	**get_env_paths(char **envp)
+static char	**get_env_paths(t_shell *shell)
 {
-	int	i;
+/*	int	i;
 
 	i = 0;
 	while (envp && envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
 	if (!envp || !envp[i])
+		return (ft_split(DEFAULT_PATH, ':'));
+	return (ft_split(envp[i] + 5, ':'));
+	*/
+
+	char	*path;
+
+	if (!shell || !shell->env)
+		return (ft_split(DEFAULT_PATH, ':'));
+	path = get_value("PATH", shell->env);
+	if (!path)
 		return (ft_split(DEFAULT_PATH, ':'));
 	return (ft_split(envp[i] + 5, ':'));
 }
