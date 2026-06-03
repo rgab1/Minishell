@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/05/15 06:23:01 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/05/24 21:44:36 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,3 +109,16 @@ int main (int ac, char **av, char **envp)
     free(line);
     return  (0);
 }
+
+/* il faut creer une boucle (jusqu'a que la liste soit vide ou qu'il y a un pipe)
+et inserer la data dans la struct :
+
+typedef struct s_cmd
+{
+    char            **argv;      // Le tableau de la commande (ex: ["grep", "hassan", NULL])
+    char            *infile;    // Si une redirection < est présente dans CE bloc
+    char            *outfile;   // Si une redirection > ou >> est présente dans CE bloc
+    int             redir_type; // Pour savoir si c'est >, >>, etc.
+    struct s_cmd    *next;      // Pointeur vers la commande SUIVANTE (après le pipe)
+}   t_cmd;
+*/

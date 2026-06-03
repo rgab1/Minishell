@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+q/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
@@ -14,11 +14,15 @@
 # define PIPEX_H
 # define DEFAULT_PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
+#include <sys/types.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+
 typedef struct s_cmd
 {
+	char			**cmd;
 	int				in_fd;
 	int				out_fd;
-	char			**cmd;
 	struct s_cmd	*next;
 }			t_cmd;
 
