@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/06/03 19:01:22 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/05 14:42:35 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 #define ESPACE 32
 // #define TAB	9
 
+#define ERROR_SYNTAXE = "Syntaxe error"
+
+typedef struct s_cmd t_cmd;
+
 typedef enum e_tokens_type
 {
 	WORD,
-	CMD,
-	FLAGS,
-	ARGS,
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
@@ -66,5 +67,12 @@ static size_t	count_word(char const *s);
 static char	*ft_next_word(const char **s);
 char	**split_star(char const *str);
 
+//parse.c
+int	ft_tokensize(t_tokens *lst);
+static t_cmd	*init_cmd(int len_tok);
+t_cmd	*create_cmd_struct(t_tokens *nodes);
+t_cmd *manage_cmd(t_tokens *tokens, t_cmd *cmd, int *j_tab);
+int    add_str(t_tokens *tokens, t_cmd *cmd, int *j_tab);
+t_tokens	*change_fd(t_tokens *tokens, t_cmd *cmd, int redir);
 
 #endif

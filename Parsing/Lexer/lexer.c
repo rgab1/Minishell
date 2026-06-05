@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/05/24 21:44:36 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/05 14:41:39 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void    print_lst(t_tokens  *nodes)
 int main (int ac, char **av, char **envp)
 {
     t_tokens    *nodes;
+    t_cmd       *cmd;
     char        *line;
     char        **tab;
 
@@ -103,8 +104,8 @@ int main (int ac, char **av, char **envp)
         }
         tab = split_star(line);
         nodes = manage_token(tab);
-        
         print_lst(nodes);
+        cmd = create_cmd_struct(nodes);
     }
     free(line);
     return  (0);
