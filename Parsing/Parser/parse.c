@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/06/05 14:21:02 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/05 17:49:09 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,72 +62,107 @@ t_cmd	*create_cmd_struct(t_tokens *nodes)
 			cmd->next = init_cmd(ft_tokensize(nodes));
 		    cmd = cmd->next;
         }
-        cmd = manage_cmd(nodes, cmd, &j_tab);
+        cmd = manage_cmd(&nodes, cmd, &j_tab);
         if (cmd == NULL)
             return (NULL);
 	}
 	return (cmd);
 }
-    
-t_cmd *manage_cmd(t_tokens *tokens, t_cmd *cmd, int *j_tab)
+
+
+
+t_cmd   *manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 {
-    while (tokens->type != PIPE && !tokens)
+    while ((*tokens)->type != PIPE && tokens)
     {
-        if (tokens->type == WORD)
+        if ((*tokens)->type == WORD)
         {
-            if (add_str(tokens, cmd, j_tab) == -1)
-                return (NULL);
+            add_str(tokens, cmd, j_tab);
+            *tokens = (*tokens)->next;
         }
-        else if (tokens->type == REDIR_IN)
+        else if ((*tokens)->type == REDIR_IN)
         {
-            tokens = change_fd(tokens, cmd, REDIR_IN);
+            change_fd(tokens, cmd, REDIR_IN);
             if (tokens == NULL)
                 return (NULL);
+            *tokens = (*tokens)->next;
         }
-        else if (tokens->type == REDIR_OUT)
+        else if ((*tokens)->type == REDIR_OUT)
         {
-            tokens = change_fd(tokens, cmd, REDIR_OUT);
+            change_fd(tokens, cmd, REDIR_OUT);
             if (tokens == NULL)
                 return (NULL);
+            *tokens = (*tokens)->next;
         }
     }
+    return (cmd);
 }
 
-int    add_str(t_tokens *tokens, t_cmd *cmd, int *j_tab)
+void    add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 {
-    int size;
-
-    size = strlen(tokens->data);
-    cmd->cmd[*j_tab] = tokens->data;
-    *j_tab ++;
-    return (0);
+    cmd->cmd[*j_tab] = (* tokens)->data;
+    (* j_tab) ++;
 }
 
-t_tokens	*change_fd(t_tokens *tokens, t_cmd *cmd, int redir)
+int    change_fd(t_tokens **tokens, t_cmd *cmd, int redir)
 {
-	if (tokens->next == NULL)
+	if ((*tokens)->next == NULL)
 		// appel fonction liberer memoire + putstring
-		return (NULL);
-    if (tokens->next->data == NULL)
+		return (-1);
+    if ((*tokens)->next->data == NULL)
 		// appel fonction liberer memoire + putstring
-		return (NULL);
-	if (tokens->type == redir)
+		return (-1);
+	if ((*tokens)->type == redir)
     {
-        tokens = tokens->next;
-		cmd->in_fd = open(tokens->data, O_RDONLY);
+        *tokens = (*tokens)->next;
+		cmd->in_fd = open((*tokens)->data, O_RDONLY);
     }
-	else if (tokens->type == redir)
+	else if ((*tokens)->type == redir)
 	{
-        tokens = tokens->next;
-        cmd->out_fd = open(tokens->data, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        *tokens = (*tokens)->next;
+        cmd->out_fd = open((*tokens)->data, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     }
     if (cmd->in_fd == -1 || cmd->out_fd == -1)
     {
-        perror(tokens->data);
-        return (NULL);
+        perror((*tokens)->data);
+        return (-1);
     }
-	tokens = tokens->next;
-    return (tokens); 
+    
+    return (0); 
 }
 /* il faut gerer le cas ou on avait deja modifier les in/out _fd 
 et reverifier derriere */   
+
+void    put_cmd(t_cmd *cmd)
+{
+    int i;
+
+    if (!cmd)
+        printf("NOOOO");
+    i = 0;
+    while(cmd)
+    {
+        printf("ENTRER DANS BOUCLE");
+        printf("cmd : %d - %s\n", i, cmd->cmd);
+        printf("cmd : %d - %d\n", i, cmd->in_fd);
+        printf("cmd : %d - %d\n", i, cmd->out_fd);
+        printf("----------------------");
+        cmd = cmd->next;
+        i++;
+    }
+}
+
+// t_tokens    *browse_tokens(t_tokens **tokens, int  i_tok)
+// {
+//     int index;
+
+//     index = 0;
+//     while(index <= i_tok)
+//     {
+//         *tokens = (*tokens)->next;
+//         index ++;
+//     }
+//     return (*tokens);
+// }
+
+// HELLO | WORLD | EHEHEHE < BAHAHA
