@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/06/14 11:06:33 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/14 17:15:29 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,43 @@ t_cmd	*create_cmd_struct(t_tokens *nodes)
 	t_cmd	*tmp;
 
 	j_tab = 0;
-	cmd = malloc(sizeof(t_cmd) + 1);
-	if (!cmd)
-		return (NULL);
 	while (nodes)
 	{
 		if (j_tab == 0)
 		{
 			cmd = init_cmd(ft_tokensize(nodes));
+			if (cmd == NULL)
+				return (exit_free(nodes, cmd, NULL));// gestion erreur wip
 			tmp = cmd;
 		}
 		else
-			manage_pipe(&cmd, &nodes);
+			if (manage_pipe(&nodes, &cmd, j_tab) == -1)
+                return (NULL);
 		cmd = manage_cmd(&nodes, cmd, &j_tab);
 		if (cmd == NULL)
-			return (NULL);
+			return (exit_free(nodes, cmd, NULL));// gestion erreur wip
 	}
+	cmd->cmd[j_tab] = NULL;
 	return (tmp);
 }
 
-void	manage_pipe(t_cmd **cmd, t_tokens **nodes)
+int	manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab)
 {
 	if ((*nodes)->type == PIPE)
 	{
 		(*nodes) = (*nodes)->next;
+        (*cmd)->cmd[*j_tab] = NULL;
+		(*j_tab)++;
 		(*cmd)->next = init_cmd(ft_tokensize((*nodes)));
+		if ((*cmd) == NULL)
+			return (exit_free(nodes, cmd, NULL));
 		(*cmd) = (*cmd)->next;
 	}
 	else
 	{
 		(*cmd)->next = init_cmd(ft_tokensize((*nodes)));
+        if ((*cmd) == NULL)
+			return (exit_free(nodes, cmd, NULL));
 		(*cmd) = (*cmd)->next;
 	}
 }
@@ -82,14 +89,16 @@ t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 		}
 		else if ((*tokens)->type == REDIR_IN)
 		{
-			change_fd(tokens, cmd, REDIR_IN);
+			if (change_fd(tokens, cmd, REDIR_IN) == -1)
+				return (NULL);
 			if (tokens == NULL)
 				return (NULL);
 			*tokens = (*tokens)->next;
 		}
 		else if ((*tokens)->type == REDIR_OUT)
 		{
-			change_fd(tokens, cmd, REDIR_OUT);
+			if (change_fd(tokens, cmd, REDIR_OUT) == -1)
+				return (NULL);
 			if (tokens == NULL)
 				return (NULL);
 			*tokens = (*tokens)->next;
@@ -101,7 +110,6 @@ t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 int	change_fd(t_tokens **tokens, t_cmd *cmd, int redir)
 {
 	if ((*tokens)->next == NULL || (*tokens)->next->data == NULL)
-		// appel fonction liberer memoire + putstring
 		return (-1);
 	if (((*tokens)->type == redir) && (redir == REDIR_IN))
 	{
