@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/06/05 17:47:59 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/14 11:06:47 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,6 @@ typedef enum e_tokens_type
 	HREDIR_OUT,
 }						t_token_type;
 
-// typedef struct  s_lexer
-// {
-//     char    *word;
-//     char    *cmd;
-//     char    *flags;
-//     char    direction;
-//     int     pipe;
-//     s_lexer *next;
-//     t_token_type    type;
-// }               t_lexer;
-
 typedef struct s_tokens
 {
 	char				*data;
@@ -68,12 +57,15 @@ static char				*ft_next_word(const char **s);
 char					**split_star(char const *str);
 
 // parse.c
-int						ft_tokensize(t_tokens *lst);
 static t_cmd			*init_cmd(int len_tok);
 t_cmd					*create_cmd_struct(t_tokens *nodes);
 t_cmd					*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab);
-void					add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab);
 int						change_fd(t_tokens **tokens, t_cmd *cmd, int redir);
+void					manage_pipe(t_cmd **cmd, t_tokens **nodes);
+
+// parse_utils.c
+int						ft_tokensize(t_tokens *lst);
+void					add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab);
 void					put_cmd(t_cmd *cmd);
 
 #endif
