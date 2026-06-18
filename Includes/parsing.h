@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/06/14 11:06:47 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/16 17:39:54 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,16 @@ static t_cmd			*init_cmd(int len_tok);
 t_cmd					*create_cmd_struct(t_tokens *nodes);
 t_cmd					*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab);
 int						change_fd(t_tokens **tokens, t_cmd *cmd, int redir);
-void					manage_pipe(t_cmd **cmd, t_tokens **nodes);
+int						manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab);
 
 // parse_utils.c
 int						ft_tokensize(t_tokens *lst);
 void					add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab);
 void					put_cmd(t_cmd *cmd);
+
+// exit_free.c
+void					exit_free(t_tokens *token, t_cmd *cmd, char *str);
+void					free_tokens(t_tokens *token);
+void					free_cmd(t_cmd *cmd);
 
 #endif
