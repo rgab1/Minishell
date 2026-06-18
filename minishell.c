@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 19:21:58 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/07 17:57:28 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/18 17:53:51 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
@@ -31,5 +31,7 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	shell = shell_init(envp);
 	env(shell);
+	write(1, "\n", 1);
+	export(shell);
 	return (0);
 }

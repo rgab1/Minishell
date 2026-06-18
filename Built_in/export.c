@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 21:09:27 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/18 06:10:40 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/18 18:10:11 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,57 @@ static size_t	env_count(t_env *env)
 	return (i);
 }
 
+static void	env_bubble_sort(t_env **arr)
+{
+	int		swapped;
+	size_t	i;
+	t_env	*temp;
+
+	swapped = 1;
+	while (swapped)
+	{
+		swapped = 0;
+		i = 0;
+		while (arr[i] && arr[i + 1])
+		{
+			if (ft_strcmp(arr[i]->key, arr[i + 1]->key) > 0)
+			{
+				temp = arr[i];
+				arr[i] = arr[i + 1];
+				arr[i + 1] = temp;
+				swapped = 1;
+			}
+			i++;
+		}
+	}
+}
+
+static void	print_sorted_arr(t_env **arr)
+{
+	size_t	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		if (arr[i]->value)
+			ft_printf("declare -x %s=\"%s\"\n", arr[i]->key, arr[i]->value);
+		else
+			ft_printf("declare -x %s\n", arr[i]->key);
+		i++;
+	}
+}
+
 void	print_env_alphabetical(t_env *env)
 {
 	t_env	**arr;
 	t_env	*temp;
-	size_t	count;
 	size_t	i;
-	size_t	j;
 
 	if (!env)
 		return ;
-	count = env_count(env);
-	arr = (t_env **)malloc(sizeof(t_env *) * (count + 1));
+	arr = (t_env **)malloc(sizeof(t_env *) * (env_count(env) + 1));
 	if (!arr)
-		return ; // Add your specific error exit here if you want
-
-	/* 1. Fill the array with pointers */
+		return (exit_error("Malloc failed", 4));
 	i = 0;
 	temp = env;
 	while (temp)
@@ -49,38 +84,10 @@ void	print_env_alphabetical(t_env *env)
 		temp = temp->next;
 	}
 	arr[i] = NULL;
-
-	/* 2. Bubble Sort the array of pointers */
-	i = 0;
-	while (i < count - 1)
-	{
-		j = 0;
-		while (j < count - i - 1)
-		{
-			if (ft_strcmp(arr[j]->key, arr[j + 1]->key) > 0)
-			{
-				temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
-			j++;
-		}
-		i++;
-	}
-
-	/* 3. Print in alphabetical order */
-	i = 0;
-	while (i < count)
-	{
-		if (arr[i]->value)
-			ft_printf("declare -x %s=\"%s\"\n", arr[i]->key, arr[i]->value);
-		else
-			ft_printf("declare -x %s\n", arr[i]->key);
-		i++;
-	}
+	env_bubble_sort(arr);
+	print_sorted_arr(arr);
 	free(arr);
 }
-//a coder: print_env_alphabetical
 
 int	export(t_shell *shell)
 {
