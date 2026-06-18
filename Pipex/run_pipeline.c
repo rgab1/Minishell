@@ -6,36 +6,38 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/03/18 17:49:08 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/05 16:42:14 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <pipex.h>
 
-void	run_pipeline(t_cmd *current, char **envp, int *pid)
+void	run_pipeline(t_shell *shell, int *pid)
 {
 	int		fd[2];
 	t_cmd	*head;
 
-	head = current;
-	while (current)
+	head = shell->cmd;
+	while (shell->cmd)
 	{
-		if (current->next)
+		if (shell->cmd->next)
 		{
 			pipe(fd);
-			current->out_fd = fd[1];
-			current->next->in_fd = fd[0];
+			shell->cmd->out_fd = fd[1];
+			shell->cmd->next->in_fd = fd[0];
 		}
+		if (is_builtin(shell))
+			continue ;
 		*pid = fork();
 		if (*pid == 0)
 		{
-			if (current->next)
+			if (shell->cmd->next)
 				close(fd[0]);
-			run_command(current, envp, head);
+			run_command(shell->cmd, get_envp(shell), head);
 		}
-		close(current->in_fd);
-		close(current->out_fd);
-		current = current->next;
+		close(shell->cmd->in_fd);
+		close(shell->cmd->out_fd);
+		shell->cmd = shell->cmd->next;
 	}
 }

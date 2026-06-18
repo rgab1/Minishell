@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/04/10 21:19:28 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/05 14:39:59 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void run_command(t_cmd *current, char **envp, t_cmd *head)
 	exit_code = 127;
 	if (access(path, X_OK) != 0)
 		exit_code = 126;
-	return (free(path), free_list(head), exit(exit_code));
+	return (free(path), free_envp(envp), free_list(head), exit(exit_code));
 }
