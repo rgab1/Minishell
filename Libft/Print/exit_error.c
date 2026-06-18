@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 21:00:04 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 22:26:16 by grivault         ###   ########.fr       */
+/*   Updated: 2026/04/10 21:00:06 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	exit_error(char *error_msg, int error_code)
 {
-	ft_putstr_fd(error_msg, 2);
+	puterror(error_msg);
 	exit(error_code);
 }

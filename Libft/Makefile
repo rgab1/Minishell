@@ -6,7 +6,7 @@
 #    By: grivault <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/24 11:06:44 by grivault          #+#    #+#              #
-#    Updated: 2025/11/24 11:19:19 by grivault         ###   ########.fr        #
+#    Updated: 2026/06/18 05:48:06 by grivault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC_PRINTF = checks.c data_init.c ft_putchar_data.c ft_putx_data.c \
 SRC_STR = ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
 		  ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c \
 		  ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c \
-		  ft_toupper.c free_strings.c
+		  ft_toupper.c free_strings.c ft_strcmp.c
 
 SRC = $(addprefix List/, $(SRC_LIST)) \
 	  $(addprefix Memory/, $(SRC_MEM)) \
