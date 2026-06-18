@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 22:39:26 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/18 05:47:42 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/18 06:00:43 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -27,7 +27,7 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
-int		ft_strcmp(const char *s1, const char s2);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_printf(const char *input, ...);
 void	exit_error(char *error_msg, int error_code);
 size_t	ft_tablen(void **tab);
