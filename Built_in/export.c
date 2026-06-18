@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 21:09:27 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/18 05:58:29 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/18 06:10:40 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	print_env_alphabetical(t_env *env)
 
 	if (!env)
 		return ;
-	count = get_env_size(env);
-	arr = (t_env **)malloc(sizeof(t_env *) * count);
+	count = env_count(env);
+	arr = (t_env **)malloc(sizeof(t_env *) * (count + 1));
 	if (!arr)
 		return ; // Add your specific error exit here if you want
 
@@ -48,6 +48,7 @@ void	print_env_alphabetical(t_env *env)
 		arr[i++] = temp;
 		temp = temp->next;
 	}
+	arr[i] = NULL;
 
 	/* 2. Bubble Sort the array of pointers */
 	i = 0;
