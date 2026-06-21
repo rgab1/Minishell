@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:17 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/14 19:30:02 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/18 20:17:17 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static char	**get_env_paths(t_shell *shell)
 		return (ft_split(DEFAULT_PATH, ':'));
 	return (ft_split(envp[i] + 5, ':'));
 	*/
-
 	char	*path;
 
 	if (!shell || !shell->env)
@@ -36,10 +35,10 @@ static char	**get_env_paths(t_shell *shell)
 	path = get_value("PATH", shell->env);
 	if (!path)
 		return (ft_split(DEFAULT_PATH, ':'));
-	return (ft_split(envp[i] + 5, ':'));
+	return (ft_split(path, ':'));
 }
 
-char	*get_path(char *cmd, char **envp)
+char	*get_path(t_shell *shell, char *cmd)
 {
 	int		i;
 	char	**paths;
@@ -52,7 +51,7 @@ char	*get_path(char *cmd, char **envp)
 			return (ft_strdup(cmd));
 		return (NULL);
 	}
-	paths = get_env_paths(envp);
+	paths = get_env_paths(shell);
 	i = 0;
 	while (paths && paths[i])
 	{

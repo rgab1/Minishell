@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:47:53 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/05 14:42:50 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/18 20:18:34 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_split(char **split)
 
 void	free_cmd(t_cmd *current)
 {
-	free_split(head->cmd);
+	free_split(current->cmd);
 	free(current);
 }
 
