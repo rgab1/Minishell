@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:46:43 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/05 15:43:58 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/28 08:04:02 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_cmd
 	char			**cmd;
 	int				in_fd;
 	int				out_fd;
+	char			*namefile;
 	struct s_cmd	*next;
 }			t_cmd;
 

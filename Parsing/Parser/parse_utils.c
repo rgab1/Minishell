@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 10:41:46 by hassmou           #+#    #+#             */
-/*   Updated: 2026/06/16 18:12:09 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/28 07:54:13 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,17 @@ void	put_cmd(t_cmd *cmd)
 	while (cmd)
 	{
 		printf("ENTRER DANS BOUCLE\n");
-		printf("cmd : %d - %s\n", i, cmd->cmd);
+		while (cmd->cmd[j])
+			{
+				printf("cmd : %d - %s\n", i, cmd->cmd[j]);\
+				j++;
+			}
 		printf("cmd : %d - %d\n", i, cmd->in_fd);
 		printf("cmd : %d - %d\n", i, cmd->out_fd);
 		printf("----------------------\n");
 		cmd = cmd->next;
 		i++;
-		j++;
+		j = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 15:58:41 by hassmou           #+#    #+#             */
-/*   Updated: 2026/06/16 13:44:34 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/28 08:05:27 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	free_cmd(t_cmd *cmd)
 		{
 			temp_cmd = cmd->next;
 			free(cmd->cmd);
+			if (cmd->namefile)
+				free(cmd->namefile);
 			free(cmd);
 			cmd = temp_cmd;
 		}
