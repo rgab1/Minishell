@@ -44,6 +44,10 @@ cmd : 2 - 3
 My_SHELL> 
 
 Il faut faire en sorte de changer la variable 
-d'envrionnement par sa value 
+d'envrionnement par sa value (A voir avec les cas speciaux, 
+si il n'existe pas alors c'est null et on raccoursis la string;
+s'il y a plusieurs expansions a faire de suite 
+ex: $USER$PATH;
+le $? a gerer aussi)
 
 Ajout de la fonctionnaliter append
