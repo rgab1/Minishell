@@ -6,11 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/05/15 05:04:32 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/01 19:03:20 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parsing.h>
+#include "parsing.h"
 
 // char	*ft_substr(char const *s, unsigned int start, size_t len)
 // {
@@ -35,7 +35,7 @@
 // }
 
 // POUR COUNT WORD ET MALLOC
-size_t	manage_count_cot(char const *s, size_t *i)
+size_t	manage_count_cot(const char *s, size_t *i)
 {
 	size_t	res;
 
@@ -83,7 +83,7 @@ static size_t	count_word(char const *s)
 	return (count);
 }
 
-static char	*ft_next_word(const char **s)
+static char	*ft_next_word(const char **s, t_env *env)
 {
 	size_t	start;
 	size_t	len;
@@ -94,13 +94,14 @@ static char	*ft_next_word(const char **s)
 	while ((*s)[i] && ((*s)[i] == ESPACE || (*s)[i] == TAB))
 		i++;
 	start = i;
-	i = manage_lex(s, start);
+	i = manage_lex(s, start, env);
 	*s += i;
 	word = ft_substr(*s - i, start, i - start);
 	return (word);
 }
+// Il faut changer le $USER en Hassmou dans la string 
 
-char	**split_star(char const *str)
+char	**split_star(char const *str, t_env *env)
 {
 	size_t	word_count;
 	size_t	i;
@@ -115,7 +116,7 @@ char	**split_star(char const *str)
 	i = 0;
 	while (i < word_count)
 	{
-		tab[i] = ft_next_word(&str);
+		tab[i] = ft_next_word(&str, env);
 		i++;
 		while (*str == ESPACE || *str == TAB)
 			str++;

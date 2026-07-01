@@ -6,14 +6,14 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/06/28 08:04:22 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/06/30 16:59:12 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "pipex.h"
 
-static t_cmd	*init_cmd(int len_tok)
+t_cmd	*init_cmd(int len_tok)
 {
 	t_cmd	*node;
 
@@ -79,58 +79,41 @@ int	manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab)
 	return (0);
 }
 
+// 			*tokens = (*tokens)->next;
 t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 {
 	while (*tokens && (*tokens)->type != PIPE)
 	{
 		if ((*tokens)->type == WORD)
-		{
 			add_str(tokens, cmd, j_tab);
-			*tokens = (*tokens)->next;
-		}
-		else if ((*tokens)->type == REDIR_IN)
+		else
 		{
-			if (change_fd(tokens, cmd, REDIR_IN) == -1)
-				return (NULL);
-			if (tokens == NULL)
-				return (NULL);
-			*tokens = (*tokens)->next;
+			if (sort_redir(tokens, cmd) == -1)
+			return (NULL);
 		}
-		else if ((*tokens)->type == REDIR_OUT)
-		{
-			if (change_fd(tokens, cmd, REDIR_OUT) == -1)
-				return (NULL);
-			if (tokens == NULL)
-				return (NULL);
-			*tokens = (*tokens)->next;
-		}
+		*tokens = (*tokens)->next;
 	}
 	return (cmd);
 }
 
-int	change_fd(t_tokens **tokens, t_cmd *cmd, int redir)
+int	sort_redir(t_tokens **tokens, t_cmd *cmd)
 {
-	if ((*tokens)->next == NULL || (*tokens)->next->data == NULL)
-		return (-1);
-	if (((*tokens)->type == redir) && (redir == REDIR_IN))
+	if (((*tokens)->type == REDIR_IN) 
+			|| ((*tokens)->type == REDIR_OUT) 
+				|| ((*tokens)->type == AREDIR_OUT))
 	{
-		*tokens = (*tokens)->next;
-		if (cmd->in_fd != -2)
-			repair_fd_in(cmd->out_fd);
-		cmd->in_fd = open((*tokens)->data, O_RDONLY);
+		if ((*tokens)->next == NULL || (*tokens)->next->data == NULL)
+			return (-1);
+		if (manage_fd(tokens, cmd, (*tokens)->type) == -1)
+			return (-1);
+		// *tokens = (*tokens)->next;
 	}
-	else if ((*tokens)->type == redir && (redir == REDIR_OUT))
-	{
-		*tokens = (*tokens)->next;
-		if (cmd->out_fd != -2)
-			repair_fd_out(cmd->out_fd);
-		cmd->out_fd = open((*tokens)->data, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	}
-	if (cmd->in_fd == -1 || cmd->out_fd == -1)
-	{
-		perror((*tokens)->data);
-		return (-1);
-	}
+	// else if ((*tokens)->type == HREDIR_IN)
+	// {
+		// if (manage_fd(tokens, cmd, HREDIR_IN) == -1)
+			// return (-1);
+	// }  POUR HEREDOC A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
 	return (0);
 }
 

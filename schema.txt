@@ -1,0 +1,49 @@
+➜  Minishell git:(Hassan) ✗ cc -g main.c Environment/environment.c Environment/get_value.c Environment/set_value.c Environment/free_stuff.c Parsing/Lexer/lexer.c Parsing/First_tab/browse_line.c Parsing/First_tab/create_tab.c Parsing/Parser/parse.c Parsing/Parser/change_fd.c Parsing/Parser/parse_utils.c Parsing/Parser/va_env/env.c Parsing/exit_free.c Libft/libft.a -I Libft -I Includes -lreadline
+➜  Minishell git:(Hassan) ✗ ./a.out
+My_SHELL> Hello | "bahahah $USER-ehehe | cat > schema.tkt"
+14, 14, content = Hello; type_nbr = 0
+content = |; type_nbr = 1
+content = "bahahah $USER-ehehe | cat > schema.tkt"; type_nbr = 0
+content = ; type_nbr = 0
+ENTRER DANS BOUCLE
+cmd : 0 - Hello
+cmd : 0 - -2
+cmd : 0 - -2
+----------------------
+ENTRER DANS BOUCLE
+cmd : 1 - "bahahah $USER-ehehe | cat > schema.tkt"
+cmd : 1 - 
+cmd : 1 - -2
+cmd : 1 - -2
+----------------------
+My_SHELL> Hello | "bahahah $USER-ehehe" | cat > schema.tkt
+14, 14, content = Hello; type_nbr = 0
+content = |; type_nbr = 1
+content = "bahahah $USER-ehehe"; type_nbr = 0
+content = |; type_nbr = 1
+content = cat; type_nbr = 0
+content = >; type_nbr = 3
+content = schema.tkt; type_nbr = 0
+content = ; type_nbr = 0
+ENTRER DANS BOUCLE
+cmd : 0 - Hello
+cmd : 0 - -2
+cmd : 0 - -2
+----------------------
+ENTRER DANS BOUCLE
+cmd : 1 - "bahahah $USER-ehehe"
+cmd : 1 - -2
+cmd : 1 - -2
+----------------------
+ENTRER DANS BOUCLE
+cmd : 2 - cat
+cmd : 2 - 
+cmd : 2 - -2
+cmd : 2 - 3
+----------------------
+My_SHELL> 
+
+Il faut faire en sorte de changer la variable 
+d'envrionnement par sa value 
+
+Ajout de la fonctionnaliter append

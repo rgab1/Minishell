@@ -6,14 +6,16 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/06/16 17:39:54 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/01 18:48:57 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
+# include "environment.h"
 # include "libft.h"
+# include "pipex.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
@@ -35,42 +37,60 @@ typedef enum e_tokens_type
 	REDIR_IN,
 	REDIR_OUT,
 	HREDIR_IN,
-	HREDIR_OUT,
+	AREDIR_OUT,
 }						t_token_type;
 
 typedef struct s_tokens
 {
 	char				*data;
 	t_token_type		type;
-	struct s_tokens		*head;
 	struct s_tokens		*next;
 }						t_tokens;
 
+// lexer.c
+t_tokens				*create_tokens(char *str, t_token_type type);
+void					ft_lstadd_token(t_tokens **lst, t_tokens *new);
+t_tokens				*manage_token(char **tab);
+
 // browse_line.c
-size_t					manage_lex(const char **s, size_t start);
-size_t					index_in_cot(const char *str, size_t i, int car);
+size_t					manage_lex(const char **s, size_t start, t_env *env);
+size_t					index_in_cot(const char *str, size_t i, int car,
+							t_env *env);
 
 // create_tab.c
 size_t					manage_count_cot(char const *s, size_t *i);
 static size_t			count_word(char const *s);
-static char				*ft_next_word(const char **s);
-char					**split_star(char const *str);
+static char				*ft_next_word(const char **s, t_env *env);
+char					**split_star(char const *str, t_env *env);
 
 // parse.c
-static t_cmd			*init_cmd(int len_tok);
+t_cmd					*init_cmd(int len_tok);
 t_cmd					*create_cmd_struct(t_tokens *nodes);
-t_cmd					*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab);
-int						change_fd(t_tokens **tokens, t_cmd *cmd, int redir);
 int						manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab);
+t_cmd					*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab);
+int						sort_redir(t_tokens **tokens, t_cmd *cmd);
 
 // parse_utils.c
 int						ft_tokensize(t_tokens *lst);
 void					add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab);
 void					put_cmd(t_cmd *cmd);
 
+// repair_fd.c
+void					repair_fd_in(int fd, t_cmd *cmd);
+void					repair_fd_out(int fd, t_cmd *cmd);
+
+// change_fd.c
+int						manage_fd(t_tokens **tokens, t_cmd *cmd, int redir);
+int						change_fd_redir_in(t_tokens **tokens, t_cmd *cmd);
+int						change_fd_redir_out(t_tokens **tokens, t_cmd *cmd);
+int						change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd);
+
 // exit_free.c
 void					exit_free(t_tokens *token, t_cmd *cmd, char *str);
 void					free_tokens(t_tokens *token);
 void					free_cmd(t_cmd *cmd);
+
+// env.c
+void					count_va_env(const char *str, size_t *i, t_env *env);
 
 #endif
