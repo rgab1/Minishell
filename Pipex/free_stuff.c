@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:47:53 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/18 20:18:34 by grivault         ###   ########.fr       */
+/*   Updated: 2026/06/23 17:51:32 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,14 @@ void	free_list(t_cmd *head)
 		free(head);
 		head = tmp;
 	}
+}
+
+void	free_all(t_shell *shell)
+{
+	if (shell)
+		if (shell->env)
+			free_env(shell->env);
+	if (shell)
+		if (shell->cmd)
+			free_cmd(shell->cmd);
 }

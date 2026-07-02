@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/22 23:17:40 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/02 19:36:59 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void	run_pipeline(t_shell *shell, int *pid)
 {
 	int		fd[2];
-	t_cmd	*head;
 
 	head = shell->cmd;
 	while (shell->cmd)
@@ -32,12 +31,13 @@ void	run_pipeline(t_shell *shell, int *pid)
 		{
 			if (shell->cmd->next)
 				close(fd[0]);
-			if (is_builtin(shell, &pid)
-				continue ;
-			run_command(shell->cmd, get_envp(shell), head);
+			is_builtin(shell, pid);
+			run_command(shell->cmd, get_envp(shell), shell);
 		}
-		close(shell->cmd->in_fd);
-		close(shell->cmd->out_fd);
+		if (shell->cmd->in_fd > 2)
+			close(shell->cmd->in_fd);
+		if (shell->cmd->out_fd > 2)
+			close(shell->cmd->out_fd);
 		shell->cmd = shell->cmd->next;
 	}
 }

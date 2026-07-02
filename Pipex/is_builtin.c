@@ -6,38 +6,34 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/22 23:23:36 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/02 19:37:21 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void exec_builtin(t_shell *shell, int *pid, size_t func_index)
+static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 {
-	int			exit_status;
+	int			save_in;
+	int			save_out;
 	static int	(*builtins[6])(t_shell *shell) = {
 		cd, echo, env, export, pwd, unset
 	};
 
-	if (*pid != 0)
-	{
-		exit_status = builtins[func_index](shell);
-		*pid = fork();
-		if (*pid == 0)
-		{
-			dup2(shell->cmd->in_fd, 0);
-			dup2(shell->cmd->out_fd, 1);
-			exit(exit_status);
-		}
-	}
+	if (*pid == 0)
+		return (close_and_free_all(shell), exit(builtins[func_index](shell)));
 	else
 	{
+		save_in = dup(0);
+		save_out = dup(1);
 		dup2(shell->cmd->in_fd, 0);
 		dup2(shell->cmd->out_fd, 1);
-		exit(builtins[func_index](shell));
+		shell->exit_code = builtins[func_index](shell);
+		dup2(save_in, 0);
+		dup2(save_out, 1);
+		close(save_in);
+		close(save_out);
 	}
-	close(shell->cmd->in_fd);
-	close(shell->cmd->out_fd);
 }
 
 int	is_builtin(t_shell *shell, int *pid)

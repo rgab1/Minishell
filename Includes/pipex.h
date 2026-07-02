@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:46:43 by grivault          #+#    #+#             */
-/*   Updated: 2026/03/18 17:46:45 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/02 19:32:03 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,25 @@ typedef struct s_cmd
 {
 	int				in_fd;
 	int				out_fd;
+	int				exit_status;
 	char			**cmd;
+	char			*tmp_file;
 	struct s_cmd	*next;
 }			t_cmd;
 
-t_cmd	*parsing(char **av);
+char	*get_path(t_shell *shell, char *cmd);
+char	**ft_split_quotes(char *s, char c);
+
+void	free_all(t_shell *shell);
+void	free_list(t_cmd *head);
+void	free_split(char **split);
+void	close_and_free_all(t_shell *shell);
+
+int		is_builtin(t_shell *shell, int *pid);
+void	run_pipeline(t_cmd *current, char **envp, int *pid);
+void	run_command(t_cmd *current, char **envp, t_shell *shell);
+
 void	print_list(t_cmd *head);
 void	print_node(t_cmd *current);
-void	run_command(t_cmd *current, char **envp, t_cmd *head);
-void	free_split(char **split);
-char	*get_path(char *cmd, char **envp);
-void	free_list(t_cmd *head);
-void	run_pipeline(t_cmd *current, char **envp, int *pid);
-char	**ft_split_quotes(char *s, char c);
 
 #endif

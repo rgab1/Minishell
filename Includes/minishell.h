@@ -9,14 +9,14 @@
 
 # include <pipex.h>
 # include <environment.h>
+# include <built_in.h>
 
 typedef struct	s_shell
 {
 	t_env	*env;
 	t_cmd	*cmd;
+	int		exit_code;
 }				t_shell;
-
-# include <built_in.h>
 
 void	free_shell(t_shell *shell);
 

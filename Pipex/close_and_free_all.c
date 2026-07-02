@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_all.c                                        :+:      :+:    :+:   */
+/*   close_and_free_all.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 22:59:26 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/22 23:07:42 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/02 19:40:40 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	close_and_free_all(shell)
+void	close_and_free_all(t_shell *shell)
 {
-	t_shell	*current;
+	t_cmd	*current;
+	t_cmd	*temp;
 
 	if (!shell || !shell->cmd)
 		exit_error("shell or cmd struct are not defined", 4);
@@ -23,9 +24,12 @@ void	close_and_free_all(shell)
 	current = shell->cmd;
 	while (current)
 	{
-		close(current->in_fd);
-		close(current->out_fd);
+		temp = current->next;
+		if (current->in_fd > 2)
+			close(current->in_fd);
+		if (current->out_fd > 2)
+			close(current->out_fd);
 		free_cmd(current);
-		current = current->next;
+		current = temp;
 	}
 }
