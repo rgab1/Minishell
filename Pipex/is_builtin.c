@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/02 19:37:21 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/04 00:41:04 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 {
 	int			save_in;
 	int			save_out;
-	static int	(*builtins[6])(t_shell *shell) = {
-		cd, echo, env, export, pwd, unset
+	int			exit_code;
+	static int	(*builtins[7])(t_shell *shell) = {
+		cd, echo, env, export, pwd, unset, ft_exit
 	};
 
 	if (*pid == 0)
-		return (close_and_free_all(shell), exit(builtins[func_index](shell)));
+	{
+		exit_code = builtins[func_index](shell);
+		return (full_cleanup(shell), exit(exit_code));
+	}
 	else
 	{
 		save_in = dup(0);
@@ -39,8 +43,8 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 int	is_builtin(t_shell *shell, int *pid)
 {
 	size_t		i;
-	static char	*builtins[7] = {
-		"cd", "echo", "env", "export", "pwd", "unset", NULL
+	static char	*builtins[8] = {
+		"cd", "echo", "env", "export", "pwd", "unset", "exit", NULL
 	};
 
 	if (!shell ||!shell->cmd || !shell->cmd->cmd || !shell->cmd->cmd[0])

@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/02 19:34:08 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/03 18:32:31 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,44 @@
 #include <pipex.h>
 #include <libft.h>
 
-static void close_last(t_cmd *current)
+static void	close_fds(t_cmd	*current)
 {
-	while (current->next)
-		current = current->next;
-	close(current->out_fd);
+	if (current->in_fd > 2)
+	{
+		close(current->in_fd);
+		current->in_fd = -1;
+	}
+	if (current->out_fd > 2)
+	{
+		close(current->out_fd);
+		current->out_fd = -1;
+	}
 }
 
-void run_command(t_cmd *current, char **envp, t_shell *shell)
+void	run_command(t_cmd *current, char **envp, t_shell *shell)
 {
-	char *path;
-	int exit_code;
+	char	*path;
+	int		exit_code;
 
 	if (current->in_fd == -1 || current->out_fd == -1)
-		return (free_list(shell->cmd), exit(1));
+		return (full_cleanup(shell), exit(1));
 	path = get_path(shell, current->cmd[0]);
 	if (!path)
 	{
 		ft_putstr_fd(current->cmd[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
-		close(current->in_fd);
-		close(current->out_fd);
-		return (close_last(current), free_list(shell->cmd), exit(127));
+		if (ft_strchr(current->cmd[0], '/'))
+			ft_putstr_fd(": No such file or directory\n", 2);
+		else
+			ft_putstr_fd(": command not found\n", 2);
+		return (full_cleanup(shell), exit(127));
 	}
 	dup2(current->in_fd, 0);
 	dup2(current->out_fd, 1);
-	close(current->in_fd);
-	close(current->out_fd);
-	close_last(current);
+	close_fds(current);
 	execve(path, current->cmd, envp);
 	perror(current->cmd[0]);
 	exit_code = 127;
 	if (access(path, X_OK) != 0)
 		exit_code = 126;
-	return (free(path), free_envp(envp), free_list(shell->cmd), exit(exit_code));
+	return (free(path), free_envp(envp), full_cleanup(shell), exit(exit_code));
 }

@@ -6,16 +6,15 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 13:49:40 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/02 19:35:07 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/03 18:33:40 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-
 static void	single_cmd(t_shell *shell, int *pid)
 {
-	int status;
+	int	status;
 
 	*pid = -1;
 	if (is_builtin(shell, pid))
@@ -27,7 +26,6 @@ static void	single_cmd(t_shell *shell, int *pid)
 	if (WIFEXITED(status))
 		shell->exit_code = WEXITSTATUS(status);
 }
-
 
 void	master_function(t_shell *shell)
 {
@@ -47,5 +45,5 @@ void	master_function(t_shell *shell)
 		while (wait(NULL) > 0)
 			continue ;
 	}
-	return (close_and_free_all(shell));
+	return (full_cleanup(shell));
 }

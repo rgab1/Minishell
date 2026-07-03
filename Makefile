@@ -5,18 +5,21 @@ C_FLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC_BUILT_IN = env.c pwd.c cd.c export.c unset.c
+SRC_BUILT_IN = env.c pwd.c cd.c export.c unset.c ft_exit.c echo.c
 
-SRC_ENVIRONMENT = environment.c free_env.c get_value.c set_value.c
+SRC_ENVIRONMENT = environment.c free_env.c get_value.c set_value.c \
+				  get_envp.c
 
 SRC_UTILS = free_shell.c
 
-SRC_PIPEX = 
+SRC_PIPEX = free_stuff.c full_cleanup.c is_builtin.c master.c \
+			run_command.c run_pipeline.c get_path.c
 
-SRC = minishell.c \
+SRC = test_execution.c \
 	  $(addprefix Built_in/, $(SRC_BUILT_IN)) \
-	  $(addprefix Environment/, $(SRC_ENVIRONMENT))
-
+	  $(addprefix Environment/, $(SRC_ENVIRONMENT)) \
+	  $(addprefix Pipex/, $(SRC_PIPEX)) \
+	  
 OBJ = $(SRC:.c=.o)
 
 DEPENDENCIES = $(OBJ:.o=.d)
@@ -50,5 +53,5 @@ redo: re
 	make clean
 	clear
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re redo
 

@@ -6,26 +6,29 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/02 19:36:59 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/04 00:45:16 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <pipex.h>
 
+static void	pipe_assignement(int *fd, t_cmd *current)
+{
+	pipe(fd);
+	current->out_fd = fd[1];
+	current->next->in_fd = fd[0];
+}
+
 void	run_pipeline(t_shell *shell, int *pid)
 {
 	int		fd[2];
+	t_cmd	*temp;
 
-	head = shell->cmd;
 	while (shell->cmd)
 	{
 		if (shell->cmd->next)
-		{
-			pipe(fd);
-			shell->cmd->out_fd = fd[1];
-			shell->cmd->next->in_fd = fd[0];
-		}
+			pipe_assignement(fd, shell->cmd);
 		*pid = fork();
 		if (*pid == 0)
 		{
@@ -38,6 +41,8 @@ void	run_pipeline(t_shell *shell, int *pid)
 			close(shell->cmd->in_fd);
 		if (shell->cmd->out_fd > 2)
 			close(shell->cmd->out_fd);
-		shell->cmd = shell->cmd->next;
+		temp = shell->cmd->next;
+		free_cmd(shell->cmd);
+		shell->cmd = temp;
 	}
 }

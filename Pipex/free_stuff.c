@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:47:53 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/23 17:51:32 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/03 17:13:50 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ void	free_split(char **split)
 void	free_cmd(t_cmd *current)
 {
 	free_split(current->cmd);
+	if (current->in_fd > 2)
+		close(current->in_fd);
+	if (current->out_fd > 2)
+		close(current->out_fd);
 	free(current);
 }
 
 void	free_envp(char **envp)
 {
-	free_split(envp);
+	if (envp)
+		free_split(envp);
 }
 
 void	free_list(t_cmd *head)
@@ -52,9 +57,10 @@ void	free_list(t_cmd *head)
 void	free_all(t_shell *shell)
 {
 	if (shell)
+	{
 		if (shell->env)
 			free_env(shell->env);
-	if (shell)
 		if (shell->cmd)
 			free_cmd(shell->cmd);
+	}
 }
