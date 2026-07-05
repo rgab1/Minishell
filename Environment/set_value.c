@@ -6,11 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/02 20:22:38 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 00:05:37 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <environment.h>
+#include <minishell.h>
 
 static char	**key_and_value_pair(char *key, char *value)
 {
@@ -25,7 +25,7 @@ static char	**key_and_value_pair(char *key, char *value)
 	return (pair);
 }
 
-int	set_value(char *key, char *value,  t_env **head)
+int	set_value(char *key, char *value, t_env **head)
 {
 	size_t	key_len;
 	t_env	*temp;

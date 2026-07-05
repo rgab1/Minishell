@@ -35,13 +35,13 @@ int main(int ac, char **av, char **envp)
 
     // 2. Setup a pipeline: "ls -l" | "grep .c"
     char **args1 = malloc(sizeof(char *) * 3);
-    args1[0] = ft_strdup("ls");
-    args1[1] = ft_strdup("-l");
+    args1[0] = ft_strdup("env");
+    args1[1] = NULL;
     args1[2] = NULL;
 
     char **args2 = malloc(sizeof(char *) * 3);
     args2[0] = ft_strdup("grep");
-    args2[1] = ft_strdup(".c");
+    args2[1] = ft_strdup("PATH");
     args2[2] = NULL;
 
     cmd1 = create_cmd(args1);

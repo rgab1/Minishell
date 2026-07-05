@@ -6,12 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:47:53 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/03 17:13:50 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 00:10:06 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <pipex.h>
+#include <minishell.h>
 
 void	free_split(char **split)
 {
@@ -29,10 +28,17 @@ void	free_cmd(t_cmd *current)
 {
 	free_split(current->cmd);
 	if (current->in_fd > 2)
+	{
 		close(current->in_fd);
+		current->in_fd = -1;
+	}
 	if (current->out_fd > 2)
+	{
 		close(current->out_fd);
-	free(current);
+		current->out_fd = -1;
+	}
+	if (current)
+		free(current);
 }
 
 void	free_envp(char **envp)
@@ -41,26 +47,14 @@ void	free_envp(char **envp)
 		free_split(envp);
 }
 
-void	free_list(t_cmd *head)
+void	free_cmd_list(t_cmd *head)
 {
 	t_cmd	*tmp;
 
 	while (head)
 	{
 		tmp = head->next;
-		free_split(head->cmd);
-		free(head);
+		free_cmd(head);
 		head = tmp;
-	}
-}
-
-void	free_all(t_shell *shell)
-{
-	if (shell)
-	{
-		if (shell->env)
-			free_env(shell->env);
-		if (shell->cmd)
-			free_cmd(shell->cmd);
 	}
 }

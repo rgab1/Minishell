@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 19:46:14 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/11 03:05:39 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/05 23:53:46 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	pwd(t_shell *shell)
 
 	(void)shell;
 	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (minishell_error("pwd", strerror(errno)), 1);
 	ft_printf("%s\n", cwd);
 	free(cwd);
 	return (0);

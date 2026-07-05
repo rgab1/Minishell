@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:08:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/11 03:04:51 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/05 22:46:29 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ static char	*path_resolution(char *path, t_env *head)
 	if (!path)
 	{
 		if (!home_path)
-			return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), NULL);
+			return (minishell_error("cd", ERROR_HOME_NOT_SET), NULL);
 		return (ft_strdup(home_path));
 	}
 	if (path[0] == '~')
 	{
 		if (!home_path)
-			return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), NULL);
+			return (minishell_error("cd", ERROR_HOME_NOT_SET), NULL);
 		return (ft_strjoin(home_path, path + 1));
 	}
 	if (ft_strncmp(path, "-", 2) == 0)
 	{
 		old_pwd = get_value("OLDPWD", head);
 		if (!old_pwd)
-			return (ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2), NULL);
+			return (minishell_error("cd", ERROR_OLDPWD_NOT_SET), NULL);
 		return (ft_strdup(old_pwd));
 	}
 	return (ft_strdup(path));
@@ -52,7 +52,7 @@ static void	update_wd_vars(t_env **head)
 		free(new_cwd);
 	}
 	else
-		perror("minishell: cd");
+		minishell_error("cd", strerror(errno));
 }
 
 int	cd(t_shell *shell)
@@ -63,7 +63,7 @@ int	cd(t_shell *shell)
 	if (!path)
 		return (1);
 	if (chdir(path) != 0)
-		return (perror("minishell: cd"), free(path), 1);
+		return (minishell_error("cd", strerror(errno)), free(path), 1);
 	if (shell->cmd->cmd[1] && ft_strncmp(shell->cmd->cmd[1], "-", 2) == 0)
 		ft_printf("%s\n", path);
 	update_wd_vars(&shell->env);

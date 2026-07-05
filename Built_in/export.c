@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 21:09:27 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/18 18:10:11 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/05 23:51:55 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	print_sorted_arr(t_env **arr)
 	}
 }
 
-void	print_env_alphabetical(t_env *env)
+static void	print_env_alphabetical(t_env *env)
 {
 	t_env	**arr;
 	t_env	*temp;
@@ -93,15 +93,24 @@ int	export(t_shell *shell)
 {
 	size_t	i;
 	char	**pair;
+	int		exit_status;
 
 	i = 1;
+	exit_status = 0;
 	if (!shell->cmd->cmd[1])
 		return (print_env_alphabetical(shell->env), 0);
 	while (shell->cmd->cmd[i])
 	{
-		pair = extract_key_value(shell->cmd->cmd[i++]);
-		set_value(pair[0], pair[1], &shell->env);
-		free_strings(pair);
+		pair = extract_key_value(shell->cmd->cmd[i]);
+		if (!is_valid_identifier(pair[0]))
+		{
+			minishell_error(shell->cmd->cmd[i], ERROR_IDENTIFIER);
+			exit_status = 1;
+		}
+		else
+			set_value(pair[0], pair[1], &shell->env);
+		free_split(pair);
+		i++;
 	}
-	return (0);
+	return (exit_status);
 }

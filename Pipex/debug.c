@@ -6,12 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:47:41 by grivault          #+#    #+#             */
-/*   Updated: 2026/03/18 17:47:45 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 00:09:51 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <pipex.h>
+#include <minishell.h>
 
 void	print_node(t_cmd *current)
 {

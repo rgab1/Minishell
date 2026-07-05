@@ -6,11 +6,19 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/04 00:41:04 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/05 22:17:11 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static void	dup_fds(t_cmd *current)
+{
+	if (current->in_fd > 2 || current->in_fd == 0)
+		dup2(current->in_fd, 0);
+	if (current->out_fd > 2 || current->out_fd == 1)
+		dup2(current->out_fd, 1);
+}
 
 static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 {
@@ -23,6 +31,7 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 
 	if (*pid == 0)
 	{
+		dup_fds(shell->cmd);
 		exit_code = builtins[func_index](shell);
 		return (full_cleanup(shell), exit(exit_code));
 	}

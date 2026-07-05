@@ -6,11 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:32:09 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/02 21:23:26 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 00:04:45 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <environment.h>
+#include <minishell.h>
 
 int	del_env_node(t_env **head, char *key)
 {

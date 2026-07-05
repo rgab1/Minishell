@@ -6,13 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/03 18:32:31 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 00:17:06 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <pipex.h>
-#include <libft.h>
+#include <minishell.h>
 
 static void	close_fds(t_cmd	*current)
 {
@@ -38,18 +36,17 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 	path = get_path(shell, current->cmd[0]);
 	if (!path)
 	{
-		ft_putstr_fd(current->cmd[0], 2);
 		if (ft_strchr(current->cmd[0], '/'))
-			ft_putstr_fd(": No such file or directory\n", 2);
+			minishell_error(current->cmd[0], ERROR_NO_FILE);
 		else
-			ft_putstr_fd(": command not found\n", 2);
+			minishell_error(current->cmd[0], ERROR_CMD_NOT_FOUND);
 		return (full_cleanup(shell), exit(127));
 	}
 	dup2(current->in_fd, 0);
 	dup2(current->out_fd, 1);
 	close_fds(current);
 	execve(path, current->cmd, envp);
-	perror(current->cmd[0]);
+	minishell_error(current->cmd[0], strerror(errno));
 	exit_code = 127;
 	if (access(path, X_OK) != 0)
 		exit_code = 126;

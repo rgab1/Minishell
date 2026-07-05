@@ -6,12 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/04 00:45:16 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 00:11:15 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <pipex.h>
+#include <minishell.h>
 
 static void	pipe_assignement(int *fd, t_cmd *current)
 {

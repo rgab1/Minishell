@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 22:59:26 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/03 23:41:10 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/04 01:05:08 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	full_cleanup(t_shell *shell)
 			current = temp;
 		}
 	}
+	free(shell);
 }

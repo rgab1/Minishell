@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   minishell_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/01 02:02:09 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 00:08:14 by grivault         ###   ########.fr       */
+/*   Created: 2026/07/05 21:55:07 by grivault          #+#    #+#             */
+/*   Updated: 2026/07/05 22:47:45 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
 
-typedef struct s_shell	t_shell;
+#include <minishell.h>
 
-int	env(t_shell *shell);
-int	pwd(t_shell *shell);
-int	cd(t_shell *shell);
-int	unset(t_shell *shell);
-int	export(t_shell *shell);
-int	echo(t_shell *shell);
-int	ft_exit(t_shell *shell);
-
-#endif
+void	minishell_error(char *context, char *error_msg)
+{
+	ft_putstr_fd("minishell: ", 2);
+	if (context)
+	{
+		ft_putstr_fd(context, 2);
+		ft_putstr_fd(": ", 2);
+	}
+	if (error_msg)
+		ft_putstr_fd(error_msg, 2);
+	ft_putstr_fd("\n", 2);
+}

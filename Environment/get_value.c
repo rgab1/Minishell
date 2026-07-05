@@ -6,15 +6,15 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/01 20:05:31 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 00:05:17 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <environment.h>
+#include <minishell.h>
 
-char *get_value(char *key, t_env *head)
+char	*get_value(char *key, t_env *head)
 {
-	size_t key_len;
+	size_t	key_len;
 
 	key_len = ft_strlen(key);
 	while (head)

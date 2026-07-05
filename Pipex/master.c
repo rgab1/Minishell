@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 13:49:40 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/03 18:33:40 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/05 21:44:51 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	master_function(t_shell *shell)
 		while (wait(NULL) > 0)
 			continue ;
 	}
-	return (full_cleanup(shell));
+	return (free_cmd_list(shell->cmd));
 }
