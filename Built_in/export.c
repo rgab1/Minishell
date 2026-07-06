@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 21:09:27 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/05 23:51:55 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 05:45:48 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	print_env_alphabetical(t_env *env)
 		return ;
 	arr = (t_env **)malloc(sizeof(t_env *) * (env_count(env) + 1));
 	if (!arr)
-		return (exit_error("Malloc failed", 4));
+		return (exit_error(ERROR_MALLOC_FAILED_4, 4));
 	i = 0;
 	temp = env;
 	while (temp)

@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/05 22:17:11 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 05:43:20 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,12 @@ int	is_builtin(t_shell *shell, int *pid)
 		"cd", "echo", "env", "export", "pwd", "unset", "exit", NULL
 	};
 
-	if (!shell ||!shell->cmd || !shell->cmd->cmd || !shell->cmd->cmd[0])
-		exit_error("something in the shell is not defined", 4);
+	if (!shell)
+		exit_error(ERROR_SHELL_NDEF_5, 5);
+	if (!shell->cmd)
+		exit_error(ERROR_CMD_NDEF_6, 6);
+	if (!shell->cmd->cmd)
+		exit_error(ERROR_CMD_EMPTY_7, 7);
 	i = 0;
 	while (builtins[i])
 	{

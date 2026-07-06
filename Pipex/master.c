@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 13:49:40 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/05 21:44:51 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 05:36:53 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void	master_function(t_shell *shell)
 	int	pid;
 	int	status;
 
-	if (!shell || !shell->cmd)
-		return (exit_error("Shell not defined", 4));
+	if (!shell)
+		return (exit_error(ERROR_SHELL_NDEF_5, 5));
+	if (!shell->cmd)
+		return (exit_error(ERROR_CMD_NDEF_6, 6));
 	if (shell->cmd->next == NULL)
 		single_cmd(shell, &pid);
 	else

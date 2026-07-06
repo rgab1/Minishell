@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 00:05:37 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 05:50:32 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	**key_and_value_pair(char *key, char *value)
 
 	pair = (char **)malloc(sizeof(char *) * 3);
 	if (!pair)
-		return (NULL);
+		return (exit_error(ERROR_MALLOC_FAILED_4, 4), NULL);
 	pair[0] = ft_strdup(key);
 	pair[1] = ft_strdup(value);
 	pair[2] = NULL;

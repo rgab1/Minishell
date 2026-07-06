@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 14:24:14 by grivault          #+#    #+#             */
-/*   Updated: 2026/06/18 05:23:46 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 05:44:53 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**get_envp(t_shell *shell)
 
 	envp = (char **)malloc(sizeof(char *) * (env_count(shell->env) + 1));
 	if (!envp)
-		exit_error("Malloc failed", 4);
+		exit_error(ERROR_MALLOC_FAILED_4, 4);
 	current = shell->env;
 	i = 0;
 	while (current)

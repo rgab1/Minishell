@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 22:59:26 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/04 01:05:08 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 05:44:13 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	full_cleanup(t_shell *shell)
 	t_cmd	*temp;
 
 	if (!shell)
-		exit_error("shell or cmd struct are not defined", 4);
+		exit_error(ERROR_SHELL_NDEF_5, 5);
 	if (shell->env)
 		free_env(shell->env);
 	if (shell->cmd)

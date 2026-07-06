@@ -26,6 +26,7 @@ int main(int ac, char **av, char **envp)
     t_shell *shell;
     t_cmd   *cmd1;
     t_cmd   *cmd2;
+    t_cmd   *cmd3;
 
     (void)ac;
     (void)av;
@@ -35,20 +36,29 @@ int main(int ac, char **av, char **envp)
 
     // 2. Setup a pipeline: "ls -l" | "grep .c"
     char **args1 = malloc(sizeof(char *) * 3);
-    args1[0] = ft_strdup("env");
-    args1[1] = NULL;
-    args1[2] = NULL;
+    args1[0] = ft_strdup("echo");
+    args1[1] = ft_strdup("-n");
+    args1[2] = ft_strdup("1");
 
     char **args2 = malloc(sizeof(char *) * 3);
-    args2[0] = ft_strdup("grep");
-    args2[1] = ft_strdup("PATH");
+    args2[0] = NULL;
+    args2[1] = NULL;
     args2[2] = NULL;
+
+    char **args3 = malloc(sizeof(char *) * 3);
+    args3[0] = NULL; 
+    args3[1] = NULL;
+    args3[2] = NULL;
+
 
     cmd1 = create_cmd(args1);
     cmd2 = create_cmd(args2);
-    cmd1->next = cmd2;
+    cmd3 = create_cmd(args3);
+
+    cmd1->next = NULL;
+	cmd2->next = cmd3;
     
-    shell->cmd = cmd1;
+    shell->cmd = NULL;
 
     // 3. Execute
     master_function(shell);

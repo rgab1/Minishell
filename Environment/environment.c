@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:32:09 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 00:04:45 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 05:50:09 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	new_env_node(t_env **head, char	**key_and_value)
 
 	current = (t_env *)malloc(sizeof(t_env));
 	if (!current)
-		return ;
+		return (exit_error(ERROR_MALLOC_FAILED_4, 4));
 	current->key = key_and_value[0];
 	current->value = key_and_value[1];
 	current->next = NULL;
@@ -71,7 +71,7 @@ char	**extract_key_value(char *env_str)
 
 	pair = (char **)malloc(sizeof(char *) * 3);
 	if (!pair)
-		return (NULL);
+		return (exit_error(ERROR_MALLOC_FAILED_4, 4), NULL);
 	equal_pos = ft_strchr(env_str, '=');
 	if (equal_pos)
 	{
