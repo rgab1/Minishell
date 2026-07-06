@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   master.c                                           :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 13:49:40 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 05:36:53 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 06:11:15 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ static void	single_cmd(t_shell *shell, int *pid)
 		shell->exit_code = WEXITSTATUS(status);
 }
 
-void	master_function(t_shell *shell)
+void	execution(t_shell *shell)
 {
 	int	pid;
 	int	status;
 
 	if (!shell)
-		return (exit_error(ERROR_SHELL_NDEF_5, 5));
+		exit_error(ERROR_SHELL_NDEF_5, 5);
 	if (!shell->cmd)
-		return (exit_error(ERROR_CMD_NDEF_6, 6));
+		exit_error(ERROR_CMD_NDEF_6, 6);
 	if (shell->cmd->next == NULL)
 		single_cmd(shell, &pid);
 	else

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:46:43 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 00:07:52 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 06:12:59 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef EXECUTION_H
+# define EXECUTION_H
 # define DEFAULT_PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 typedef struct s_cmd
@@ -31,7 +31,7 @@ void	free_split(char **split);
 void	free_cmd(t_cmd *current);
 
 int		is_builtin(t_shell *shell, int *pid);
-void	master_function(t_shell *shell);
+void	execution(t_shell *shell);
 void	run_pipeline(t_shell *shell, int *pid);
 void	run_command(t_cmd *current, char **envp, t_shell *shell);
 

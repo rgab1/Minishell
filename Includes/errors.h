@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 22:06:52 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 05:42:53 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/06 06:10:16 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@
 # define ERROR_SHELL_NDEF_5 "Shell is not defined\n"
 # define ERROR_CMD_NDEF_6 "Cmd is not defined\n"
 # define ERROR_CMD_EMPTY_7 "Cmd char is NULL\n"
-
 
 #endif

@@ -58,10 +58,10 @@ int main(int ac, char **av, char **envp)
     cmd1->next = NULL;
 	cmd2->next = cmd3;
     
-    shell->cmd = NULL;
+    shell->cmd = cmd1;
 
     // 3. Execute
-    master_function(shell);
+    execution(shell);
 
     return (0);
 }
