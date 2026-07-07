@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_value.c                                        :+:      :+:    :+:   */
+/*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/07 03:21:47 by hassmou          ###   ########.fr       */
+/*   Created: 2026/07/07 10:15:34 by hassmou           #+#    #+#             */
+/*   Updated: 2026/07/07 11:38:41 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <environment.h>
+#include "parsing.h"
 
-char *get_value(char *key, t_env *head)
+void	search_symbols(char const *s, size_t *i, size_t *count)
 {
-	size_t key_len;
-
-	key_len = ft_strlen(key);
-	while (head)
+	if (s[(*i)] == '<')
 	{
-		if (!ft_strncmp(key, head->key, key_len + 1))
-			return (head->value);
-		head = head->next;
+		(*count) += 2;
+		(*i)++;
+		if (s[(*i)] == '<')
+			(*i)++;
 	}
-	return (ft_strdup("")); // gerer l'erreur ou la key n'est pas trouve
+	else if (s[(*i)] == '>')
+	{
+		(*count) += 2;
+		(*i)++;
+		if (s[(*i)] == '>')
+			(*i)++;
+	}
+	else if (s[(*i)] == '|')
+	{
+		(*count) += 2;
+		(*i)++;
+	}
+	else
+		(*i)++;
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main,c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/01 17:52:25 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/07 11:50:22 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	print_lst(t_tokens *nodes)
 {
@@ -26,6 +26,7 @@ void	print_lst(t_tokens *nodes)
 
 int	main(int ac, char **av, char **envp)
 {
+	t_shell		*shell;
     t_env       *env;
 	t_tokens	*nodes;
 	t_cmd		*cmd;
@@ -41,14 +42,20 @@ int	main(int ac, char **av, char **envp)
 		if (!line)
 		{
 			printf("exit\n");
-			break ;
+			return (0);
 		}
-        env = env_init(envp);
+        env = env_init(envp); // CHANGEMENT INIT LE SHELL AVEC SHELL_INIT(**ENVP);
 		tab = split_star(line, env);
+		if (!tab)
+			{
+				free(line);
+				exit_free(nodes, cmd, "Error : Invalide Syntaxe");
+			}// Il  faut changer et mettre les structures dans le shell
 		nodes = manage_token(tab);
 		print_lst(nodes);
 		cmd = create_cmd_struct(nodes);
-		put_cmd(cmd);
+		// put_cmd(cmd);
+		
 	}
 	free(line);
 	rl_clear_history();

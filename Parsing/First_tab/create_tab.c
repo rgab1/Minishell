@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/01 19:03:20 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/07 11:42:43 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,21 @@
 // 	return (sub_str);
 // }
 
-// POUR COUNT WORD ET MALLOC
-size_t	manage_count_cot(const char *s, size_t *i)
+// POUR COUNT WORD ET MALLOC (i++ pour les " a ignorer)
+void	manage_count_cot(const char *s, size_t *i)
 {
-	size_t	res;
-
-	res = 0;
 	if (s[*i] == SINGLE_COT)
 	{
 		(*i)++;
 		while (s[*i] != SINGLE_COT)
 			(*i)++;
-		res++;
 	}
 	else if (s[*i] == DOUBLE_COT)
 	{
 		(*i)++;
 		while (s[*i] != DOUBLE_COT)
 			(*i)++;
-		res++;
 	}
-	return (res);
 }
 
 static size_t	count_word(char const *s)
@@ -66,20 +60,21 @@ static size_t	count_word(char const *s)
 	i = 0;
 	while (s[i])
 	{
-		count += manage_count_cot(s, &i);
 		if (s[i] != ESPACE && s[i] != TAB)
 		{
 			count++;
 			while (s[i] && (s[i] != ESPACE && s[i] != TAB))
 			{
-				if (s[i] == SINGLE_COT && s[i] == DOUBLE_COT)
-					count += manage_count_cot(s, &i);
-				i++;
+				if (s[i] == SINGLE_COT || s[i] == DOUBLE_COT)
+					manage_count_cot(s, &i);
+				if (s[i])
+					search_symbols(s, &i, &count);
 			}
 		}
 		else
 			i++;
 	}
+	printf("words = %d\n", count);
 	return (count);
 }
 
@@ -110,6 +105,8 @@ char	**split_star(char const *str, t_env *env)
 	if (!str)
 		return (NULL);
 	word_count = count_word(str);
+	if (word_count == 0)
+		return (0);
 	tab = malloc(sizeof(char *) * (word_count + 1));
 	if (!tab)
 		return (NULL);

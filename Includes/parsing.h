@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/01 18:48:57 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/07 11:48:53 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ typedef struct s_tokens
 	struct s_tokens		*next;
 }						t_tokens;
 
-// lexer.c
+// lexing.c
+void					search_symbols(char const *s, size_t *i, size_t *count);
+
+// init_token.c
 t_tokens				*create_tokens(char *str, t_token_type type);
 void					ft_lstadd_token(t_tokens **lst, t_tokens *new);
 t_tokens				*manage_token(char **tab);
@@ -58,7 +61,7 @@ size_t					index_in_cot(const char *str, size_t i, int car,
 							t_env *env);
 
 // create_tab.c
-size_t					manage_count_cot(char const *s, size_t *i);
+void					manage_count_cot(char const *s, size_t *i);
 static size_t			count_word(char const *s);
 static char				*ft_next_word(const char **s, t_env *env);
 char					**split_star(char const *str, t_env *env);
@@ -91,6 +94,10 @@ void					free_tokens(t_tokens *token);
 void					free_cmd(t_cmd *cmd);
 
 // env.c
-void					count_va_env(const char *str, size_t *i, t_env *env);
+int						count_va_env(const char *str, size_t *i, t_env *env,
+							size_t *supp);
+char					*get_key(unsigned char *src, t_env *env, int *i);
+int						ft_is_key(char *key, t_env *head);
+int						ft_is_env(char c);
 
 #endif

@@ -1,53 +1,7 @@
-➜  Minishell git:(Hassan) ✗ cc -g main.c Environment/environment.c Environment/get_value.c Environment/set_value.c Environment/free_stuff.c Parsing/Lexer/lexer.c Parsing/First_tab/browse_line.c Parsing/First_tab/create_tab.c Parsing/Parser/parse.c Parsing/Parser/change_fd.c Parsing/Parser/parse_utils.c Parsing/Parser/va_env/env.c Parsing/exit_free.c Libft/libft.a -I Libft -I Includes -lreadline
-➜  Minishell git:(Hassan) ✗ ./a.out
-My_SHELL> Hello | "bahahah $USER-ehehe | cat > schema.tkt"
-14, 14, content = Hello; type_nbr = 0
-content = |; type_nbr = 1
-content = "bahahah $USER-ehehe | cat > schema.tkt"; type_nbr = 0
-content = ; type_nbr = 0
-ENTRER DANS BOUCLE
-cmd : 0 - Hello
-cmd : 0 - -2
-cmd : 0 - -2
-----------------------
-ENTRER DANS BOUCLE
-cmd : 1 - "bahahah $USER-ehehe | cat > schema.tkt"
-cmd : 1 - 
-cmd : 1 - -2
-cmd : 1 - -2
-----------------------
-My_SHELL> Hello | "bahahah $USER-ehehe" | cat > schema.tkt
-14, 14, content = Hello; type_nbr = 0
-content = |; type_nbr = 1
-content = "bahahah $USER-ehehe"; type_nbr = 0
-content = |; type_nbr = 1
-content = cat; type_nbr = 0
-content = >; type_nbr = 3
-content = schema.tkt; type_nbr = 0
-content = ; type_nbr = 0
-ENTRER DANS BOUCLE
-cmd : 0 - Hello
-cmd : 0 - -2
-cmd : 0 - -2
-----------------------
-ENTRER DANS BOUCLE
-cmd : 1 - "bahahah $USER-ehehe"
-cmd : 1 - -2
-cmd : 1 - -2
-----------------------
-ENTRER DANS BOUCLE
-cmd : 2 - cat
-cmd : 2 - 
-cmd : 2 - -2
-cmd : 2 - 3
-----------------------
-My_SHELL> 
+Reprise du parsing a 0 et gerer le lexique present, Changement du code et restructuration du projet (Hello<World ici il y a 3 mots par exemple)
 
-Il faut faire en sorte de changer la variable 
-d'envrionnement par sa value (A voir avec les cas speciaux, 
-si il n'existe pas alors c'est null et on raccoursis la string;
-s'il y a plusieurs expansions a faire de suite 
-ex: $USER$PATH;
-le $? a gerer aussi)
+changement return (ft_strdup("")); dans get_value
 
-Ajout de la fonctionnaliter append
+Gestions d'erreurs a gerer encore :
+9 espace = segfaults
+entrer (touche) = segfaults etc

@@ -6,15 +6,17 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 15:58:41 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/01 18:51:50 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/07 11:47:53 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "pipex.h"
 
-void	exit_free(t_tokens *token, t_cmd *cmd, char *str)
+void	exit_free(t_tokens *token, t_cmd *cmd, char *line, char *str)
 {
+	if (line)
+		free(line);
     if (str)
         printf("%s\n", str);
     if (token)
