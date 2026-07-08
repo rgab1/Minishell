@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:46:43 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 06:12:59 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/08 19:40:16 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 # define EXECUTION_H
 # define DEFAULT_PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
+#include <sys/types.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+
 typedef struct s_cmd
 {
+	char			**cmd;
 	int				in_fd;
 	int				out_fd;
-	char			**cmd;
+	char			*namefile;
 	struct s_cmd	*next;
 }			t_cmd;
 

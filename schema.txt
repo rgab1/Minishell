@@ -1,0 +1,7 @@
+Reprise du parsing a 0 et gerer le lexique present, Changement du code et restructuration du projet (Hello<World ici il y a 3 mots par exemple)
+
+changement return (ft_strdup("")); dans get_value
+
+Gestions d'erreurs a gerer encore :
+9 espace = segfaults
+entrer (touche) = segfaults etc

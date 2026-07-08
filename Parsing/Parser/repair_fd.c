@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   repair_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 20:50:36 by grivault          #+#    #+#             */
-/*   Updated: 2026/05/12 06:34:49 by hassmou          ###   ########.fr       */
+/*   Created: 2026/06/28 07:57:58 by hassmou           #+#    #+#             */
+/*   Updated: 2026/06/30 16:26:52 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
-{
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1024);
-	return (0);
-}
+#include "parsing.h"
+#include "pipex.h"
+
+// void    repair_fd_out(int fd, t_cmd *cmd)
+// {
+//     close(fd);
+//     cmd->out_fd = -2;
+// }
+
+// void    repair_fd_in(int fd, t_cmd *cmd)
+// {
+//     close(fd);
+//     cmd->in_fd = -2;
+// }

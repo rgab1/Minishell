@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/07/06 00:05:17 by grivault         ###   ########.fr       */
+=======
+/*   Updated: 2026/07/07 03:21:47 by hassmou          ###   ########.fr       */
+>>>>>>> origin/Hassan
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +27,5 @@ char	*get_value(char *key, t_env *head)
 			return (head->value);
 		head = head->next;
 	}
-	return (NULL); // gerer l'erreur ou la key n'est pas trouve
+	return (ft_strdup("")); // gerer l'erreur ou la key n'est pas trouve
 }
