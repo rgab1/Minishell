@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/06/30 16:59:12 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/08 18:05:56 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_cmd	*create_cmd_struct(t_tokens *nodes)
 		{
 			cmd = init_cmd(ft_tokensize(nodes));
 			if (cmd == NULL)
-				return (exit_free(nodes, cmd, NULL), NULL);// gestion erreur wip
+				return (NULL);// gestion erreur wip
 			tmp = cmd;
 		}
 		else
@@ -51,7 +51,7 @@ t_cmd	*create_cmd_struct(t_tokens *nodes)
                 return (NULL);
 		cmd = manage_cmd(&nodes, cmd, &j_tab);
 		if (cmd == NULL)
-			return (exit_free(nodes, cmd, NULL), NULL);// gestion erreur wip
+			return (NULL);// gestion erreur wip
 	}
 	cmd->cmd[j_tab] = NULL;
 	return (tmp);
@@ -66,14 +66,14 @@ int	manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab)
 		*j_tab = 0;
 		(*cmd)->next = init_cmd(ft_tokensize((*nodes)));
 		if ((*cmd) == NULL)
-			return (exit_free(*nodes, *cmd, NULL), -1);
+			return (-1);
 		(*cmd) = (*cmd)->next;
 	}
 	else
 	{
 		(*cmd)->next = init_cmd(ft_tokensize((*nodes)));
         if ((*cmd) == NULL)
-			return (exit_free(*nodes, *cmd, NULL), -1);
+			return (-1);
 		(*cmd) = (*cmd)->next;
 	}
 	return (0);

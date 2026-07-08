@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/07 11:42:43 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/08 17:00:24 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,29 @@
 // }
 
 // POUR COUNT WORD ET MALLOC (i++ pour les " a ignorer)
-void	manage_count_cot(const char *s, size_t *i)
+int	manage_count_cot(const char *s, size_t *i)
 {
 	if (s[*i] == SINGLE_COT)
 	{
 		(*i)++;
 		while (s[*i] != SINGLE_COT)
+		{
+			if (s[*i] == '\0')
+				return (1);
 			(*i)++;
+		}
 	}
 	else if (s[*i] == DOUBLE_COT)
 	{
 		(*i)++;
 		while (s[*i] != DOUBLE_COT)
+		{
+			if (s[*i] == '\0')
+				return (1);
 			(*i)++;
+		}
 	}
+	return (0);
 }
 
 static size_t	count_word(char const *s)
@@ -66,7 +75,8 @@ static size_t	count_word(char const *s)
 			while (s[i] && (s[i] != ESPACE && s[i] != TAB))
 			{
 				if (s[i] == SINGLE_COT || s[i] == DOUBLE_COT)
-					manage_count_cot(s, &i);
+					if (manage_count_cot(s, &i) == 1)
+						return (0);
 				if (s[i])
 					search_symbols(s, &i, &count);
 			}
@@ -94,7 +104,7 @@ static char	*ft_next_word(const char **s, t_env *env)
 	word = ft_substr(*s - i, start, i - start);
 	return (word);
 }
-// Il faut changer le $USER en Hassmou dans la string 
+// Il faut changer le $USER en Hassmou dans la string
 
 char	**split_star(char const *str, t_env *env)
 {
@@ -106,7 +116,7 @@ char	**split_star(char const *str, t_env *env)
 		return (NULL);
 	word_count = count_word(str);
 	if (word_count == 0)
-		return (0);
+		return (NULL);
 	tab = malloc(sizeof(char *) * (word_count + 1));
 	if (!tab)
 		return (NULL);

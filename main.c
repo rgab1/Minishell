@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/07 11:50:22 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/08 18:04:18 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	main(int ac, char **av, char **envp)
         env = env_init(envp); // CHANGEMENT INIT LE SHELL AVEC SHELL_INIT(**ENVP);
 		tab = split_star(line, env);
 		if (!tab)
-			{
-				free(line);
-				exit_free(nodes, cmd, "Error : Invalide Syntaxe");
-			}// Il  faut changer et mettre les structures dans le shell
+			return (exit_free(nodes, cmd, line, "Error : Invalide Syntaxe"), 1);
+		// Il  faut changer et mettre les structures dans le shell
 		nodes = manage_token(tab);
 		print_lst(nodes);
 		cmd = create_cmd_struct(nodes);
+		if (!cmd)
+			return (exit_free(nodes, cmd, line, "Error : IDK"), 1);
 		// put_cmd(cmd);
 		
 	}
