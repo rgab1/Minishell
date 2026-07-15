@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 06:13:25 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/15 16:22:03 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <errno.h>
+# include <parsing.h>
 
 # include <errors.h>
 # include <libft.h>
@@ -29,6 +30,7 @@ typedef struct s_shell
 {
 	t_env	*env;
 	t_cmd	*cmd;
+	char	*line;
 	int		exit_code;
 }				t_shell;
 
