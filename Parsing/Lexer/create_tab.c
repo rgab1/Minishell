@@ -6,33 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/08 17:00:24 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/15 19:46:18 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-// char	*ft_substr(char const *s, unsigned int start, size_t len)
-// {
-// 	char	*sub_str;
-// 	size_t	s_len;
-// 	size_t	actual_len;
-
-// 	if (!s || start < 0)
-// 		return (NULL);
-// 	s_len = ft_strlen(s);
-// 	if (start >= s_len)
-// 		return (ft_strdup(""));
-// 	actual_len = s_len - start;
-// 	if (actual_len > len)
-// 		actual_len = len;
-// 	sub_str = (char *)malloc(sizeof(char) * (actual_len + 1));
-// 	if (sub_str == NULL)
-// 		return (NULL);
-// 	ft_memcpy(sub_str, s + start, actual_len);
-// 	sub_str[actual_len] = '\0';
-// 	return (sub_str);
-// }
 
 // POUR COUNT WORD ET MALLOC (i++ pour les " a ignorer)
 int	manage_count_cot(const char *s, size_t *i)
@@ -60,7 +38,7 @@ int	manage_count_cot(const char *s, size_t *i)
 	return (0);
 }
 
-static size_t	count_word(char const *s)
+size_t	count_word(char const *s)
 {
 	size_t	count;
 	size_t	i;
@@ -69,26 +47,27 @@ static size_t	count_word(char const *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] != ESPACE && s[i] != TAB)
+		while (s[i] && (s[i] == ESPACE || s[i] == TAB))
+            i++;
+		if (!s[i])
+			break;
+		count++;
+		while (s[i] && (s[i] != ESPACE && s[i] != TAB))
 		{
-			count++;
-			while (s[i] && (s[i] != ESPACE && s[i] != TAB))
+			if (s[i] == SINGLE_COT || s[i] == DOUBLE_COT)
 			{
-				if (s[i] == SINGLE_COT || s[i] == DOUBLE_COT)
-					if (manage_count_cot(s, &i) == 1)
-						return (0);
-				if (s[i])
-					search_symbols(s, &i, &count);
+				if (manage_count_cot(s, &i) == 1)
+					return (0);// WIP Return minishell_error (print)
 			}
+			if (s[i])
+				search_symbols(s, &i, &count);
 		}
-		else
-			i++;
 	}
 	printf("words = %d\n", count);
 	return (count);
 }
 
-static char	*ft_next_word(const char **s, t_env *env)
+char	*ft_next_word(const char **s, t_env *env)
 {
 	size_t	start;
 	size_t	len;

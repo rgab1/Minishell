@@ -6,12 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 10:41:46 by hassmou           #+#    #+#             */
-/*   Updated: 2026/06/30 16:54:02 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/15 17:18:43 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "pipex.h"
 
 int	ft_tokensize(t_tokens *lst)
 {

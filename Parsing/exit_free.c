@@ -6,17 +6,14 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 15:58:41 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/15 16:21:53 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/15 17:38:46 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "execution.h"
 
 void	exit_free(t_tokens *token, t_cmd *cmd, char *str)
 {
-	if (line)
-		free(line);
     if (str)
         printf("%s\n", str);
     if (token)

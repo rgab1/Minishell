@@ -6,12 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/08 18:05:56 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/15 17:18:21 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "pipex.h"
 
 t_cmd	*init_cmd(int len_tok)
 {
