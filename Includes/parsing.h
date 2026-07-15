@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/15 16:06:52 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/15 17:40:55 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PARSING_H
 
 # include "environment.h"
-# include "libft.h"
 # include "execution.h"
+# include "libft.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
@@ -61,9 +61,9 @@ size_t					index_in_cot(const char *str, size_t i, int car,
 							t_env *env);
 
 // create_tab.c
-void					manage_count_cot(char const *s, size_t *i);
-static size_t			count_word(char const *s);
-static char				*ft_next_word(const char **s, t_env *env);
+int						manage_count_cot(char const *s, size_t *i);
+size_t					count_word(char const *s);
+char					*ft_next_word(const char **s, t_env *env);
 char					**split_star(char const *str, t_env *env);
 
 // parse.c
@@ -100,4 +100,6 @@ char					*get_key(unsigned char *src, t_env *env, int *i);
 int						ft_is_key(char *key, t_env *head);
 int						ft_is_env(char c);
 
+// garbage
+void					print_lst(t_tokens *nodes);
 #endif

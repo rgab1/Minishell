@@ -15,11 +15,19 @@ SRC_UTILS = full_cleanup.c minishell_error.c
 SRC_EXECUTION = free_stuff.c is_builtin.c execution.c \
 			run_command.c run_pipeline.c get_path.c
 
+SRC_PARSING = browse_line.c create_tab.c lexing.c change_fd.c \
+			parse_utils.c repair_fd.c about_env.c init_token.c \
+			init_shell.c
+
+SRC_MAIN = Main.c
+
 SRC = test_execution.c \
 	  $(addprefix Built_in/, $(SRC_BUILT_IN)) \
 	  $(addprefix Environment/, $(SRC_ENVIRONMENT)) \
 	  $(addprefix Execution/, $(SRC_EXECUTION)) \
 	  $(addprefix Utils/, $(SRC_UTILS)) \
+	  $(addprefix Parsing/, $(SRC_PARSING)) \
+	  $(addprefix Main/, $(SRC_MAIN)) \
 	  
 OBJ = $(SRC:.c=.o)
 
