@@ -6,36 +6,28 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/15 19:46:18 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/16 17:11:04 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 // POUR COUNT WORD ET MALLOC (i++ pour les " a ignorer)
-int	manage_count_cot(const char *s, size_t *i)
+void	manage_count_cot(const char *s, size_t *i)
 {
 	if (s[*i] == SINGLE_COT)
 	{
 		(*i)++;
 		while (s[*i] != SINGLE_COT)
-		{
-			if (s[*i] == '\0')
-				return (1);
 			(*i)++;
-		}
 	}
 	else if (s[*i] == DOUBLE_COT)
 	{
 		(*i)++;
 		while (s[*i] != DOUBLE_COT)
-		{
-			if (s[*i] == '\0')
-				return (1);
 			(*i)++;
-		}
 	}
-	return (0);
+	(*i)++;
 }
 
 size_t	count_word(char const *s)
@@ -55,15 +47,13 @@ size_t	count_word(char const *s)
 		while (s[i] && (s[i] != ESPACE && s[i] != TAB))
 		{
 			if (s[i] == SINGLE_COT || s[i] == DOUBLE_COT)
-			{
-				if (manage_count_cot(s, &i) == 1)
-					return (0);// WIP Return minishell_error (print)
-			}
+				manage_count_cot(s, &i);
 			if (s[i])
 				search_symbols(s, &i, &count);
+			printf("s[i] == %c\n", s[i]);
 		}
 	}
-	printf("words = %d\n", count);
+	printf("word = %d\n", count);
 	return (count);
 }
 

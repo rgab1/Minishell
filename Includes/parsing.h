@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/15 17:40:55 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/16 17:04:53 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_tokens
 
 // lexing.c
 void					search_symbols(char const *s, size_t *i, size_t *count);
+void	search_redir(char const *s, size_t *i, size_t *count);
+void	search_pipe(char const *s, size_t *i, size_t *count);
 
 // init_token.c
 t_tokens				*create_tokens(char *str, t_token_type type);
@@ -61,7 +63,7 @@ size_t					index_in_cot(const char *str, size_t i, int car,
 							t_env *env);
 
 // create_tab.c
-int						manage_count_cot(char const *s, size_t *i);
+void					manage_count_cot(char const *s, size_t *i);
 size_t					count_word(char const *s);
 char					*ft_next_word(const char **s, t_env *env);
 char					**split_star(char const *str, t_env *env);
