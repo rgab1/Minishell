@@ -2,3 +2,20 @@ manage_count_cot
 subject : Not interpret unclosed quotes
 Donc modification du code et on enleve la condition si on ne trouve pas justement
 (je me suis pris la tete pour rien...)
+
+Meilleur gestion des symbols tels que hello|cat ou hello |cat ou hello| cat
+
+A FAIRE :
+Gerer la memoire des strings en faisant attention aux variables d'environment et le $?
+donc remplacer i=4 -> $USER en i=7 -> Hassmou
+Meme chose pour le $?
+
+J'avais pas mal avancer, j'avais fais le lexer, la tokenisation 
+puis le parse pour enfin le mettre dans une structure cmd, qui lui est aussi avec la struct env dans la struct shell. 
+Je n'avais pas encore toucher aux varables d'environnement ce qui ma fallut que je reprenne le projet 
+depuis le debut du lexer ce qui m'a valu pas mal de temps et je me suis rendu compter qu'il fallait que je change 
+toute la structure de mes programmes pour faire en sorte que $USER soit Hassmou 
+et donc supprimer le compteur de caractere pour $USER et enfin ajouter celui de Hassmou, pour avoir la taille final afin d'allouer de la memoire. 
+En faisant ca, je me suis aussi rendu compte que certaines commande comme "hello | cat", 
+je devais aussi gerer le "hello|cat" ainsi que "hello| cat" et ainsi de suite donc 
+j'ai du rechanger mon lexer pour avoir une bonne taille pour mon char **.

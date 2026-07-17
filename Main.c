@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   Main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/15 17:19:18 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/17 21:06:37 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
+	shell = shell_init();
 	while (1)
 	{
 		line = readline("My_SHELL> ");
@@ -39,7 +40,7 @@ int	main(int ac, char **av, char **envp)
 			printf("exit\n");
 			return (0);
 		}
-		shell = manage_shell(envp, line);
+		shell = manage_shell(envp, line, shell);
 		if (!shell)
 			return (1);
 	}
