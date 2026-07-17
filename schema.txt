@@ -19,3 +19,14 @@ et donc supprimer le compteur de caractere pour $USER et enfin ajouter celui de 
 En faisant ca, je me suis aussi rendu compte que certaines commande comme "hello | cat", 
 je devais aussi gerer le "hello|cat" ainsi que "hello| cat" et ainsi de suite donc 
 j'ai du rechanger mon lexer pour avoir une bonne taille pour mon char **.
+
+Feat : ajout d'un exit status dans la struct t_shell 
+Et initialisation de cette structe avant la boucle infinie.
+
+Feat : variable supp deplacer index_in_cot -> manage_lex
+donc changement du calcule de fin dans index_in_cot 'add = (i - add) + value_env;' 
+
+about_env
+Fix : MAJ sur les fonctions en faisant appel aux autres fonctions isdigit ect,
+remplacement des parametres t_env *env par t_shell *shell
+Feat : ajout d'une condition si $? alors i += 2 et sup += 2. return strlen de ce exit_code 

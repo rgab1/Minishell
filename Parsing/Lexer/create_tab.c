@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/16 17:11:04 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/17 21:45:04 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ size_t	count_word(char const *s)
 	return (count);
 }
 
-char	*ft_next_word(const char **s, t_env *env)
+char	*ft_next_word(const char **s, t_shell *shell)
 {
 	size_t	start;
 	size_t	len;
@@ -68,14 +68,14 @@ char	*ft_next_word(const char **s, t_env *env)
 	while ((*s)[i] && ((*s)[i] == ESPACE || (*s)[i] == TAB))
 		i++;
 	start = i;
-	i = manage_lex(s, start, env);
+	i = manage_lex(s, start, shell->env);
 	*s += i;
 	word = ft_substr(*s - i, start, i - start);
 	return (word);
 }
 // Il faut changer le $USER en Hassmou dans la string
 
-char	**split_star(char const *str, t_env *env)
+char	**split_star(char const *str, t_shell *shell)
 {
 	size_t	word_count;
 	size_t	i;
@@ -92,7 +92,7 @@ char	**split_star(char const *str, t_env *env)
 	i = 0;
 	while (i < word_count)
 	{
-		tab[i] = ft_next_word(&str, env);
+		tab[i] = ft_next_word(&str, shell->env);
 		i++;
 		while (*str == ESPACE || *str == TAB)
 			str++;

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 10:15:34 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/16 17:59:47 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/16 18:06:16 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,3 @@ void	search_pipe(char const *s, size_t *i, size_t *count)
 		(*count)++;
 	}
 }
-
-// void	keep_searching(char const *s, size_t *i, size_t *count)
-// {
-// 	(*count)++;
-// 	while (!(s[(*i)] == ESPACE && s[(*i)] == TAB
-// 		&& s[(*i)] == '>' && s[(*i)] == '|' && s[(*i)] == '<'))
-// 			(*i)++;
-// }

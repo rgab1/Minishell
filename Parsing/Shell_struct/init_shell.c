@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/17 21:07:46 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/17 21:46:05 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_shell	*manage_shell(char **envp, char *line, t_shell *shell)
 
     shell->line = line;
 	shell->env = env_init(envp);
-	lex = split_star(line, shell->env);
+	lex = split_star(line, shell);
 	if (!lex)
 		return (exit_free(nodes, shell->cmd, "Error : Invalide Syntaxe split star"), NULL);
 	nodes = manage_token(lex);

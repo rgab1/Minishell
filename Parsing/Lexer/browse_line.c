@@ -6,59 +6,57 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 00:38:16 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/07 09:27:47 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/17 21:48:41 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parsing.h>
 
-size_t	manage_lex(const char **s, size_t start, t_env *env)
+size_t	manage_lex(const char **s, size_t start, t_shell *shell)
 {
 	size_t	i;
+	size_t	supp;
 
 	i = start;
+	supp = 0;
 	while ((*s)[i] && ((*s)[i] != ESPACE && (*s)[i] != TAB))
 	{
 		if (i == start && (*s)[i] == SINGLE_COT)
-		{
-			i = index_in_cot(*s, i, SINGLE_COT, env);
-		}
+			i = index_in_cot(*s, i, &supp, shell);
 		else if (i == start && (*s)[i] == DOUBLE_COT)
-		{
-			i = index_in_cot(*s, i, DOUBLE_COT, env);
-		}
+			i = index_in_cot(*s, i, &supp, shell);
 		i++;
 	}
+	i = i - supp;
 	return (i);
 }
 
 // POUR INDEX IN WORD
-size_t	index_in_cot(const char *str, size_t i, int car, t_env *env)
+size_t	index_in_cot(const char *str, size_t i, size_t *supp, t_shell *shell)
 {
 	size_t	value_env;
 	size_t	add;
-	size_t	supp;
 
 	add = i;
 	supp = 0;
 	value_env = 0;
-	if (car == SINGLE_COT)
+	if (str[i] == SINGLE_COT)
 	{
 		i++;
 		while (str[i] != SINGLE_COT)
 			i++;
 	}
-	else if (car == DOUBLE_COT)
+	else if (str[i] == DOUBLE_COT)
 	{
 		i++;
 		while (str[i] != DOUBLE_COT)
 		{
 			if (str[i] == '$')
-				value_env += count_va_env(str, &i, env, &supp);
+				value_env += count_va_env(str, &i, shell, supp);
 			else
 				i++;
 		}
 	}
-	add = (i - add) + value_env - supp;
+	add = (i - add) + value_env;
 	return (add);
 }

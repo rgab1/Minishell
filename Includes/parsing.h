@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/16 17:48:20 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/17 21:51:23 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ typedef struct s_tokens
 
 // lexing.c
 void					search_symbols(char const *s, size_t *i, size_t *count);
-void	search_redir_in(char const *s, size_t *i, size_t *count);
-void	search_redir_out(char const *s, size_t *i, size_t *count);
-void	search_pipe(char const *s, size_t *i, size_t *count);
+void					search_redir_in(char const *s, size_t *i,
+							size_t *count);
+void					search_redir_out(char const *s, size_t *i,
+							size_t *count);
+void					search_pipe(char const *s, size_t *i, size_t *count);
 
 // init_token.c
 t_tokens				*create_tokens(char *str, t_token_type type);
@@ -59,15 +61,15 @@ void					ft_lstadd_token(t_tokens **lst, t_tokens *new);
 t_tokens				*manage_token(char **tab);
 
 // browse_line.c
-size_t					manage_lex(const char **s, size_t start, t_env *env);
+size_t					manage_lex(const char **s, size_t start, t_shell *shell);
 size_t					index_in_cot(const char *str, size_t i, int car,
-							t_env *env);
+							t_shell *shell);
 
 // create_tab.c
 void					manage_count_cot(char const *s, size_t *i);
 size_t					count_word(char const *s);
-char					*ft_next_word(const char **s, t_env *env);
-char					**split_star(char const *str, t_env *env);
+char					*ft_next_word(const char **s, t_shell *shell);
+char					**split_star(char const *str, t_shell *shell);
 
 // parse.c
 t_cmd					*init_cmd(int len_tok);
@@ -96,13 +98,14 @@ void					exit_free(t_tokens *token, t_cmd *cmd, char *str);
 void					free_tokens(t_tokens *token);
 void					free_cmd(t_cmd *cmd);
 
-// env.c
-int						count_va_env(const char *str, size_t *i, t_env *env,
-							size_t *supp);
+// about_env.c
+int						count_va_env(const char *str, size_t *i,
+							size_t *supp, t_shell *shell);
 char					*get_key(unsigned char *src, t_env *env, int *i);
 int						ft_is_key(char *key, t_env *head);
 int						ft_is_env(char c);
 
 // garbage
 void					print_lst(t_tokens *nodes);
+
 #endif
