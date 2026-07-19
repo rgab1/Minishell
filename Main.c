@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/17 21:15:15 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/18 16:49:37 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	shell = shell_init();
+	if (!shell)
+		return (1);
 	while (1)
 	{
 		line = readline("My_SHELL> ");

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/17 21:46:05 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/18 17:23:08 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_shell	*manage_shell(char **envp, char *line, t_shell *shell)
 	t_tokens	*nodes;
 	t_cmd		*cmd;
 
+	nodes = NULL;
+	cmd = NULL;
     shell->line = line;
 	shell->env = env_init(envp);
 	lex = split_star(line, shell);
@@ -42,4 +44,5 @@ t_shell	*manage_shell(char **envp, char *line, t_shell *shell)
 	shell->cmd = create_cmd_struct(nodes);
 	if (!cmd)
 		return (exit_free(nodes, shell->cmd, "Error : IDK"), NULL);
+	return (shell);
 }

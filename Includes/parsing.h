@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/17 21:51:23 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/18 17:33:15 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void					ft_lstadd_token(t_tokens **lst, t_tokens *new);
 t_tokens				*manage_token(char **tab);
 
 // browse_line.c
-size_t					manage_lex(const char **s, size_t start, t_shell *shell);
-size_t					index_in_cot(const char *str, size_t i, int car,
+size_t					manage_lex(const char **s, size_t start,
+							t_shell *shell);
+size_t					index_in_cot(const char *str, size_t i, size_t *supp,
 							t_shell *shell);
 
 // create_tab.c
@@ -88,7 +89,7 @@ void					repair_fd_in(int fd, t_cmd *cmd);
 void					repair_fd_out(int fd, t_cmd *cmd);
 
 // change_fd.c
-int						manage_fd(t_tokens **tokens, t_cmd *cmd, int redir);
+int						manage_fd(t_tokens **tokens, t_cmd *cmd, size_t redir);
 int						change_fd_redir_in(t_tokens **tokens, t_cmd *cmd);
 int						change_fd_redir_out(t_tokens **tokens, t_cmd *cmd);
 int						change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd);
@@ -99,8 +100,11 @@ void					free_tokens(t_tokens *token);
 void					free_cmd(t_cmd *cmd);
 
 // about_env.c
-int						count_va_env(const char *str, size_t *i,
-							size_t *supp, t_shell *shell);
+size_t					count_va_env(const char *str, size_t *i, size_t *supp,
+							t_shell *shell);
+size_t					get_exit_status(size_t *i, size_t *supp,
+							t_shell *shell);
+
 char					*get_key(unsigned char *src, t_env *env, int *i);
 int						ft_is_key(char *key, t_env *head);
 int						ft_is_env(char c);

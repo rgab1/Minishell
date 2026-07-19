@@ -6,13 +6,13 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/15 17:18:40 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/18 17:29:35 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	manage_fd(t_tokens **tokens, t_cmd *cmd, int redir)
+int	manage_fd(t_tokens **tokens, t_cmd *cmd, size_t redir)
 {
 	if (((*tokens)->type == redir) && (redir == REDIR_IN))
 	{

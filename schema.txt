@@ -30,3 +30,11 @@ about_env
 Fix : MAJ sur les fonctions en faisant appel aux autres fonctions isdigit ect,
 remplacement des parametres t_env *env par t_shell *shell
 Feat : ajout d'une condition si $? alors i += 2 et sup += 2. return strlen de ce exit_code 
+
+
+about_env
+Feat : Ajout de la fonction qui compter le nombre de caractere dans le shell->exit_code
+about create_tab
+Fix : Meilleur gestion du manage_count qui comptais a l'infinie si ""$?$USER" | ahsh'$USER'"$USER" AHAH"
+donc si il y avait '' puis directement "". Je n'avais pas gerer le cas ou il y aurait les 2 qui 
+s'enchainent vu qu'il y avait l'index qui faisait +1 si un quote etait finit.ainsi il ne voyait pas l'autre qui apparaissait.
