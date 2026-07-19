@@ -38,3 +38,9 @@ about create_tab
 Fix : Meilleur gestion du manage_count qui comptais a l'infinie si ""$?$USER" | ahsh'$USER'"$USER" AHAH"
 donc si il y avait '' puis directement "". Je n'avais pas gerer le cas ou il y aurait les 2 qui 
 s'enchainent vu qu'il y avait l'index qui faisait +1 si un quote etait finit.ainsi il ne voyait pas l'autre qui apparaissait.
+
+about create_tab and browse_line
+Fix : Suppression du fichier browse_line -> Grosse restructuration du lexer et de la tokenisation 
+= Maintenant on arrete de compter le nbr de caractere pour l'expansion, 
+juste on creer un tableau de string puis compter le nombre de caractere lors de la tokenisation
+donc suppression de la fonction index_in_cote (qui comptais les $) pour maintenant utiliser manage_count_cot qui de vient -> index_count_cote

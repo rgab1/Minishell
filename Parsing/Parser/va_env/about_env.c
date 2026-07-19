@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 16:36:49 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/18 21:00:20 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/19 18:15:34 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ size_t	count_va_env(const char *str, size_t *i, size_t *supp, t_shell *shell)
 	}
 	start_key = ((*i));
 	start_key++;
-	while ((ft_isalnum(str[start_key]) || (str[start_key] == '_')))
+	while (str[(start_key)] && (ft_isalnum(str[start_key])
+			|| (str[start_key] == '_')))
 		start_key++;
 	key = ft_substr(str, (unsigned int)((*i)), start_key - (*i));
 	(*i) = start_key;
@@ -37,15 +38,15 @@ size_t	count_va_env(const char *str, size_t *i, size_t *supp, t_shell *shell)
 	free(key);
 	return (cost_value);
 }
-	// printf("key = %s, len = %d\n", key, ft_strlen(key));
-	// printf("supp = %d\n", (*supp));
-	// printf("supp + %d = %d\n", ft_strlen(key), (*supp));
-	// printf("cost_value = %d\n", cost_value);
+// printf("key = %s, len = %d\n", key, ft_strlen(key));
+// printf("supp = %d\n", (*supp));
+// printf("supp + %d = %d\n", ft_strlen(key), (*supp));
+// printf("cost_value = %d\n", cost_value);
 
 size_t	get_exit_status(size_t *i, size_t *supp, t_shell *shell)
 {
 	size_t	cost_value;
-	int	tmp;
+	int		tmp;
 
 	cost_value = 0;
 	(*i) += 2;
@@ -54,10 +55,10 @@ size_t	get_exit_status(size_t *i, size_t *supp, t_shell *shell)
 		return (1);
 	tmp = shell->exit_code;
 	while (tmp >= 10)
-		{
-			tmp = tmp / 10;
-			cost_value += 1;
-		}
+	{
+		tmp = tmp / 10;
+		cost_value += 1;
+	}
 	cost_value += 1;
 	return (cost_value);
 }
