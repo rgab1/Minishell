@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/18 17:33:15 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/19 18:41:56 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,12 @@ void					ft_lstadd_token(t_tokens **lst, t_tokens *new);
 t_tokens				*manage_token(char **tab);
 
 // browse_line.c
-size_t					manage_lex(const char **s, size_t start,
-							t_shell *shell);
-size_t					index_in_cot(const char *str, size_t i, size_t *supp,
-							t_shell *shell);
-
+size_t					manage_lex(const char **s, size_t start);
 // create_tab.c
-void					manage_count_cot(char const *s, size_t *i);
+void					index_count_cot(char const *s, size_t *i);
 size_t					count_word(char const *s);
-char					*ft_next_word(const char **s, t_shell *shell);
-char					**split_star(char const *str, t_shell *shell);
+char					*ft_next_word(const char **s);
+char					**split_star(char const *str);
 
 // parse.c
 t_cmd					*init_cmd(int len_tok);
