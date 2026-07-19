@@ -42,5 +42,11 @@ s'enchainent vu qu'il y avait l'index qui faisait +1 si un quote etait finit.ain
 about create_tab and browse_line
 Fix : Suppression du fichier browse_line -> Grosse restructuration du lexer et de la tokenisation 
 = Maintenant on arrete de compter le nbr de caractere pour l'expansion, 
-juste on creer un tableau de string puis compter le nombre de caractere lors de la tokenisation
+juste on creer un tableau de string puis compter le nombre de caractere apres de la tokenisation lors de l'expansion
 donc suppression de la fonction index_in_cote (qui comptais les $) pour maintenant utiliser manage_count_cot qui de vient -> index_count_cote
+
+about manage_lex
+Fix : ajout d'une condition qui permet de savoir si Hello<World et donc de creer 3 string 
+pour separer la redir ou le pipe
+
+hello<world

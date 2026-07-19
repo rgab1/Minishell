@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/19 18:42:27 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/19 19:31:17 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,23 @@ void	index_count_cot(const char *str, size_t *i)
 size_t	manage_lex(const char **s, size_t start)
 {
 	size_t	i;
-	size_t	supp;
 
-	printf("ENTRER DANS MANAGE_LEX\n");
 	i = start;
-	supp = 0;
-	while ((*s)[i] && ((*s)[i] != ESPACE && (*s)[i] != TAB))
+	if ((*s)[i] == '<' || (*s)[i] == '>' || (*s)[i] == '|')
+	{
+		i++;
+		if ((*s)[i] == '<' || (*s)[i] == '>')
+			i++;
+		return (i);
+	}
+	while ((*s)[i] && ((*s)[i] != ESPACE && (*s)[i] != TAB) && ((*s)[i] != '<'
+			&& (*s)[i] != '>' && (*s)[i] != '|'))
 	{
 		if ((*s)[i] == SINGLE_COT || (*s)[i] == DOUBLE_COT)
 			index_count_cot(*s, &i);
 		else
 			i++;
 	}
-	i = i - supp;
 	return (i);
 }
 
@@ -54,7 +58,6 @@ size_t	count_word(char const *s)
 	size_t	count;
 	size_t	i;
 
-	printf("ENTER COUNT_WORD\n");
 	count = 0;
 	i = 0;
 	while (s[i])
@@ -73,7 +76,6 @@ size_t	count_word(char const *s)
 			printf("s[i] == %c\n", s[i]);
 		}
 	}
-	printf("word = %ld\n", count);
 	return (count);
 }
 
