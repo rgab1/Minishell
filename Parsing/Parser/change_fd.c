@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/18 17:29:35 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/19 20:23:54 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	manage_fd(t_tokens **tokens, t_cmd *cmd, size_t redir)
 	if (((*tokens)->type == redir) && (redir == REDIR_IN))
 	{
 		if(change_fd_redir_in(tokens, cmd) == -1)
-			return (-1);
+			return (-1); //gestion d'erreur a faire
 	}
 	else if ((*tokens)->type == redir && (redir == REDIR_OUT))
 	{
 		if(change_fd_redir_out(tokens, cmd) == -1)
-			return (-1);
+			return (-1); //gestion d'erreur a faire
 	}
 	//else if ((*tokens)->type == redir && (redir == HREDIR_IN))
 		// gestion heredoc 
@@ -30,12 +30,12 @@ int	manage_fd(t_tokens **tokens, t_cmd *cmd, size_t redir)
 	else if ((*tokens)->type == redir && (redir == AREDIR_OUT))
 	{
 		if(change_fd_aredir_out(tokens, cmd) == -1)
-			return (-1);
+			return (-1); //gestion d'erreur a faire
 	}
 	if (cmd->in_fd == -1 || cmd->out_fd == -1)
 	{
 		perror((*tokens)->data);
-		return (-1);
+		return (-1); //gestion d'erreur a faire
 	}
 	return (0);
 }

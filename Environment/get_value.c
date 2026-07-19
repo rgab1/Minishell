@@ -6,11 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/07/06 00:05:17 by grivault         ###   ########.fr       */
-=======
-/*   Updated: 2026/07/07 03:21:47 by hassmou          ###   ########.fr       */
->>>>>>> origin/Hassan
+/*   Updated: 2026/07/19 21:20:28 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +20,13 @@ char	*get_value(char *key, t_env *head)
 	while (head)
 	{
 		if (!ft_strncmp(key, head->key, key_len + 1))
-			return (head->value);
+		{
+			if (head->value)
+				return (head->value);
+			else
+				return (ft_strdup(""));
+		}
 		head = head->next;
 	}
-	return (ft_strdup("")); // gerer l'erreur ou la key n'est pas trouve
+	return (ft_strdup(""));
 }

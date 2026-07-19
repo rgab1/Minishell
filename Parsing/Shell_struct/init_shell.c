@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/19 18:38:22 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/19 20:05:07 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ t_shell	*shell_init(void)
 t_shell	*manage_shell(char **envp, char *line, t_shell *shell)
 {
 	char		**lex;
-	t_tokens	*nodes;
+	t_tokens	*tokens;
 	t_cmd		*cmd;
 
-	nodes = NULL;
+	tokens = NULL;
 	cmd = NULL;
     shell->line = line;
 	shell->env = env_init(envp);
 	lex = split_star(line);
 	if (!lex)
-		return (exit_free(nodes, shell->cmd, "Error : Invalide Syntaxe split star"), NULL);
-	nodes = manage_token(lex);
-	print_lst(nodes);
-	shell->cmd = create_cmd_struct(nodes);
+		return (exit_free(tokens, shell->cmd, "Error : Invalide Syntaxe split star"), NULL); // Utilisation de minishell_error()
+	tokens = manage_token(lex);
+	print_lst(tokens);
+	shell->cmd = create_cmd_struct(tokens);
 	if (!cmd)
-		return (exit_free(nodes, shell->cmd, "Error : IDK"), NULL);
+		return (exit_free(tokens, shell->cmd, "Error : IDK"), NULL);
 	return (shell);
 }

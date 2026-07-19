@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   init_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/01 17:30:50 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/19 20:10:01 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+void	free_tab(char **tab)
+{
+	size_t i;
+
+	i = 0;
+	while (tab[i])
+	{
+		i++;
+		free(tab[i - 1]);
+	}
+	free(tab);
+}
 
 t_tokens	*create_tokens(char *str, t_token_type type)
 {
@@ -54,14 +67,14 @@ t_tokens	*manage_token(char **tab)
 	{
 		if (ft_strcmp(tab[i], "|") == 0)
 			temp = create_tokens(tab[i], PIPE);
-		else if (ft_strcmp(tab[i], "<") == 0)
-			temp = create_tokens(tab[i], REDIR_IN);
-		else if (ft_strcmp(tab[i], ">") == 0)
-			temp = create_tokens(tab[i], REDIR_OUT);
-		else if (ft_strcmp(tab[i], "<<") == 0)
+		else if (ft_strncmp(tab[i], "<<", 2) == 0)
 			temp = create_tokens(tab[i], HREDIR_IN);
-		else if (ft_strcmp(tab[i], ">>") == 0)
+		else if (ft_strncmp(tab[i], ">>", 2) == 0)
 			temp = create_tokens(tab[i], AREDIR_OUT);
+		else if (ft_strncmp(tab[i], "<", 1) == 0)
+			temp = create_tokens(tab[i], REDIR_IN);
+		else if (ft_strncmp(tab[i], ">", 1) == 0)
+			temp = create_tokens(tab[i], REDIR_OUT);
 		else
 			temp = create_tokens(tab[i], WORD);
 		ft_lstadd_token(&lst, temp);

@@ -50,3 +50,11 @@ Fix : ajout d'une condition qui permet de savoir si Hello<World et donc de creer
 pour separer la redir ou le pipe
 
 hello<world
+
+about get_value
+Fix : Ajout d'une condition lorsqu'on trouve que la strncmp head->key est good, on verifie si head->value est vrai pour eviter 
+de retourner une valeur NULL et que je puisee utiliser strlen(get_value(key)), pour eviter un segfault.
+
+about expand
+Feat : Ajout d'une fonctionnalite qui permet de compter le nombre de caractere 
+a allouer pour la string final sans les quot et en changeant les variables d'environment

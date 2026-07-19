@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 10:41:46 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/15 17:18:43 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/19 20:12:42 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_tokensize(t_tokens *lst)
 
 void	add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 {
-	cmd->cmd[*j_tab] = (*tokens)->data;
+	cmd->cmd[*j_tab] = ft_strdup((*tokens)->data);
+	free((*tokens)->data);
 	(*j_tab)++;
 }
 
