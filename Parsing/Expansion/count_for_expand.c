@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   about_env.c                                        :+:      :+:    :+:   */
+/*   count_for_expand.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/01 16:36:49 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/19 21:51:02 by hassmou          ###   ########.fr       */
+/*   Created: 2026/07/19 22:29:51 by hassmou           #+#    #+#             */
+/*   Updated: 2026/07/19 22:30:01 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	count_expand(const char *str, size_t *i, size_t *new_size,
 		size_exit_status(i, new_size, shell);
 		return ;
 	}
-	if (!((ft_isalpha(str[(*i) + 1])) && (str[(*i) + 1] == '_')))
+	if (!((ft_isalpha(str[(*i) + 1])) || (str[(*i) + 1] == '_')))
 	{
 		(*i)++;
 		(*new_size)++;
@@ -69,53 +69,3 @@ void	size_exit_status(size_t *i, size_t *new_size, t_shell *shell)
 	}
 	(*new_size) += 1;
 }
-
-char	*get_key(unsigned char *src, t_env *env, int *i)
-{
-	size_t	j;
-	char	*key;
-
-	j = 0;
-	if ((src[(*i) + 1] >= 65 && src[(*i) + 1] <= 90) || (src[(*i) + 1] >= 97
-			&& src[(*i) + 1] <= 122) || (src[(*i) + 1] == '_'))
-		key[j] = src[(*i)];
-	else
-		return (NULL);
-	while (ft_is_env(src[(*i) + 1]))
-	{
-		(*i)++;
-		j++;
-		key[j] = src[(*i)];
-	}
-	if (!ft_is_key(key, env))
-		return (NULL);
-	return (key);
-}
-
-int	ft_is_key(char *key, t_env *head)
-{
-	size_t	key_len;
-
-	*key++;
-	key_len = ft_strlen(key);
-	while (head)
-	{
-		if (ft_strncmp(key, head->key, key_len + 1))
-			return (0);
-		head = head->next;
-	}
-	return (1);
-}
-
-int	ft_is_env(char *str, int first, size_t *i)
-{
-	if (first == 0 && (!((ft_isdigit(str[(*i) + 1]) || ft_isalpha(str[(*i)
-						+ 1])) && (str[(*i) + 1] == '_'))))
-		return (0);
-	else if ((ft_isalnum(str[(*i)]) || (str[(*i)] == '_')))
-		return (0);
-	else
-		return (1);
-}
-
-// fonction pour $?

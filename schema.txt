@@ -58,3 +58,10 @@ de retourner une valeur NULL et que je puisee utiliser strlen(get_value(key)), p
 about expand
 Feat : Ajout d'une fonctionnalite qui permet de compter le nombre de caractere 
 a allouer pour la string final sans les quot et en changeant les variables d'environment
+WIP
+
+about expand
+Feat : Ajout d'une fonctionnalite qui permet de copier tout les caracteres pour la string final sans
+quotes et sans $
+WIP
+Feat : Creation d'un nouveau dossier qui Expansions avec les fichieirs dedans correspondant
