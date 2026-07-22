@@ -65,3 +65,7 @@ Feat : Ajout d'une fonctionnalite qui permet de copier tout les caracteres pour 
 quotes et sans $
 WIP
 Feat : Creation d'un nouveau dossier qui Expansions avec les fichieirs dedans correspondant
+
+about expand
+Feat : Creation d'une nouvelle structure t_exp *exp (expand) avec des variables i, new_size et char * final_ str
+Feat : Fonction recursive qui copie le exit_status dans la final_str;

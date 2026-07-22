@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/19 21:36:00 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/22 05:21:54 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include "environment.h"
+# include "expansion.h"
 # include "execution.h"
 # include "libft.h"
 # include <readline/history.h>

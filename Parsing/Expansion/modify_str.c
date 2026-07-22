@@ -6,67 +6,58 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 16:36:49 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/19 22:51:46 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/22 09:30:20 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	modify_expand(const char *str, size_t *i, size_t *new_size,
-		t_shell *shell)
+void	modify_expand(const char *str, t_exp *exp, t_shell *shell)
 {
-	size_t	cost_value;
-
-	if (str[(*i) + 1] == '?')
+	if (!((ft_isalpha(str[exp->i + 1])) || (str[exp->i + 1] == '_')))
 	{
-		modify_exit_status(i, new_size, shell);
+		exp->final_str[exp->new_size] = str[exp->i];
+		exp->i++;
+		exp->new_size++;
 		return ;
 	}
-	if (!((ft_isalpha(str[(*i) + 1])) || (str[(*i) + 1] == '_')))
-	{
-		(*i)++;
-		(*new_size)++;
-		return ;
-	}
-	modify_head_value(str, i,new_size, shell);
+	modify_head_value(str, exp, shell);
 }
 
-void	modify_head_value(const char *str, size_t *i, size_t *new_size,
-		size_t *shell)
+void	modify_head_value(const char *str, t_exp *exp, size_t *shell)
 {
 	char	*key;
 	char	*value;
 	size_t	start_key;
 
-	(*i)++;
-	start_key = (*i);
+	exp->i++;
+	start_key = exp->i;
 	while (str[(start_key)] && (ft_isalnum(str[start_key])
 			|| (str[start_key] == '_')))
 		start_key++;
-	key = ft_substr(str, (unsigned int)((*i)), start_key - (*i));
-	(*i) = start_key;
+	key = ft_substr(str, (unsigned int)(exp->i), start_key - exp->i);
+	exp->i = start_key;
 	value = get_value(key, shell->env);
 	free(key);
 }
 
-void	modify_exit_status(size_t *i, size_t *new_size, t_shell *shell)
+void	modify_exit_status(t_exp *exp, char *final_str, int exit_code)
 {
-	size_t	cost_value;
-	int		tmp;
-
-	cost_value = 0;
-	(*i) += 2;
-	if (shell->exit_code == 0)
+	exp->i += 2;
+	if (exit_code == 0)
 	{
-		(*new_size)++;
+		exp->final_str[exp->new_size] = '0';
+		exp->new_size++;
 		return ;
 	}
-	tmp = shell->exit_code;
-	while (tmp >= 10)
-	{
-		tmp = tmp / 10;
-		(*new_size) += 1;
-	}
+	recursive_exit_status(&exp->new_size, final_str, exit_code);
+}
+
+void	recursive_exit_status(size_t *new_size, char *final_str, int exit_code)
+{
+	if (exit_code >= 10)
+		recursive_exit_status(new_size, final_str, exit_code / 10);
+	final_str[(*new_size)] = (exit_code % 10) + '0';
 	(*new_size) += 1;
 }
 
