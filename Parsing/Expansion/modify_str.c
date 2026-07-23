@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 16:36:49 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/22 09:30:20 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 07:17:23 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	modify_expand(const char *str, t_exp *exp, t_shell *shell)
 		exp->new_size++;
 		return ;
 	}
-	modify_head_value(str, exp, shell);
+	modify_value(str, exp, shell);
 }
 
-void	modify_head_value(const char *str, t_exp *exp, size_t *shell)
+void	modify_value(const char *str, t_exp *exp, t_shell *shell)
 {
 	char	*key;
 	char	*value;
@@ -39,9 +39,25 @@ void	modify_head_value(const char *str, t_exp *exp, size_t *shell)
 	exp->i = start_key;
 	value = get_value(key, shell->env);
 	free(key);
+	add_expand(value, exp, shell);
 }
 
-void	modify_exit_status(t_exp *exp, char *final_str, int exit_code)
+void	add_expand(char *value, t_exp *exp, t_shell *shell)
+{
+	size_t	i;
+
+	i = 0;
+	if (!value[i])
+		return ;
+	while (value[i])
+	{
+		exp->final_str[exp->new_size] = value[i];
+		i++;
+		exp->new_size++;
+	}
+}
+
+void	modify_exit_status(t_exp *exp, int exit_code)
 {
 	exp->i += 2;
 	if (exit_code == 0)
@@ -50,7 +66,7 @@ void	modify_exit_status(t_exp *exp, char *final_str, int exit_code)
 		exp->new_size++;
 		return ;
 	}
-	recursive_exit_status(&exp->new_size, final_str, exit_code);
+	recursive_exit_status(&exp->new_size, exp->final_str, exit_code);
 }
 
 void	recursive_exit_status(size_t *new_size, char *final_str, int exit_code)

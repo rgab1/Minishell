@@ -6,21 +6,12 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/22 05:21:54 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 08:04:03 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-
-# include "environment.h"
-# include "expansion.h"
-# include "execution.h"
-# include "libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdio.h>
-# include <stdlib.h>
 
 # define SINGLE_COT 39
 # define DOUBLE_COT 34
@@ -59,11 +50,13 @@ void					search_pipe(char const *s, size_t *i, size_t *count);
 // init_token.c
 t_tokens				*create_tokens(char *str, t_token_type type);
 void					ft_lstadd_token(t_tokens **lst, t_tokens *new);
-t_tokens				*manage_token(char **tab);
+t_tokens				*manage_token(char **tab, t_shell *shell);
+void					expand_tokens(t_tokens *tokens, t_shell *shell);
 void					free_tab(char **tab);
 
 // browse_line.c
 size_t					manage_lex(const char **s, size_t start);
+
 // create_tab.c
 void					index_count_cot(char const *s, size_t *i);
 size_t					count_word(char const *s);
@@ -97,15 +90,11 @@ void					exit_free(t_tokens *token, t_cmd *cmd, char *str);
 void					free_tokens(t_tokens *token);
 void					free_cmd(t_cmd *cmd);
 
-// about_env.c
-void					count_expand(const char *str, size_t *i,
-							size_t *new_size, t_shell *shell);
-size_t					size_exit_status(size_t *i, size_t *supp,
-							t_shell *shell);
-
+/*
 char					*get_key(unsigned char *src, t_env *env, int *i);
 int						ft_is_key(char *key, t_env *head);
 int						ft_is_env(char c);
+*/
 
 // garbage
 void					print_lst(t_tokens *nodes);

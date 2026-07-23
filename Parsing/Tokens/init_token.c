@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/19 20:10:01 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 07:43:24 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_lstadd_token(t_tokens **lst, t_tokens *new)
 	temp->next = new;
 }
 
-t_tokens	*manage_token(char **tab)
+t_tokens	*manage_token(char **tab, t_shell *shell)
 {
 	int			i;
 	t_tokens	*temp;
@@ -80,7 +80,20 @@ t_tokens	*manage_token(char **tab)
 		ft_lstadd_token(&lst, temp);
 		i++;
 	}
+	expand_tokens(lst, shell);
 	return (lst);
+}
+
+void	expand_tokens(t_tokens *tokens, t_shell *shell)
+{
+	t_tokens *tmp;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		manage_expand(tmp, shell);
+		tmp = tmp->next;
+	}
 }
 
 /* il faut creer une boucle (jusqu'a que la liste soit vide ou qu'il y a un pipe)

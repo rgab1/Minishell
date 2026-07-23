@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/22 09:28:53 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 07:36:02 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_shell	*manage_shell(char **envp, char *line, t_shell *shell)
 	lex = split_star(line);
 	if (!lex)
 		return (exit_free(tokens, shell->cmd, "Error : Invalide Syntaxe split star"), NULL); // Utilisation de minishell_error()
-	tokens = manage_token(lex);
+	tokens = manage_token(lex, shell);
 	print_lst(tokens);
-	// manage expand();
+	manage_expand(tokens, shell);
 	shell->cmd = create_cmd_struct(tokens);
 	if (!cmd)
 		return (exit_free(tokens, shell->cmd, "Error : IDK"), NULL);

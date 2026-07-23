@@ -67,5 +67,14 @@ WIP
 Feat : Creation d'un nouveau dossier qui Expansions avec les fichieirs dedans correspondant
 
 about expand
+Feat : expansion.h
 Feat : Creation d'une nouvelle structure t_exp *exp (expand) avec des variables i, new_size et char * final_ str
 Feat : Fonction recursive qui copie le exit_status dans la final_str;
+WIP
+
+about expand
+Fix : Expansion terminer (sans avoir tester encore), creation de la token->data avec la string final sans 
+les quotes ou les dollars ect
+Fix : si probleme dans get_value return NULL
+Feat : creation d'un expansion.h meilleure structuration du projet (probleme en compilant Inclusion circulaire)
+WIP
