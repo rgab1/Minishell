@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/23 08:04:03 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 13:59:17 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 // #define TAB	9
 
 # define ERROR_SYNTAXE = "Syntaxe error"
-
-typedef struct s_cmd	t_cmd;
 
 typedef enum e_tokens_type
 {

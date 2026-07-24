@@ -6,17 +6,15 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 22:29:51 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 06:58:37 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 14:21:48 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	count_expand(const char *str, size_t *i, size_t *new_size,
+void	count_expand(char *str, size_t *i, size_t *new_size,
 		t_shell *shell)
 {
-	size_t	cost_value;
-
 	if (str[(*i) + 1] == '?')
 	{
 		size_exit_status(i, new_size, shell);
@@ -31,7 +29,7 @@ void	count_expand(const char *str, size_t *i, size_t *new_size,
 	(*new_size) += size_head_value(str, i, shell);
 }
 
-int	size_head_value(const char *str, size_t *i, t_shell *shell)
+int	size_head_value(char *str, size_t *i, t_shell *shell)
 {
 	char	*key;
 	size_t	result;
@@ -51,10 +49,8 @@ int	size_head_value(const char *str, size_t *i, t_shell *shell)
 
 void	size_exit_status(size_t *i, size_t *new_size, t_shell *shell)
 {
-	size_t	cost_value;
 	int		tmp;
 
-	cost_value = 0;
 	(*i) += 2;
 	if (shell->exit_code == 0)
 	{

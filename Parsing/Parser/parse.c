@@ -6,11 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/19 22:10:10 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 14:15:35 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 t_cmd	*init_cmd(int len_tok)
 {
@@ -85,7 +85,7 @@ t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 	{
 		if ((*tokens)->type == WORD)
 			{
-				manage_expand();
+				// manage_expand();
 				add_str(tokens, cmd, j_tab);
 			}
 		else

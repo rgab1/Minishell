@@ -6,11 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 10:15:34 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/18 21:54:06 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 14:08:15 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	search_symbols(char const *s, size_t *i, size_t *count)
 {

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:40:31 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 07:45:09 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/24 11:48:04 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	manage_expand(t_tokens *tokens, t_shell *shell)
 	t_exp	*exp;
 
 	exp = init_exp();
-	get_new_size_exp(exp, tokens, shell);
+	get_new_size_expand(exp, tokens, shell);
 	exp->final_str = malloc(sizeof(char) * (exp->new_size + 1));
 	if (!exp->final_str)
 		return ; // gestion d'erreur ici
@@ -78,11 +78,4 @@ void	set_newdata_token(t_exp *exp, t_tokens *tokens, t_shell *shell)
 		else
 			exp->final_str[exp->new_size++] = tokens->data[exp->i++];
 	}
-}
-
-void	free_exp(t_exp *exp)
-{
-	if (exp->final_str)
-		free(exp->final_str);
-	free(exp);
 }

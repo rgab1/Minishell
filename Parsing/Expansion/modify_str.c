@@ -6,13 +6,13 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 16:36:49 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 07:17:23 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 14:27:59 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	modify_expand(const char *str, t_exp *exp, t_shell *shell)
+void	modify_expand(char *str, t_exp *exp, t_shell *shell)
 {
 	if (!((ft_isalpha(str[exp->i + 1])) || (str[exp->i + 1] == '_')))
 	{
@@ -24,7 +24,7 @@ void	modify_expand(const char *str, t_exp *exp, t_shell *shell)
 	modify_value(str, exp, shell);
 }
 
-void	modify_value(const char *str, t_exp *exp, t_shell *shell)
+void	modify_value(char *str, t_exp *exp, t_shell *shell)
 {
 	char	*key;
 	char	*value;
@@ -39,10 +39,10 @@ void	modify_value(const char *str, t_exp *exp, t_shell *shell)
 	exp->i = start_key;
 	value = get_value(key, shell->env);
 	free(key);
-	add_expand(value, exp, shell);
+	add_expand(value, exp);
 }
 
-void	add_expand(char *value, t_exp *exp, t_shell *shell)
+void	add_expand(char *value, t_exp *exp)
 {
 	size_t	i;
 
@@ -66,7 +66,7 @@ void	modify_exit_status(t_exp *exp, int exit_code)
 		exp->new_size++;
 		return ;
 	}
-	recursive_exit_status(&exp->new_size, exp->final_str, exit_code);
+	recursive_exit_status(&(exp->new_size), exp->final_str, exit_code);
 }
 
 void	recursive_exit_status(size_t *new_size, char *final_str, int exit_code)

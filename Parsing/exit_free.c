@@ -6,11 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 15:58:41 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/15 17:38:46 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 14:10:51 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	exit_free(t_tokens *token, t_cmd *cmd, char *str)
 {

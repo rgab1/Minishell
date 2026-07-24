@@ -6,11 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/19 19:31:17 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/24 11:36:29 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 // POUR COUNT WORD ET MALLOC (i++ pour les " a ignorer)
 void	index_count_cot(const char *str, size_t *i)
@@ -110,7 +110,7 @@ char	**split_star(char const *str)
 		return (NULL);
 	tab = malloc(sizeof(char *) * (word_count + 1));
 	if (!tab)
-		return (NULL);
+		return (minishell_error("Malloc ", ERROR_MALLOC_FAILED_4), NULL);
 	i = 0;
 	while (i < word_count)
 	{

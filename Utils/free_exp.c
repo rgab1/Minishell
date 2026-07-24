@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_value.c                                        :+:      :+:    :+:   */
+/*   free_exp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/24 11:02:46 by hassmou          ###   ########.fr       */
+/*   Created: 2026/07/24 11:48:27 by hassmou           #+#    #+#             */
+/*   Updated: 2026/07/24 11:49:18 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+# include "minishell.h"
 
-char	*get_value(char *key, t_env *head)
+void	free_exp(t_exp *exp)
 {
-	size_t	key_len;
-
-	key_len = ft_strlen(key);
-	while (head)
-	{
-		if (!ft_strncmp(key, head->key, key_len + 1))
-		{
-			if (head->value)
-				return (head->value);
-			else
-				return (ft_strdup(""));
-		}
-		head = head->next;
-	}
-	return (ft_strdup(""));
+    if (exp)
+    {
+	    if (exp->final_str)
+	    	free(exp->final_str);
+	    free(exp);
+    }
 }

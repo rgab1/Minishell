@@ -78,3 +78,11 @@ les quotes ou les dollars ect
 Fix : si probleme dans get_value return NULL
 Feat : creation d'un expansion.h meilleure structuration du projet (probleme en compilant Inclusion circulaire)
 WIP
+
+gerer get_value et mettre strdup car strlen(getvalue)
+
+Fix : Expansion completement terminer avec les tests
+Fix : return ft_strdup("") dans getvalue pour le strlen 
+Feat : Utils/free_exp
+Retour si erreur return (exemple malloc failed etc) a continuer
+WIP

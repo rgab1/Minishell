@@ -6,26 +6,29 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/23 08:27:43 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 14:02:54 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <errno.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <errno.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+
+struct s_env;
+struct s_cmd;
 
 typedef struct s_shell
 {
-	t_env	*env;
-	t_cmd	*cmd;
+	struct s_env	*env;
+	struct s_cmd	*cmd;
 	char	*line;
 	int		exit_code;
 }			t_shell;
@@ -37,7 +40,6 @@ typedef struct s_shell
 # include "errors.h"
 # include "expansion.h"
 # include "libft.h"
-
 
 void		full_cleanup(t_shell *shell);
 void		minishell_error(char *context, char *error_msg);

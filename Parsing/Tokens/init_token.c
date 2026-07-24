@@ -6,11 +6,11 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/23 07:43:24 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/23 14:07:47 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	free_tab(char **tab)
 {
