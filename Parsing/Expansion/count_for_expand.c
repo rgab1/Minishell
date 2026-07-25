@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 22:29:51 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 14:21:48 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 12:38:06 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	size_head_value(char *str, size_t *i, t_shell *shell)
 	char	*key;
 	size_t	result;
 	size_t	start_key;
+	char	*value;
 
 	(*i)++;
 	start_key = (*i);
@@ -42,7 +43,10 @@ int	size_head_value(char *str, size_t *i, t_shell *shell)
 		start_key++;
 	key = ft_substr(str, (unsigned int)((*i)), start_key - (*i));
 	(*i) = start_key;
-	result = ft_strlen(get_value(key, shell->env));
+	value = get_value(key, shell->env);
+	if (value == NULL)
+		return (0);
+	result = ft_strlen(value);
 	free(key);
 	return (result);
 }
@@ -61,7 +65,7 @@ void	size_exit_status(size_t *i, size_t *new_size, t_shell *shell)
 	while (tmp >= 10)
 	{
 		tmp = tmp / 10;
-		(*new_size) += 1;
+		(*new_size) ++;
 	}
-	(*new_size) += 1;
+	(*new_size) ++;
 }

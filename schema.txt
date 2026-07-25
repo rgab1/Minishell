@@ -86,3 +86,16 @@ Fix : return ft_strdup("") dans getvalue pour le strlen
 Feat : Utils/free_exp
 Retour si erreur return (exemple malloc failed etc) a continuer
 WIP
+
+Fix : J'ai remis return NULL dans le get_value, ce qui me perturbais etait juste que strlen(NULL) = segfault
+Et donc j'ai juste mis une condition dans size_head_value if (!value) alors return (0);
+Fix : init le env avant le while(1) dans le main afin de ne pas le redefinir a chaque commande
+Fix : free char  **lex dans manage_shell apres avoir creer les tokens
+Feat/Fix: Alors beaucoup de changement, relecture du projet entier, mise en forme + gestion des erreurs a return.
+Feat : Check_syntaxe qui verifie la syntaxe
+Feat : creation fonction free_tokens
+Feat : creation free_cmd_struct 
+Feat : Apres une erreur ou quoi que ce soit d'autre je return (shell) pour continuer dans la boucle et eviter d'exit.
+Feat : exit_code maj dans certain cas, a continuer ! 
+et autres que j'ai oublier .... ahah
+WIP

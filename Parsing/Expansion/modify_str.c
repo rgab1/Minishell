@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 16:36:49 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 14:27:59 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 12:44:45 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	add_expand(char *value, t_exp *exp)
 	size_t	i;
 
 	i = 0;
-	if (!value[i])
+	if (!value)
 		return ;
 	while (value[i])
 	{

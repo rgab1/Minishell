@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/23 13:59:17 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 16:19:09 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # define SINGLE_COT 39
 # define DOUBLE_COT 34
 # define ESPACE 32
-// #define TAB	9
-
-# define ERROR_SYNTAXE = "Syntaxe error"
 
 typedef enum e_tokens_type
 {
@@ -50,7 +47,7 @@ t_tokens				*create_tokens(char *str, t_token_type type);
 void					ft_lstadd_token(t_tokens **lst, t_tokens *new);
 t_tokens				*manage_token(char **tab, t_shell *shell);
 void					expand_tokens(t_tokens *tokens, t_shell *shell);
-void					free_tab(char **tab);
+void					free_lex(char **tab);
 
 // browse_line.c
 size_t					manage_lex(const char **s, size_t start);
@@ -67,6 +64,7 @@ t_cmd					*create_cmd_struct(t_tokens *nodes);
 int						manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab);
 t_cmd					*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab);
 int						sort_redir(t_tokens **tokens, t_cmd *cmd);
+int 					check_syntax(t_tokens *tokens);
 
 // parse_utils.c
 int						ft_tokensize(t_tokens *lst);
@@ -84,9 +82,10 @@ int						change_fd_redir_out(t_tokens **tokens, t_cmd *cmd);
 int						change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd);
 
 // exit_free.c
-void					exit_free(t_tokens *token, t_cmd *cmd, char *str);
 void					free_tokens(t_tokens *token);
+void    				free_cmd_struct(t_cmd *cmd);
 void					free_cmd(t_cmd *cmd);
+
 
 /*
 char					*get_key(unsigned char *src, t_env *env, int *i);

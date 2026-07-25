@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/23 14:02:54 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 12:00:21 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		full_cleanup(t_shell *shell);
 void		minishell_error(char *context, char *error_msg);
 
 // init_shell.c
-t_shell		*shell_init(void);
-t_shell		*manage_shell(char **envp, char *line, t_shell *shell);
+t_shell		*shell_init(char **envp);
+t_shell		*manage_shell(char *line, t_shell *shell);
 
 #endif

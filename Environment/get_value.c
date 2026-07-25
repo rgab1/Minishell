@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/24 11:02:46 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 11:55:34 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ char	*get_value(char *key, t_env *head)
 			if (head->value)
 				return (head->value);
 			else
-				return (ft_strdup(""));
+				return (NULL);
 		}
 		head = head->next;
 	}
-	return (ft_strdup(""));
+	return (NULL);
 }

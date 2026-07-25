@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 14:15:35 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 16:34:57 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ t_cmd	*create_cmd_struct(t_tokens *nodes)
 		{
 			cmd = init_cmd(ft_tokensize(nodes));
 			if (cmd == NULL)
-				return (NULL);// gestion erreur wip
+				return (NULL);
 			tmp = cmd;
 		}
 		else
 			if (manage_pipe(&nodes, &cmd, &j_tab) == -1)
-                return (NULL);
+                return (free_cmd_list(tmp), NULL);
 		cmd = manage_cmd(&nodes, cmd, &j_tab);
 		if (cmd == NULL)
-			return (NULL);// gestion erreur wip
+			return (free_cmd_list(tmp), NULL);
 	}
 	cmd->cmd[j_tab] = NULL;
 	return (tmp);
@@ -64,34 +64,23 @@ int	manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab)
         (*cmd)->cmd[*j_tab] = NULL;
 		*j_tab = 0;
 		(*cmd)->next = init_cmd(ft_tokensize((*nodes)));
-		if ((*cmd) == NULL)
-			return (-1);
-		(*cmd) = (*cmd)->next;
-	}
-	else
-	{
-		(*cmd)->next = init_cmd(ft_tokensize((*nodes)));
-        if ((*cmd) == NULL)
-			return (-1);
+		if ((*cmd)->next == NULL)
+			return (-1); //gestion d'erreur a faire
 		(*cmd) = (*cmd)->next;
 	}
 	return (0);
 }
 
-// 			*tokens = (*tokens)->next;
 t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 {
 	while (*tokens && (*tokens)->type != PIPE)
 	{
 		if ((*tokens)->type == WORD)
-			{
-				// manage_expand();
 				add_str(tokens, cmd, j_tab);
-			}
 		else
 		{
 			if (sort_redir(tokens, cmd) == -1)
-			return (NULL); 
+				return (NULL); 
 		}
 		*tokens = (*tokens)->next;
 	}
@@ -105,7 +94,7 @@ int	sort_redir(t_tokens **tokens, t_cmd *cmd)
 				|| ((*tokens)->type == AREDIR_OUT))
 	{
 		if ((*tokens)->next == NULL || (*tokens)->next->data == NULL)
-			return (-1); //  gestion d'erreur a faire
+			return (minishell_error(ERROR_SYNTAXE, (*tokens)->next->data), -1);
 		if (manage_fd(tokens, cmd, (*tokens)->type) == -1)
 			return (-1);//  gestion d'erreur a faire
 		// *tokens = (*tokens)->next;

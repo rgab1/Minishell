@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 08:19:32 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 15:22:54 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	manage_fd(t_tokens **tokens, t_cmd *cmd, size_t redir)
 int    change_fd_redir_in(t_tokens **tokens, t_cmd *cmd)
 {
     *tokens = (*tokens)->next;
-	if (*tokens == NULL)
-		return (-1);
+	if (*tokens == NULL || (*tokens)->type != WORD)
+		return (-1); //gestion d'erreur a faire
 	if (cmd->in_fd != -2)
 	{
 		close(cmd->in_fd);
@@ -58,7 +58,7 @@ int    change_fd_redir_out(t_tokens **tokens, t_cmd *cmd)
 {
     *tokens = (*tokens)->next;
 	if (*tokens == NULL)
-		return (-1);
+		return (-1); //gestion d'erreur a faire
 	if (cmd->out_fd != -2)
 	{
 		close(cmd->out_fd);
@@ -72,7 +72,7 @@ int    change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd)
 {
     *tokens = (*tokens)->next;
 	if (*tokens == NULL)
-		return (-1);
+		return (-1); //gestion d'erreur a faire
     if (cmd->out_fd != -2)
 	{
 		close(cmd->out_fd);

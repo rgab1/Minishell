@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:40:31 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/24 11:48:04 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 12:42:00 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ void	manage_expand(t_tokens *tokens, t_shell *shell)
 	t_exp	*exp;
 
 	exp = init_exp();
+	if (!exp)
+		return ;
 	get_new_size_expand(exp, tokens, shell);
+	printf("get size\n");
 	exp->final_str = malloc(sizeof(char) * (exp->new_size + 1));
 	if (!exp->final_str)
 		return ; // gestion d'erreur ici
 	exp->new_size = 0;
 	exp->i = 0;
 	set_newdata_token(exp, tokens, shell);
-	exp->final_str[exp->new_size] = '\0';
+	printf("set token\n");
 	free(tokens->data);
-	tokens->data = ft_strdup(exp->final_str);
+	tokens->data = exp->final_str;
 	free_exp(exp);
 }
 
@@ -70,12 +73,13 @@ void	set_newdata_token(t_exp *exp, t_tokens *tokens, t_shell *shell)
 		}
 		else if (tokens->data[exp->i] == DOUBLE_COT)
 			exp->i++;
-		else if (tokens->data[exp->i] == '$' && tokens->data[exp->i + 1]
-			&& tokens->data[exp->i + 1] == '?')
+		else if (tokens->data[exp->i] == '$' && (tokens->data[exp->i + 1]
+			&& tokens->data[exp->i + 1] == '?'))
 			modify_exit_status(exp, shell->exit_code);
 		else if (tokens->data[exp->i] == '$')
 			modify_expand(tokens->data, exp, shell);
 		else
 			exp->final_str[exp->new_size++] = tokens->data[exp->i++];
 	}
+	exp->final_str[exp->new_size] = '\0';
 }

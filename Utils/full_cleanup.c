@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   full_cleanup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 22:59:26 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 05:44:13 by grivault         ###   ########.fr       */
+/*   Updated: 2026/07/25 16:25:08 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	full_cleanup(t_shell *shell)
 		while (current)
 		{
 			temp = current->next;
-			free_cmd(current);
+			free_cmd_struct(current);
 			current = temp;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/24 11:51:02 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 12:00:31 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	shell = shell_init();
+	shell = shell_init(envp);
 	if (!shell)
 		return (1);
 	while (1)
@@ -42,7 +42,7 @@ int	main(int ac, char **av, char **envp)
 			printf("exit\n");
 			return (0);
 		}
-		shell = manage_shell(envp, line, shell);
+		shell = manage_shell(line, shell);
 		if (!shell)
 			break ;
 	}

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 22:06:52 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/24 11:07:41 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 15:39:37 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ERRORS_H
 
 // minishell_error function messages
+# define ERROR_SYNTAXE "Syntaxe error neat unexpected token" // a changer
 # define ERROR_HOME_NOT_SET "HOME not set"
 # define ERROR_OLDPWD_NOT_SET "OLDPWD not set"
 # define ERROR_CMD_NOT_FOUND "command not found"
@@ -28,6 +29,8 @@
 # define ERROR_SHELL_NDEF_5 "Shell is not defined\n"
 # define ERROR_CMD_NDEF_6 "Cmd is not defined\n"
 # define ERROR_CMD_EMPTY_7 "Cmd char is NULL\n"
+
+// parsing function messages
 # define ERROR_EXP_NDEF_8 "Exp is not defined\n"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 11:48:27 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/24 11:49:18 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/25 12:09:55 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	free_exp(t_exp *exp)
 {
     if (exp)
     {
-	    if (exp->final_str)
-	    	free(exp->final_str);
 	    free(exp);
     }
 }
