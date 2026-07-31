@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/25 15:44:15 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/31 00:55:14 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int check_syntax(t_tokens *tokens)
     
     tmp = tokens;
     if (tmp && tmp->type == PIPE)
-        return (minishell_error(ERROR_SYNTAXE, '|'), 1);
+        return (minishell_error(ERROR_SYNTAXE, "|"), 1);
     while (tmp)
     {
         if (tmp->type == REDIR_IN || tmp->type == REDIR_OUT 
@@ -30,7 +30,7 @@ int check_syntax(t_tokens *tokens)
         else if (tmp->type == PIPE)
         {
             if (tmp->next == NULL || tmp->next->type == PIPE)
-                return (minishell_error(ERROR_SYNTAXE, '|'),1);
+                return (minishell_error(ERROR_SYNTAXE, "|"),1);
         }
         tmp = tmp->next;
     }

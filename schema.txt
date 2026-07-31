@@ -99,3 +99,6 @@ Feat : Apres une erreur ou quoi que ce soit d'autre je return (shell) pour conti
 Feat : exit_code maj dans certain cas, a continuer ! 
 et autres que j'ai oublier .... ahah
 WIP
+
+Fix : Gestion des erreurs a print WIP
+Feat : Ajout du Heredoc terminer (A voir les testes encore WIP)

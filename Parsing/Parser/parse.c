@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/25 16:34:57 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/07/31 04:39:59 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ t_cmd	*init_cmd(int len_tok)
 t_cmd	*create_cmd_struct(t_tokens *nodes)
 {
 	int		j_tab;
+	int		i_heredoc;
 	t_cmd	*cmd;
 	t_cmd	*tmp;
 
 	j_tab = 0;
+	i_heredoc = 0;
 	while (nodes)
 	{
 		if (j_tab == 0)
@@ -47,10 +49,10 @@ t_cmd	*create_cmd_struct(t_tokens *nodes)
 		}
 		else
 			if (manage_pipe(&nodes, &cmd, &j_tab) == -1)
-                return (free_cmd_list(tmp), NULL);
-		cmd = manage_cmd(&nodes, cmd, &j_tab);
+                return (free_cmd_struct(tmp), NULL);
+		cmd = manage_cmd(&nodes, cmd, &j_tab, i_heredoc);
 		if (cmd == NULL)
-			return (free_cmd_list(tmp), NULL);
+			return (free_cmd_struct(tmp), NULL);
 	}
 	cmd->cmd[j_tab] = NULL;
 	return (tmp);
@@ -71,7 +73,7 @@ int	manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab)
 	return (0);
 }
 
-t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
+t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab, int i_heredoc)
 {
 	while (*tokens && (*tokens)->type != PIPE)
 	{
@@ -79,7 +81,7 @@ t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 				add_str(tokens, cmd, j_tab);
 		else
 		{
-			if (sort_redir(tokens, cmd) == -1)
+			if (sort_redir(tokens, cmd, i_heredoc) == -1)
 				return (NULL); 
 		}
 		*tokens = (*tokens)->next;
@@ -87,23 +89,17 @@ t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 	return (cmd);
 }
 
-int	sort_redir(t_tokens **tokens, t_cmd *cmd)
+int	sort_redir(t_tokens **tokens, t_cmd *cmd, int i_heredoc)
 {
-	if (((*tokens)->type == REDIR_IN) 
-			|| ((*tokens)->type == REDIR_OUT) 
-				|| ((*tokens)->type == AREDIR_OUT))
+	if ((*tokens)->type == REDIR_IN
+			|| (*tokens)->type == REDIR_OUT
+				|| (*tokens)->type == AREDIR_OUT
+					|| (*tokens)->type == AREDIR_OUT)
 	{
 		if ((*tokens)->next == NULL || (*tokens)->next->data == NULL)
 			return (minishell_error(ERROR_SYNTAXE, (*tokens)->next->data), -1);
-		if (manage_fd(tokens, cmd, (*tokens)->type) == -1)
-			return (-1);//  gestion d'erreur a faire
-		// *tokens = (*tokens)->next;
-	}
-	// else if ((*tokens)->type == HREDIR_IN)
-	// {
-		// if (manage_fd(tokens, cmd, HREDIR_IN) == -1)
-			// return (-1);
-	// }  POUR HEREDOC A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
+		if (manage_fd(tokens, cmd, (*tokens)->type, i_heredoc) == -1)
+			return (-1);
+	}	
 	return (0);
 }
