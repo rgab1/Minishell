@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/01 04:29:54 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 05:55:31 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_cmd	*create_cmd_struct(t_tokens *nodes)
 		else
 			if (manage_pipe(&nodes, &cmd, &j_tab) == -1)
                 return (free_cmd_struct(tmp), NULL);
-		cmd = manage_cmd(&nodes, cmd, &j_tab, i_heredoc);
+		cmd = manage_cmd(&nodes, cmd, &j_tab, &i_heredoc);
 		if (cmd == NULL)
 			return (free_cmd_struct(tmp), NULL);
 	}
@@ -77,7 +77,7 @@ int	manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab)
 	return (0);
 }
 
-t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab, int i_heredoc)
+t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab, int *i_heredoc)
 {
 	while (*tokens && (*tokens)->type != PIPE)
 	{
@@ -93,7 +93,7 @@ t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab, int i_heredoc)
 	return (cmd);
 }
 
-int	sort_redir(t_tokens **tokens, t_cmd *cmd, int i_heredoc)
+int	sort_redir(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 {
 	if ((*tokens)->type == REDIR_IN
 			|| (*tokens)->type == REDIR_OUT

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/25 12:00:31 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 06:12:17 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int ac, char **av, char **envp)
 			printf("exit\n");
 			return (0);
 		}
+		add_history(line);
 		shell = manage_shell(line, shell);
 		if (!shell)
 			break ;

@@ -6,18 +6,18 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/01 04:32:40 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 06:00:51 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	manage_fd(t_tokens **tokens, t_cmd *cmd, int i_heredoc)
+int	manage_fd(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 {
 	if (((*tokens)->type == REDIR_IN)
 			|| (*tokens)->type == REDIR_OUT)
 	{
-		if(change_fd_redir(tokens, cmd) == -1)
+		if(change_fd_redir(tokens, (*tokens)->type, cmd) == -1)
 			return (-1);
 	}
 	else if ((*tokens)->type == AREDIR_OUT)
@@ -38,22 +38,28 @@ int	manage_fd(t_tokens **tokens, t_cmd *cmd, int i_heredoc)
 	return (0);
 }
 
-int    change_fd_redir(t_tokens **tokens, t_cmd *cmd)
+int    change_fd_redir(t_tokens **tokens, size_t redir, t_cmd *cmd)
 {
     *tokens = (*tokens)->next;
-	if (*tokens == NULL || (*tokens)->type != WORD)
+	if (*tokens == NULL || (*tokens)->data == NULL ||(*tokens)->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, NULL), 1); 
-	if ((*tokens)->type == REDIR_IN && cmd->in_fd != -2)
+	if (redir == REDIR_IN)
 	{
-		close(cmd->in_fd);
-		cmd->in_fd = -2;
+		if (cmd->in_fd != -2)
+		{
+			close(cmd->in_fd);
+			cmd->in_fd = -2;
+		}
 		cmd->in_fd = open((*tokens)->data, O_RDONLY);
 	}
-	else if ((*tokens)->type == REDIR_OUT && cmd->out_fd != -2)
+	else if (redir == REDIR_OUT)
 	{
-		close(cmd->out_fd);
-		cmd->out_fd = -2;
-		cmd->out_fd = open((*tokens)->data, O_WRONLY, O_CREAT, O_TRUNC, 0644);
+		if (cmd->out_fd != -2)
+		{
+			close(cmd->out_fd);
+			cmd->out_fd = -2;
+		}
+		cmd->out_fd = open((*tokens)->data, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	}
     return (0);
 }
@@ -61,7 +67,7 @@ int    change_fd_redir(t_tokens **tokens, t_cmd *cmd)
 int    change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd)
 {
     *tokens = (*tokens)->next;
-	if (*tokens == NULL || (*tokens)->type != WORD)
+	if (*tokens == NULL || (*tokens)->data == NULL || (*tokens)->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, NULL), 1);
     if (cmd->out_fd != -2)
 	{
@@ -72,7 +78,7 @@ int    change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd)
     return (0);
 }
 
-int		change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int i_heredoc)
+int		change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 {
 	char	*namefile;
 
@@ -86,6 +92,7 @@ int		change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int i_heredoc)
 		cmd->in_fd = -2;
 	}
 	namefile = name_file_hc(i_heredoc);
+	(*i_heredoc)++;
 	cmd->in_fd = open(namefile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	make_heredoc(tokens, cmd);
 	close(cmd->in_fd);

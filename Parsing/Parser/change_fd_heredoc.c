@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/01 04:33:46 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 06:02:12 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 			minishell_error(ERROR_CTRL_D_HEREDOC, (*tokens)->data);
 			break;
 		}
-		else if (ft_strcmp(line, "EOF") == 0)
+		else if (ft_strcmp(line, (*tokens)->data) == 0)
 		{
 			free(line);
 			break;
@@ -34,10 +34,10 @@ void	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 	}
 }
 
-char	*name_file_hc(int i_heredoc)
+char	*name_file_hc(int *i_heredoc)
 {
 	char	*nbr_file;
 
-	nbr_file = ft_itoa(i_heredoc);
+	nbr_file = ft_itoa(*i_heredoc);
 	return (ft_strjoin(".heredoc_", nbr_file));
 }
