@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 16:01:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/25 16:15:39 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 03:13:33 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void    free_cmd_struct(t_cmd *cmd)
         while (cmd)
         {
             tmp = cmd->next;
-            free_cmd(tmp);
+            free_cmd_star(tmp);
             cmd = tmp;
         }
     }
 }
 
-void	free_cmd(t_cmd *cmd)
+void	free_cmd_star(t_cmd *cmd)
 {
     size_t  i;
 

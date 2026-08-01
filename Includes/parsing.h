@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/31 05:20:18 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 03:11:42 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char				*name_file_hc(int i_heredoc);
 // exit_free.c
 void				free_tokens(t_tokens *token);
 void				free_cmd_struct(t_cmd *cmd);
-void				free_cmd(t_cmd *cmd);
+void				free_cmd_star(t_cmd *cmd);
 
 /*
 char				*get_key(unsigned char *src, t_env *env, int *i);

@@ -10,24 +10,26 @@ SRC_BUILT_IN = env.c pwd.c cd.c export.c unset.c ft_exit.c echo.c
 SRC_ENVIRONMENT = environment.c free_env.c get_value.c set_value.c \
 				  get_envp.c is_valid_identifier.c
 
-SRC_UTILS = full_cleanup.c minishell_error.c
+SRC_UTILS = free_cmd_star.c free_exp.c free_tokens.c full_cleanup.c \
+			minishell_error.c
 
 SRC_EXECUTION = free_stuff.c is_builtin.c execution.c \
 			run_command.c run_pipeline.c get_path.c
 
-SRC_PARSING = browse_line.c create_tab.c lexing.c change_fd.c \
-			parse_utils.c repair_fd.c about_env.c init_token.c \
-			init_shell.c
+SRC_PARSING = Expansion/count_for_expand.c Expansion/init_struct_exp.c \
+			Expansion/expansion.c Expansion/modify_str.c\
+			Lexer/create_tab.c Lexer/lexing.c \
+			Parser/change_fd.c Parser/change_fd_heredoc.c \
+			Parser/check_syntax.c Parser/parse.c Parser/parse_utils.c \
+			Shell_struct/init_shell.c \
+			Tokens/init_token.c
 
-SRC_MAIN = Main.c
-
-SRC = test_execution.c \
+SRC = Main.c \
 	  $(addprefix Built_in/, $(SRC_BUILT_IN)) \
 	  $(addprefix Environment/, $(SRC_ENVIRONMENT)) \
 	  $(addprefix Execution/, $(SRC_EXECUTION)) \
 	  $(addprefix Utils/, $(SRC_UTILS)) \
 	  $(addprefix Parsing/, $(SRC_PARSING)) \
-	  $(addprefix Main/, $(SRC_MAIN)) \
 	  
 OBJ = $(SRC:.c=.o)
 
@@ -43,7 +45,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(C_FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(C_FLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
 
 %.o: %.c
 	$(CC) $(C_FLAGS) $(INCLUDES) -c $< -o $@
