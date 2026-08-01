@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/31 05:21:20 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 04:33:46 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 			minishell_error(ERROR_CTRL_D_HEREDOC, (*tokens)->data);
 			break;
 		}
-		else if (ft_strncmp(line, "EOF", 3))
+		else if (ft_strcmp(line, "EOF") == 0)
 		{
 			free(line);
 			break;

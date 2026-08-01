@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/31 04:39:59 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 04:29:54 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 t_cmd	*init_cmd(int len_tok)
 {
 	t_cmd	*node;
+	int		i;
 
+	i = 0;
 	node = malloc(sizeof(t_cmd));
 	if (!node)
 		return (NULL);
 	node->cmd = malloc(sizeof(char *) * (len_tok + 1));
 	if (!node->cmd)
 		return (NULL);
+	while (i <= len_tok)
+		node->cmd[i++] = NULL;
 	node->in_fd = -2;
 	node->out_fd = -2;
 	node->namefile = NULL;
@@ -94,11 +98,11 @@ int	sort_redir(t_tokens **tokens, t_cmd *cmd, int i_heredoc)
 	if ((*tokens)->type == REDIR_IN
 			|| (*tokens)->type == REDIR_OUT
 				|| (*tokens)->type == AREDIR_OUT
-					|| (*tokens)->type == AREDIR_OUT)
+					|| (*tokens)->type == HREDIR_IN)
 	{
 		if ((*tokens)->next == NULL || (*tokens)->next->data == NULL)
 			return (minishell_error(ERROR_SYNTAXE, (*tokens)->next->data), -1);
-		if (manage_fd(tokens, cmd, (*tokens)->type, i_heredoc) == -1)
+		if (manage_fd(tokens, cmd, i_heredoc) == -1)
 			return (-1);
 	}	
 	return (0);

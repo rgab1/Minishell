@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/31 02:51:16 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/01 04:03:59 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_shell	*manage_shell(char *line, t_shell *shell)
 		return (shell);
 	tokens = manage_token(lex, shell);
 	free(lex);
-	if (!check_syntax(tokens))
+	if (check_syntax(tokens))
 	{
 		free_tokens(tokens);
 		shell->exit_code = 2;
