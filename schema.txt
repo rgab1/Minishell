@@ -126,3 +126,6 @@ Feat : Usage de la macro WIFSIGNALED(status) dans la partie execution que ce soi
     si l'enfant a ete tuer via un signal
     On ignore les signaux SIGINT et SIGQUIT quand on est dans le process parent pour eviter de le tuer ahah
     Ajout de la fonction signal(SIGINT, SIG_DFL) et signal(SIGQUIT, SIG_DFL) juste apres avoir creer les enfants afin de permettre de ne plus ignorer les siganux presents
+
+Feat : Appel de fonction execution dans le main, mise en ordre du projet
+Feat : Ajout d'une fonction au debut de la boucle dans le main qui va checker si la variable globale est bien a 0 sinon exit_code = g_signal_status;

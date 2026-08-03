@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/03 05:22:36 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 06:09:45 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,33 @@ void	print_lst(t_tokens *nodes)
 	printf("content = %s; type_nbr = %d\n", nodes->data, nodes->type);
 }
 
+void	start_minishell(int ac, char **av)
+{
+	(void)ac;
+	(void)av;
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sigint_handler);
+}
+
+void	end_of_minishell(t_shell *shell, char *line)
+{
+	free(line);
+	rl_clear_history();
+	full_cleanup(shell);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_shell		*shell;
 	char		*line;
 
-	(void)ac;
-	(void)av;
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sigint_handler);
+	start_minishell(ac, av);
 	shell = shell_init(envp);
 	if (!shell)
 		return (1);
 	while (1)
 	{
+		check_g_status(shell, g_signal_status);
 		line = readline("My_SHELL> ");
 		if (!line)
 		{
@@ -53,8 +66,6 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		execution(shell);
 	}
-	free(line);
-	rl_clear_history();
-	full_cleanup(shell);
+	end_of_minishell(shell, line);
 	return (0);
 }

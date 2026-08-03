@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/03 04:46:45 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 06:10:11 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ typedef struct s_shell
 
 extern int g_signal_status;
 
+void		start_minishell(int ac, char **av);
+void		end_of_minishell(t_shell *shell, char *line);
+
 void		full_cleanup(t_shell *shell);
 void		minishell_error(char *context, char *error_msg);
 
@@ -54,5 +57,6 @@ t_shell		*manage_shell(char *line, t_shell *shell);
 
 // Signaux.c
 void    	sigint_handler(int sig);
+void    	check_g_status(t_shell *shell, int g_signal_status);
 
 #endif

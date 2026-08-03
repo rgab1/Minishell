@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 04:21:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/03 05:08:23 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 06:05:26 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,13 @@ void    sigint_handler(int sig)
     rl_on_new_line();
     rl_replace_line("", 0);
     rl_redisplay();
+}
+
+void    check_g_status(t_shell *shell, int g_signal_status)
+{
+    if (g_signal_status != 0)
+   	{
+       	shell->exit_code = g_signal_status;
+    	g_signal_status = 0;
+	}
 }
