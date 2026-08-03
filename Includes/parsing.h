@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/01 06:03:06 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 04:55:54 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int					change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd,
 						int *i_heredoc);
 
 // change_fd_heredoc
-void				make_heredoc(t_tokens **tokens, t_cmd *cmd);
+int					make_heredoc(t_tokens **tokens, t_cmd *cmd);
 char				*name_file_hc(int *i_heredoc);
 
 // exit_free.c

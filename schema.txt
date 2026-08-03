@@ -102,3 +102,27 @@ WIP
 
 Fix : Gestion des erreurs a print WIP
 Feat : Ajout du Heredoc terminer (A voir les testes encore WIP)
+
+Fix : MAJ sur le Makefile
+Style : Utils/free_cmd.c -> Utils/free_cmd_star.c
+
+Fix : Heredoc completement fait chanegement fct change_fd_hredir_in j'ai changer l'utilisation du open
+    en remplacant les , par des operateur bit a bit '|'
+Feat : Ajout d'une boucle dans init_cmd qui sert a initialiser toutes les strings a NULL permettant d'eviter
+        un segfault lorsque erreur et  free_cmd_star 
+Fix : suppression du size_t redir dans sort_redir qui sert a rien, comparaison directement avec token->type == ''' 
+
+Fix : Changement dans change_fd regarde si token->data n'est pas null, changement aussi ajout des conditions if 
+    cmd->in_fd != -2 a l'interieur des condition if redir == REDIR_IN
+Fix : Incrementation pour le i_heredoc afin de bien nommer les fichiers
+Fix : avant le delimiteur etait 'EOF' changement pour tokens->data
+
+Feat : Juste apres readline on utilise add_history pour avoir l'historique de la commande
+Fix : int i_heredoc -> int *i_heredoc + Correction syntaxe si rien apres << (changement dans les conditions) delimiteur = entrer('\0)
+
+Feat : Ajout d'une variable global qu'on initialise a 0 dans le main et utilisation de signal() Pour associer les fonctions a chaque siganl correspondant
+Fix : Amelioration du heredoc qui saura interpreter les signaux
+Feat : Usage de la macro WIFSIGNALED(status) dans la partie execution que ce soit dans single_cmd ou dans run_pipeline pour avoir l'exit status
+    si l'enfant a ete tuer via un signal
+    On ignore les signaux SIGINT et SIGQUIT quand on est dans le process parent pour eviter de le tuer ahah
+    Ajout de la fonction signal(SIGINT, SIG_DFL) et signal(SIGQUIT, SIG_DFL) juste apres avoir creer les enfants afin de permettre de ne plus ignorer les siganux presents

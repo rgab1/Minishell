@@ -24,12 +24,15 @@ SRC_PARSING = Expansion/count_for_expand.c Expansion/init_struct_exp.c \
 			Shell_struct/init_shell.c \
 			Tokens/init_token.c
 
+SRC_SIGNAL = signal.c
+
 SRC = Main.c \
 	  $(addprefix Built_in/, $(SRC_BUILT_IN)) \
 	  $(addprefix Environment/, $(SRC_ENVIRONMENT)) \
 	  $(addprefix Execution/, $(SRC_EXECUTION)) \
 	  $(addprefix Utils/, $(SRC_UTILS)) \
 	  $(addprefix Parsing/, $(SRC_PARSING)) \
+	  $(addprefix Signal/, $(SRC_SIGNAL)) \
 	  
 OBJ = $(SRC:.c=.o)
 

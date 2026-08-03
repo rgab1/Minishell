@@ -6,13 +6,13 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/01 06:02:12 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 05:02:10 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	make_heredoc(t_tokens **tokens, t_cmd *cmd)
+int	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 {
 	char	*line;
 
@@ -22,8 +22,10 @@ void	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 		if (line == NULL)
 		{
 			minishell_error(ERROR_CTRL_D_HEREDOC, (*tokens)->data);
-			break;
+			return (0);
 		}
+		if (g_signal_status != 0)
+			return (-1);
 		else if (ft_strcmp(line, (*tokens)->data) == 0)
 		{
 			free(line);
@@ -31,7 +33,9 @@ void	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 		}
 		ft_putstr_fd(line, cmd->in_fd);
 		ft_putchar_fd('\n', cmd->in_fd);
+		free(line);
 	}
+	return (0);
 }
 
 char	*name_file_hc(int *i_heredoc)

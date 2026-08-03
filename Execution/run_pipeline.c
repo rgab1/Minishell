@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_pipeline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 00:11:15 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/03 05:41:49 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	run_pipeline(t_shell *shell, int *pid)
 		*pid = fork();
 		if (*pid == 0)
 		{
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
 			if (shell->cmd->next)
 				close(fd[0]);
 			is_builtin(shell, pid);

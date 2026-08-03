@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/01 03:06:45 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 04:46:45 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 struct s_env;
 struct s_cmd;
@@ -42,11 +43,16 @@ typedef struct s_shell
 # include "expansion.h"
 # include "libft.h"
 
+extern int g_signal_status;
+
 void		full_cleanup(t_shell *shell);
 void		minishell_error(char *context, char *error_msg);
 
 // init_shell.c
 t_shell		*shell_init(char **envp);
 t_shell		*manage_shell(char *line, t_shell *shell);
+
+// Signaux.c
+void    	sigint_handler(int sig);
 
 #endif

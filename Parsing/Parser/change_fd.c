@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/01 06:00:51 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 05:00:44 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,13 @@ int		change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 	namefile = name_file_hc(i_heredoc);
 	(*i_heredoc)++;
 	cmd->in_fd = open(namefile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	make_heredoc(tokens, cmd);
+	if (make_heredoc(tokens, cmd) == -1)
+		{
+			close(cmd->in_fd);
+			unlink(namefile);
+			return (1);
+		}
+	unlink(namefile);
 	close(cmd->in_fd);
 	cmd->in_fd = open(namefile, O_RDONLY);
 	unlink(namefile);
