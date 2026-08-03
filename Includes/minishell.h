@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/03 06:10:11 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 06:33:27 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ t_shell		*manage_shell(char *line, t_shell *shell);
 
 // Signaux.c
 void    	sigint_handler(int sig);
-void    	check_g_status(t_shell *shell, int g_signal_status);
+void    	check_g_status(t_shell *shell);
 
 #endif

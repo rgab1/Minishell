@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/01 04:03:59 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 06:48:25 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_shell	*manage_shell(char *line, t_shell *shell)
 	}
 	print_lst(tokens);
 	shell->cmd = create_cmd_struct(tokens);
+	free_tokens(tokens);
 	if (!shell->cmd)
 	{
 		shell->exit_code = 1;

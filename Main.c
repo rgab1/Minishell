@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/03 06:09:45 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/03 06:33:11 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_lst(t_tokens *nodes)
 		return ;
 	while (nodes->next != NULL)
 	{
-		printf("content = %s; type_nbr = %d\n", nodes->data, nodes->type);
+		printf("content = %s; make type_nbr = %d\n", nodes->data, nodes->type);
 		nodes = nodes->next;
 	}
 	printf("content = %s; type_nbr = %d\n", nodes->data, nodes->type);
@@ -52,7 +52,7 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	while (1)
 	{
-		check_g_status(shell, g_signal_status);
+		check_g_status(shell);
 		line = readline("My_SHELL> ");
 		if (!line)
 		{

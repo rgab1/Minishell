@@ -129,3 +129,27 @@ Feat : Usage de la macro WIFSIGNALED(status) dans la partie execution que ce soi
 
 Feat : Appel de fonction execution dans le main, mise en ordre du projet
 Feat : Ajout d'une fonction au debut de la boucle dans le main qui va checker si la variable globale est bien a 0 sinon exit_code = g_signal_status;
+
+Fix : Suppression du char *namefile inutile dans la struct cmd et lorsqu'on free la cmd car on unlink le namefile dans la partie heredoc dans tout les cas
+Fix : Suppression de free_cmd a la fin de l'execution car full_cleanup s'en occupe
+Fix : free_tokens dans init_shell apres la creation  de la struct cmd (oui c'est un oublie ahah...)
+
+
+
+
+test avec valgrind : valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
+Il faut cree un fichier qui va permettre de supprimer les leaks de readline :
+
+readline.supp.c
+{
+    ignore_readline_leaks
+    Memcheck:Leak
+    ...
+    fun:readline
+}
+{
+    ignore_add_history_leaks
+    Memcheck:Leak
+    ...
+    fun:add_history
+}
