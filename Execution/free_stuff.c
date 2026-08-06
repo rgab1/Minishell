@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:47:53 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/01 03:10:24 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 16:28:58 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	free_split(char **split)
 
 void	free_cmd(t_cmd *current)
 {
-	free_split(current->cmd);
+	if (!current)
+		return ;
+	if (current->cmd)
+		free_split(current->cmd);
 	if (current->in_fd > 2)
 	{
 		close(current->in_fd);

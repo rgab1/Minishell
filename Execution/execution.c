@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 13:49:40 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/05 15:03:21 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 16:50:06 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	execution(t_shell *shell)
 			continue ;
 	}
 	signal(SIGINT, sigint_handler);
-	return(free_cmd_struct(shell->cmd));
+	free_cmd_struct(shell->cmd);
+	shell->cmd = NULL;
 }

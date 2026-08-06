@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 05:43:20 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/06 17:01:22 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,21 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 	{
 		save_in = dup(0);
 		save_out = dup(1);
-		dup2(shell->cmd->in_fd, 0);
-		dup2(shell->cmd->out_fd, 1);
+		exec_builtin_utils(shell);
 		shell->exit_code = builtins[func_index](shell);
 		dup2(save_in, 0);
 		dup2(save_out, 1);
 		close(save_in);
 		close(save_out);
 	}
+}
+
+static void exec_builtin_utils(t_shell *shell)
+{
+	if (shell->cmd->in_fd != -2 && shell->cmd->in_fd > 2)
+		dup2(shell->cmd->in_fd, 0);
+	if (shell->cmd->out_fd != -2 && shell->cmd->out_fd > 2)
+		dup2(shell->cmd->out_fd, 1);
 }
 
 int	is_builtin(t_shell *shell, int *pid)
