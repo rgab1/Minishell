@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/03 06:33:11 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/05 21:52:03 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	while (1)
 	{
-		check_g_status(shell);
 		line = readline("My_SHELL> ");
 		if (!line)
 		{
 			printf("exit\n");
 			break;
 		}
+		check_g_status(shell);
 		if (line[0] != '\0')
 			add_history(line);
 		shell = manage_shell(line, shell);
