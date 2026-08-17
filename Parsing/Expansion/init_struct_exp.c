@@ -6,21 +6,21 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 08:52:30 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 14:23:35 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:35:57 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-t_exp   *init_exp()
+t_exp	*init_exp(void)
 {
-    t_exp   *exp;
+	t_exp	*exp;
 
-    exp = malloc(sizeof(t_exp));
-    if (!exp)
-        return (NULL);
-    exp->i = 0;
-    exp->new_size = 0;
-    exp->final_str = NULL;
-    return (exp);
+	exp = malloc(sizeof(t_exp));
+	if (!exp)
+		return (NULL);
+	exp->i = 0;
+	exp->new_size = 0;
+	exp->final_str = NULL;
+	return (exp);
 }

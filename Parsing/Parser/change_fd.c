@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/03 05:00:44 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:14:33 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 int	manage_fd(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 {
-	if (((*tokens)->type == REDIR_IN)
-			|| (*tokens)->type == REDIR_OUT)
+	if (((*tokens)->type == REDIR_IN) || (*tokens)->type == REDIR_OUT)
 	{
-		if(change_fd_redir(tokens, (*tokens)->type, cmd) == -1)
+		if (change_fd_redir(tokens, (*tokens)->type, cmd) == -1)
 			return (-1);
 	}
 	else if ((*tokens)->type == AREDIR_OUT)
 	{
-		if(change_fd_aredir_out(tokens, cmd) == -1)
+		if (change_fd_aredir_out(tokens, cmd) == -1)
 			return (-1);
 	}
 	else if ((*tokens)->type == HREDIR_IN)
@@ -38,11 +37,11 @@ int	manage_fd(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 	return (0);
 }
 
-int    change_fd_redir(t_tokens **tokens, size_t redir, t_cmd *cmd)
+int	change_fd_redir(t_tokens **tokens, size_t redir, t_cmd *cmd)
 {
-    *tokens = (*tokens)->next;
-	if (*tokens == NULL || (*tokens)->data == NULL ||(*tokens)->type != WORD)
-		return (minishell_error(ERROR_SYNTAXE, NULL), 1); 
+	*tokens = (*tokens)->next;
+	if (*tokens == NULL || (*tokens)->data == NULL || (*tokens)->type != WORD)
+		return (minishell_error(ERROR_SYNTAXE, NULL), 1);
 	if (redir == REDIR_IN)
 	{
 		if (cmd->in_fd != -2)
@@ -61,24 +60,24 @@ int    change_fd_redir(t_tokens **tokens, size_t redir, t_cmd *cmd)
 		}
 		cmd->out_fd = open((*tokens)->data, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	}
-    return (0);
+	return (0);
 }
 
-int    change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd)
+int	change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd)
 {
-    *tokens = (*tokens)->next;
+	*tokens = (*tokens)->next;
 	if (*tokens == NULL || (*tokens)->data == NULL || (*tokens)->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, NULL), 1);
-    if (cmd->out_fd != -2)
+	if (cmd->out_fd != -2)
 	{
 		close(cmd->out_fd);
 		cmd->out_fd = -2;
 	}
-    cmd->out_fd = open((*tokens)->data, O_WRONLY | O_CREAT | O_APPEND, 0644);
-    return (0);
+	cmd->out_fd = open((*tokens)->data, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	return (0);
 }
 
-int		change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
+int	change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 {
 	char	*namefile;
 
@@ -95,11 +94,11 @@ int		change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 	(*i_heredoc)++;
 	cmd->in_fd = open(namefile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (make_heredoc(tokens, cmd) == -1)
-		{
-			close(cmd->in_fd);
-			unlink(namefile);
-			return (1);
-		}
+	{
+		close(cmd->in_fd);
+		unlink(namefile);
+		return (1);
+	}
 	unlink(namefile);
 	close(cmd->in_fd);
 	cmd->in_fd = open(namefile, O_RDONLY);

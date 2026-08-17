@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/03 04:55:54 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:13:14 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void				repair_fd_out(int fd, t_cmd *cmd);
 
 // change_fd.c
 int					manage_fd(t_tokens **tokens, t_cmd *cmd, int *i_heredoc);
-int					change_fd_redir(t_tokens **tokens, size_t redir, t_cmd *cmd);
+int					change_fd_redir(t_tokens **tokens, size_t redir,
+						t_cmd *cmd);
 int					change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd);
 int					change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd,
 						int *i_heredoc);

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/03 05:02:10 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:38:59 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 		else if (ft_strcmp(line, (*tokens)->data) == 0)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		ft_putstr_fd(line, cmd->in_fd);
 		ft_putchar_fd('\n', cmd->in_fd);

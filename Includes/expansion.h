@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   expansion.h                                        :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 05:17:59 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 14:28:37 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:13:51 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void		modify_expand(char *str, t_exp *exp, t_shell *shell);
 void		modify_value(char *str, t_exp *exp, t_shell *shell);
 void		add_expand(char *value, t_exp *exp);
 void		modify_exit_status(t_exp *exp, int exit_code);
-void		recursive_exit_status(size_t *new_size, char *final_str, int exit_code);
+void		recursive_exit_status(size_t *new_size, char *final_str,
+				int exit_code);
 
 /*count_for_expand.c*/
 void		count_expand(char *str, size_t *i, size_t *new_size,

@@ -6,13 +6,13 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/05 21:52:03 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:12:49 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_signal_status = 0;
+int		g_signal_status = 0;
 
 void	print_lst(t_tokens *nodes)
 {
@@ -36,15 +36,16 @@ void	start_minishell(int ac, char **av)
 
 void	end_of_minishell(t_shell *shell, char *line)
 {
-	free(line);
+	if (line)
+		free(line);
 	rl_clear_history();
 	full_cleanup(shell);
 }
 
 int	main(int ac, char **av, char **envp)
 {
-	t_shell		*shell;
-	char		*line;
+	t_shell	*shell;
+	char	*line;
 
 	start_minishell(ac, av);
 	shell = shell_init(envp);
@@ -56,7 +57,7 @@ int	main(int ac, char **av, char **envp)
 		if (!line)
 		{
 			printf("exit\n");
-			break;
+			break ;
 		}
 		check_g_status(shell);
 		if (line[0] != '\0')

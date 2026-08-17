@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/03 06:48:25 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:37:48 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_shell	*shell_init(char **envp)
 
 	shell = malloc(sizeof(t_shell));
 	if (!shell)
-		return (NULL); // WIP
+		return (minishell_error("Malloc", ERROR_MALLOC_FAILED_4), NULL);
 	shell->env = env_init(envp);
 	shell->cmd = NULL;
 	shell->line = NULL;
@@ -52,6 +52,5 @@ t_shell	*manage_shell(char *line, t_shell *shell)
 		shell->exit_code = 1;
 		return (shell);
 	}
-	put_cmd(shell->cmd);
 	return (shell);
 }

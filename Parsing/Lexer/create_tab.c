@@ -6,13 +6,12 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/25 12:07:09 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:39:49 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// POUR COUNT WORD ET MALLOC (i++ pour les " a ignorer)
 void	index_count_cot(const char *str, size_t *i)
 {
 	if (str[*i] == SINGLE_COT)
@@ -122,23 +121,3 @@ char	**split_star(char const *str)
 	tab[i] = NULL;
 	return (tab);
 }
-
-// int	main(void)
-// {
-// 	const char	*str = " car'Hello' < << > >> | 'World' c'est' Hassan 'eheheh' bye bye";
-// 	char		**tab;
-// 	int			i;
-
-// 	i = 0;
-// 	tab = split_star(str);
-// 	// while (tab[i] != NULL)
-// 	// {
-// 	// 	printf("%s\n", tab[i]);
-// 	// 	i++;
-// 	// }
-//     printf("%s\n", tab[2]);
-//     printf("%s\n", tab[5]);
-//     printf("%s\n", tab[1]);
-// 	free(tab);
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 10:15:34 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/23 14:08:15 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:17:49 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	search_symbols(char const *s, size_t *i, size_t *count)
 {
-	if (s[(*i)] == '<') 
+	if (s[(*i)] == '<')
 		search_redir_in(s, i, count);
-	else if (s[(*i)] == '>') 
+	else if (s[(*i)] == '>')
 		search_redir_out(s, i, count);
 	else if (s[(*i)] == '|')
 		search_pipe(s, i, count);

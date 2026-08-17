@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:40:31 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/25 12:42:00 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:34:13 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	manage_expand(t_tokens *tokens, t_shell *shell)
 	printf("get size\n");
 	exp->final_str = malloc(sizeof(char) * (exp->new_size + 1));
 	if (!exp->final_str)
-		return ; // gestion d'erreur ici
+		return (minishell_error("malloc", ERROR_MALLOC_FAILED_4));
 	exp->new_size = 0;
 	exp->i = 0;
 	set_newdata_token(exp, tokens, shell);
@@ -50,8 +50,7 @@ void	get_new_size_expand(t_exp *exp, t_tokens *tokens, t_shell *shell)
 		else if (tokens->data[exp->i] == DOUBLE_COT)
 			exp->i++;
 		else if (tokens->data[exp->i] == '$')
-			count_expand(tokens->data, &(exp->i), &(exp->new_size),
-				shell);
+			count_expand(tokens->data, &(exp->i), &(exp->new_size), shell);
 		else
 		{
 			exp->i++;
@@ -74,7 +73,7 @@ void	set_newdata_token(t_exp *exp, t_tokens *tokens, t_shell *shell)
 		else if (tokens->data[exp->i] == DOUBLE_COT)
 			exp->i++;
 		else if (tokens->data[exp->i] == '$' && (tokens->data[exp->i + 1]
-			&& tokens->data[exp->i + 1] == '?'))
+				&& tokens->data[exp->i + 1] == '?'))
 			modify_exit_status(exp, shell->exit_code);
 		else if (tokens->data[exp->i] == '$')
 			modify_expand(tokens->data, exp, shell);

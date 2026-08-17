@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/07/25 12:07:56 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:37:29 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_lex(char **tab)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (tab[i])
@@ -86,7 +86,7 @@ t_tokens	*manage_token(char **tab, t_shell *shell)
 
 void	expand_tokens(t_tokens *tokens, t_shell *shell)
 {
-	t_tokens *tmp;
+	t_tokens	*tmp;
 
 	tmp = tokens;
 	while (tmp)
@@ -95,20 +95,3 @@ void	expand_tokens(t_tokens *tokens, t_shell *shell)
 		tmp = tmp->next;
 	}
 }
-
-/* il faut creer une boucle (jusqu'a que la liste soit vide ou qu'il y a un pipe)
-et inserer la data dans la struct :
-
-typedef struct s_cmd
-{
-	char            **argv;      // Le tableau de la commande (ex: ["grep",
-		"hassan", NULL])
-	char            *infile;   
-		// Si une redirection < est présente dans CE bloc
-	char            *outfile;  
-		// Si une redirection > ou >> est présente dans CE bloc
-	int             redir_type; // Pour savoir si c'est >, >>, etc.
-	struct s_cmd    *next;     
-		// Pointeur vers la commande SUIVANTE (après le pipe)
-}			t_cmd;
-*/

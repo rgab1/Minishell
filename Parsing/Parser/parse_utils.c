@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 10:41:46 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/25 13:23:22 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:39:21 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ void	add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 	(*j_tab)++;
 }
 
-// void    add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab)
-// {
-//     dprintf(2, "[TRACE] add_str : Ajout du mot '%s' à l'index %d\n", (*tokens)->data, *j_tab);
-//     cmd->cmd[*j_tab] = (*tokens)->data;
-//     (*j_tab)++;
-// }
-
 void	put_cmd(t_cmd *cmd)
 {
 	int	i;
@@ -51,11 +44,11 @@ void	put_cmd(t_cmd *cmd)
 	while (cmd)
 	{
 		printf("ENTRER DANS BOUCLE\n");
-		while (cmd->cmd[j])	
-			{
-				printf("cmd : %d - %s\n", i, cmd->cmd[j]);\
-				j++;
-			}
+		while (cmd->cmd[j])
+		{
+			printf("cmd : %d - %s\n", i, cmd->cmd[j]);
+			j++;
+		}
 		printf("cmd : %d - %d\n", i, cmd->in_fd);
 		printf("cmd : %d - %d\n", i, cmd->out_fd);
 		printf("----------------------\n");
@@ -64,5 +57,3 @@ void	put_cmd(t_cmd *cmd)
 		j = 0;
 	}
 }
-
-/* Il faut encore gerer la suppression de memoire et parser le fait que le debut soit un WORD */

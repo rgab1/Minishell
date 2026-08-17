@@ -6,16 +6,14 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 11:48:27 by hassmou           #+#    #+#             */
-/*   Updated: 2026/07/25 12:09:55 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:40:13 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	free_exp(t_exp *exp)
 {
-    if (exp)
-    {
-	    free(exp);
-    }
+	if (exp)
+		free(exp);
 }

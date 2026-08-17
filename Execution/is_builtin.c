@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/06 17:01:22 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/06 17:42:13 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,21 @@ static void	dup_fds(t_cmd *current)
 		dup2(current->out_fd, 1);
 }
 
+static void	exec_builtin_utils(t_shell *shell)
+{
+	if (shell->cmd->in_fd != -2 && shell->cmd->in_fd > 2)
+		dup2(shell->cmd->in_fd, 0);
+	if (shell->cmd->out_fd != -2 && shell->cmd->out_fd > 2)
+		dup2(shell->cmd->out_fd, 1);
+}
+
 static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 {
-	int			save_in;
-	int			save_out;
-	int			exit_code;
-	static int	(*builtins[7])(t_shell *shell) = {
-		cd, echo, env, export, pwd, unset, ft_exit
-	};
+	int	save_in;
+	int	save_out;
+	int	exit_code;
+	static int (*builtins[7])(t_shell * shell) = {cd, echo, env, export, pwd,
+		unset, ft_exit};
 
 	if (*pid == 0)
 	{
@@ -48,20 +55,11 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 	}
 }
 
-static void exec_builtin_utils(t_shell *shell)
-{
-	if (shell->cmd->in_fd != -2 && shell->cmd->in_fd > 2)
-		dup2(shell->cmd->in_fd, 0);
-	if (shell->cmd->out_fd != -2 && shell->cmd->out_fd > 2)
-		dup2(shell->cmd->out_fd, 1);
-}
-
 int	is_builtin(t_shell *shell, int *pid)
 {
 	size_t		i;
-	static char	*builtins[8] = {
-		"cd", "echo", "env", "export", "pwd", "unset", "exit", NULL
-	};
+	static char	*builtins[8] = {"cd", "echo", "env", "export", "pwd", "unset",
+			"exit", NULL};
 
 	if (!shell)
 		exit_error(ERROR_SHELL_NDEF_5, 5);
