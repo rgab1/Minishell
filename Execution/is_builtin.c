@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/06 17:42:13 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/19 17:48:39 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	exec_builtin_utils(t_shell *shell)
 
 static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 {
-	int	save_in;
-	int	save_out;
-	int	exit_code;
-	static int (*builtins[7])(t_shell * shell) = {cd, echo, env, export, pwd,
+	int			save_in;
+	int			save_out;
+	int			exit_code;
+	static int	(*builtins[7])(t_shell *shell) = {cd, echo, env, export, pwd,
 		unset, ft_exit};
 
 	if (*pid == 0)
@@ -59,7 +59,7 @@ int	is_builtin(t_shell *shell, int *pid)
 {
 	size_t		i;
 	static char	*builtins[8] = {"cd", "echo", "env", "export", "pwd", "unset",
-			"exit", NULL};
+		"exit", NULL};
 
 	if (!shell)
 		exit_error(ERROR_SHELL_NDEF_5, 5);
