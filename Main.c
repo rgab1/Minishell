@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:12:49 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/20 20:34:22 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	end_of_minishell(t_shell *shell, char *line)
 {
 	if (line)
 		free(line);
+//	clear_history();
 	rl_clear_history();
 	full_cleanup(shell);
 }
@@ -65,7 +66,8 @@ int	main(int ac, char **av, char **envp)
 		shell = manage_shell(line, shell);
 		if (!shell)
 			break ;
-		execution(shell);
+		if (shell->cmd)
+			execution(shell);
 	}
 	end_of_minishell(shell, line);
 	return (0);
