@@ -143,6 +143,9 @@ Fix : lorsque CTRL-D avant d'exit on fait appel a end_of_minishell pour tout fre
 Fix : lors du lexer ajout de la verification de si i !=0 ainsi on peut regarder si str[i - 1] != space/tab (Pour compter le nombre de mots)
 Feat : Ajout de free(line) a la fin de la boucle afin de readline encore une fois (sans ca, causais des leaks)
 
+Fix : Ajout de plusieurs verification dans modify_expand() : si $0 donc non conforme aux va env alors je l'imprimais alors que non 
+(pareille pour $"hey" si i + 1 == tab/espace/cote/dbl_cote alors je fais juste i + 1 pour ignorer le $)
+
 test avec valgrind : valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes --suppressions=./valgrind.supp ./minishell
 Il faut cree un fichier qui va permettre de supprimer les leaks de readline :
 
