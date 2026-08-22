@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 21:55:07 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/05 22:47:45 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:48:20 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ void	minishell_error(char *context, char *error_msg)
 	if (context)
 	{
 		ft_putstr_fd(context, 2);
-		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(" ", 2);
 	}
 	if (error_msg)
+	{
+		ft_putstr_fd("'", 2);
 		ft_putstr_fd(error_msg, 2);
+		ft_putstr_fd("'", 2);
+	}
 	ft_putstr_fd("\n", 2);
 }
