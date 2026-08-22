@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 18:10:59 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/22 18:30:26 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_shell	*shell_init(char **envp)
 	shell->env = env_init(envp);
 	shell->cmd = NULL;
 	shell->line = NULL;
+	shell->save_in = -2;
+	shell->save_out = -2;
 	shell->exit_code = 0;
 	return (shell);
 }

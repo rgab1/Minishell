@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/19 17:48:39 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/22 18:08:30 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static void	exec_builtin_utils(t_shell *shell)
 
 static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 {
-	int			save_in;
-	int			save_out;
 	int			exit_code;
 	static int	(*builtins[7])(t_shell *shell) = {cd, echo, env, export, pwd,
 		unset, ft_exit};
@@ -44,14 +42,14 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 	}
 	else
 	{
-		save_in = dup(0);
-		save_out = dup(1);
+		shell->save_in = dup(0);
+		shell->save_out = dup(1);
 		exec_builtin_utils(shell);
 		shell->exit_code = builtins[func_index](shell);
-		dup2(save_in, 0);
-		dup2(save_out, 1);
-		close(save_in);
-		close(save_out);
+		dup2(shell->save_in, 0);
+		dup2(shell->save_out, 1);
+		close(shell->save_in);
+		close(shell->save_out);
 	}
 }
 

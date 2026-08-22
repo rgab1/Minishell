@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/19 21:03:04 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/22 18:04:44 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_shell
 	struct s_env	*env;
 	struct s_cmd	*cmd;
 	char			*line;
+	int				save_in;
+	int				save_out;
 	int				exit_code;
 }			t_shell;
 

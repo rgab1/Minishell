@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 22:59:26 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/03 06:30:47 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/22 18:08:01 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,9 @@ void	full_cleanup(t_shell *shell)
 		free_env(shell->env);
 	if (shell->cmd)
 		free_cmd_struct(shell->cmd);
+	if (shell->save_in > 2)
+		close(shell->save_in);
+	if (shell->save_out > 2)
+		close(shell->save_out);
 	free(shell);
 }

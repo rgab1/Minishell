@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/22 17:35:39 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/22 18:20:00 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 			minishell_error(current->cmd[0], ERROR_NO_FILE);
 		else
 			minishell_error(current->cmd[0], ERROR_CMD_NOT_FOUND);
+		free_envp(envp);
 		return (full_cleanup(shell), exit(127));
 	}
 	if (current->in_fd > 2)
