@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_command.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 06:05:20 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:35:39 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	close_fds(t_cmd	*current)
 	if (current->in_fd > 2)
 	{
 		close(current->in_fd);
-		current->in_fd = -1;
+		current->in_fd = -2;
 	}
 	if (current->out_fd > 2)
 	{
 		close(current->out_fd);
-		current->out_fd = -1;
+		current->out_fd = -2;
 	}
 }
 
@@ -42,8 +42,10 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 			minishell_error(current->cmd[0], ERROR_CMD_NOT_FOUND);
 		return (full_cleanup(shell), exit(127));
 	}
-	dup2(current->in_fd, 0);
-	dup2(current->out_fd, 1);
+	if (current->in_fd > 2)
+		dup2(current->in_fd, 0);
+	if (current->out_fd > 2)
+		dup2(current->out_fd, 1);
 	close_fds(current);
 	execve(path, current->cmd, envp);
 	minishell_error(current->cmd[0], strerror(errno));
