@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 01:15:50 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 00:05:00 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/22 06:26:08 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	free_env_node(t_env *node)
 {
 	if (node)
 	{
-		free(node->key);
-		free(node->value);
+		if (node->key)
+			free(node->key);
+		if (node->value)
+			free(node->value);
 		free(node);
 	}
 }

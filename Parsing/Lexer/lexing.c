@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 10:15:34 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:17:49 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/22 06:17:18 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,31 @@ void	search_symbols(char const *s, size_t *i, size_t *count)
 
 void	search_redir_in(char const *s, size_t *i, size_t *count)
 {
-	if (s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB)
+	if ((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB)
 		(*count)++;
 	(*i)++;
 	if (s[(*i)] && s[(*i)] == '<')
 		(*i)++;
 	if (s[(*i)] && s[(*i)] != ESPACE && s[(*i)] != TAB)
-	{
-		printf("alpha after redir !");
 		(*count)++;
-	}
 }
 
 void	search_redir_out(char const *s, size_t *i, size_t *count)
 {
-	if (s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB)
+	if ((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB)
 		(*count) += 1;
 	(*i)++;
 	if (s[(*i)] && s[(*i)] == '>')
 		(*i)++;
 	if (s[(*i)] && s[(*i)] != ESPACE && s[(*i)] != TAB)
-	{
-		printf("alpha after redir !");
 		(*count)++;
-	}
 }
 
 void	search_pipe(char const *s, size_t *i, size_t *count)
 {
-	if ((s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB))
+	if (((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB))
 		(*count)++;
 	(*i)++;
 	if (s[(*i)] && s[(*i)] != ESPACE && s[(*i)] != TAB)
-	{
-		printf("alpha after pipe !");
 		(*count)++;
-	}
 }
