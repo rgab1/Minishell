@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 10:15:34 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 20:21:14 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/22 22:05:36 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	search_redir_out(char const *s, size_t *i, size_t *count)
 
 void	search_pipe(char const *s, size_t *i, size_t *count)
 {
-	if (((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB))
+	if (((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB)
+		 && s[(*i) - 1] != '|')
 		(*count)++;
 	(*i)++;
 	if (s[(*i)] && s[(*i)] != ESPACE && s[(*i)] != TAB)

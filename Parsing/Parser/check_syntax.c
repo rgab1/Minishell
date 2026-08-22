@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 20:26:04 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/22 21:43:56 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int	check_syntax(t_tokens *tokens)
 		}
 		else if (tmp->type == PIPE)
 		{
-			if ((tmp->next == NULL || tmp->next->type == PIPE))
+			if (tmp->next == NULL)
 				return (minishell_error(ERROR_SYNTAXE, "|"), 1);
+			else if (tmp->next->type == PIPE)
+				return (minishell_error(ERROR_SYNTAXE, "||"), 1);
 		}
 		tmp = tmp->next;
 	}
