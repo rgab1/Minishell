@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:40:31 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:34:13 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/21 02:28:42 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ void	manage_expand(t_tokens *tokens, t_shell *shell)
 	if (!exp)
 		return ;
 	get_new_size_expand(exp, tokens, shell);
-	printf("get size\n");
 	exp->final_str = malloc(sizeof(char) * (exp->new_size + 1));
 	if (!exp->final_str)
 		return (minishell_error("malloc", ERROR_MALLOC_FAILED_4));
 	exp->new_size = 0;
 	exp->i = 0;
 	set_newdata_token(exp, tokens, shell);
-	printf("set token\n");
 	free(tokens->data);
 	tokens->data = exp->final_str;
 	free_exp(exp);

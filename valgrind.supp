@@ -1,0 +1,28 @@
+{
+    ignore_readline_leaks
+    Memcheck:Leak
+    match-leak-kinds: reachable
+    ...
+    fun:readline
+}
+
+{
+    ignore_add_history_leaks
+    Memcheck:Leak
+    match-leak-kinds: reachable
+    ...
+    fun:add_history
+}
+
+{
+    ignore_external_binaries_leaks
+    Memcheck:Leak
+    ...
+    obj:/usr/bin/*
+}
+{
+    ignore_external_binaries_leaks_bin
+    Memcheck:Leak
+    ...
+    obj:/bin/*
+}

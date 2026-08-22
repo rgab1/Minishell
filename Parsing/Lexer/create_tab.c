@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:39:49 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/21 02:27:01 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ size_t	count_word(char const *s)
 				index_count_cot(s, &i);
 			else if (s[i])
 				search_symbols(s, &i, &count);
-			printf("s[i] == %c\n", s[i]);
 		}
 	}
 	return (count);
@@ -104,7 +103,6 @@ char	**split_star(char const *str)
 	if (!str)
 		return (NULL);
 	word_count = count_word(str);
-	printf("word_count = %ld\n", word_count);
 	if (word_count == 0)
 		return (NULL);
 	tab = malloc(sizeof(char *) * (word_count + 1));
