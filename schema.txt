@@ -146,6 +146,8 @@ Feat : Ajout de free(line) a la fin de la boucle afin de readline encore une foi
 Fix : Ajout de plusieurs verification dans modify_expand() : si $0 donc non conforme aux va env alors je l'imprimais alors que non 
 (pareille pour $"hey" si i + 1 == tab/espace/cote/dbl_cote alors je fais juste i + 1 pour ignorer le $)
 
+Fix : Ajout d'un int pour verifier si | et i == 0 alors return error
+
 test avec valgrind : valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes --suppressions=./valgrind.supp ./minishell
 Il faut cree un fichier qui va permettre de supprimer les leaks de readline :
 
