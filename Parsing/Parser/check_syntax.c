@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 20:03:52 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/22 20:23:23 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_syntax_utils(t_tokens *tmp)
 	if (tmp->next == NULL || tmp->next->data == NULL)
 		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
 	else if (tmp->type == REDIR_IN && tmp->next->type == REDIR_OUT
-		&& (tmp->next == NULL || tmp->next->next->data == NULL))
+		&& (tmp->next->next == NULL || tmp->next->next->data == NULL))
 		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
 	else if (tmp->next->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, tmp->data), 1);
