@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 16:36:49 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 07:35:40 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/25 12:13:08 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ void	modify_expand(char *str, t_exp *exp, t_shell *shell)
 	{
 		if (ft_isdigit(str[exp->i + 1]))
 			exp->i += 2;
-		else if (str[exp->i + 1] == ESPACE || str[exp->i + 1] == TAB
-			|| str[exp->i + 1] == SINGLE_COT || str[exp->i + 1] == DOUBLE_COT)
-			exp->i++;
 		else
 		{
 			exp->final_str[exp->new_size] = str[exp->i];
