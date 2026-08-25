@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/22 18:08:30 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/25 16:51:35 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 	{
 		dup_fds(shell->cmd);
 		exit_code = builtins[func_index](shell);
+		close(0);
+		close(1);
+		close(2);
 		return (full_cleanup(shell), exit(exit_code));
 	}
 	else
