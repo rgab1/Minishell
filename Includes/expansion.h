@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 05:17:59 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:13:51 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/25 13:00:14 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_exp
 	size_t	i;
 	size_t	new_size;
 	char	*final_str;
+	int		in_quot;
 }			t_exp;
 
 /*init_struct_exp*/

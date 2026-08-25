@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:40:31 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/21 02:28:42 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/25 13:00:43 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ void	set_newdata_token(t_exp *exp, t_tokens *tokens, t_shell *shell)
 			exp->i++;
 		}
 		else if (tokens->data[exp->i] == DOUBLE_COT)
+		{
+			exp->in_quot++;
 			exp->i++;
+		}
 		else if (tokens->data[exp->i] == '$' && (tokens->data[exp->i + 1]
 				&& tokens->data[exp->i + 1] == '?'))
 			modify_exit_status(exp, shell->exit_code);
