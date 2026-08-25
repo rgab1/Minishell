@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 10:41:46 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:39:21 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/25 18:59:25 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,4 @@ void	add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab)
 	cmd->cmd[*j_tab] = (*tokens)->data;
 	(*tokens)->data = NULL;
 	(*j_tab)++;
-}
-
-void	put_cmd(t_cmd *cmd)
-{
-	int	i;
-	int	j;
-
-	if (!cmd)
-		printf("NOOOO\n");
-	i = 0;
-	j = 0;
-	while (cmd)
-	{
-		printf("ENTRER DANS BOUCLE\n");
-		while (cmd->cmd[j])
-		{
-			printf("cmd : %d - %s\n", i, cmd->cmd[j]);
-			j++;
-		}
-		printf("cmd : %d - %d\n", i, cmd->in_fd);
-		printf("cmd : %d - %d\n", i, cmd->out_fd);
-		printf("----------------------\n");
-		cmd = cmd->next;
-		i++;
-		j = 0;
-	}
 }
