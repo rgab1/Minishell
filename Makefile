@@ -11,7 +11,7 @@ SRC_ENVIRONMENT = environment.c free_env.c get_value.c set_value.c \
 				  get_envp.c is_valid_identifier.c
 
 SRC_UTILS = free_cmd_star.c free_exp.c free_tokens.c full_cleanup.c \
-			minishell_error.c
+			minishell_error.c ft_getuid.c
 
 SRC_EXECUTION = free_stuff.c is_builtin.c execution.c \
 			run_command.c run_pipeline.c get_path.c

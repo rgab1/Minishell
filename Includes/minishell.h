@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/22 18:04:44 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/25 17:29:54 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <signal.h>
 # include <environment.h>
 # include <execution.h>
@@ -41,6 +42,7 @@ typedef struct s_shell
 	char			*line;
 	int				save_in;
 	int				save_out;
+	int				UID;
 	int				exit_code;
 }			t_shell;
 
@@ -51,6 +53,7 @@ void		end_of_minishell(t_shell *shell, char *line);
 
 void		full_cleanup(t_shell *shell);
 void		minishell_error(char *context, char *error_msg);
+int			ft_getuid(void);
 
 // init_shell.c
 t_shell		*shell_init(char **envp);
