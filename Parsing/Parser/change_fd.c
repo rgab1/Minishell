@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:14:33 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/25 18:59:48 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 	char	*namefile;
 
 	*tokens = (*tokens)->next;
-	printf("Enter hredir\n");
 	if (*tokens == NULL || (*tokens)->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, NULL), 1);
 	if (cmd->in_fd != -2)

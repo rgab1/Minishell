@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 20:02:57 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/26 14:03:33 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_shell	*shell_init(char **envp)
 	shell->save_in = -2;
 	shell->save_out = -2;
 	shell->exit_code = 0;
+	shell->UID = ft_getuid();
 	return (shell);
 }
 
@@ -47,6 +48,7 @@ t_shell	*manage_shell(char *line, t_shell *shell)
 		shell->exit_code = 2;
 		return (shell);
 	}
+	print_lst(tokens);
 	shell->cmd = create_cmd_struct(tokens);
 	free_tokens(tokens);
 	if (!shell->cmd)
