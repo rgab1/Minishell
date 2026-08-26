@@ -17,7 +17,8 @@ SRC_EXECUTION = free_stuff.c is_builtin.c execution.c \
 			run_command.c run_pipeline.c get_path.c
 
 SRC_PARSING = Expansion/count_for_expand.c Expansion/init_struct_exp.c \
-			Expansion/expansion.c Expansion/modify_str.c\
+			Expansion/expansion.c Expansion/modify_str.c Expansion/modify_exit_status.c \
+			Expansion/modify_uid.c \
 			Lexer/create_tab.c Lexer/lexing.c \
 			Parser/change_fd.c Parser/change_fd_heredoc.c \
 			Parser/check_syntax.c Parser/parse.c Parser/parse_utils.c \

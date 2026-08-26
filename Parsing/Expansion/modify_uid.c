@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct_exp.c                                  :+:      :+:    :+:   */
+/*   modify_uid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/22 08:52:30 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/26 14:08:10 by hrhalmi          ###   ########.fr       */
+/*   Created: 2026/08/26 14:39:56 by hrhalmi           #+#    #+#             */
+/*   Updated: 2026/08/26 15:19:13 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
-t_exp	*init_exp(void)
+void    modify_uid(t_exp *exp, t_shell *shell)
 {
-	t_exp	*exp;
+    int     i;
+    char    *str_uid;
 
-	exp = malloc(sizeof(t_exp));
-	if (!exp)
-		return (NULL);
-	exp->i = 0;
-	exp->new_size = 0;
-	exp->final_str = NULL;
-	exp->in_quot = 0;
-	return (exp);
+    i = 0;
+    str_uid = ft_itoa(shell->UID);
+    exp->i += 4;
+    while (str_uid[i])
+        exp->final_str[exp->new_size++] = str_uid[i++];
+    free(str_uid);
 }

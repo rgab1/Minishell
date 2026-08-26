@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 22:29:51 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/25 12:04:13 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/26 15:09:29 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	count_expand(char *str, size_t *i, size_t *new_size, t_shell *shell)
 	if (str[(*i) + 1] == '?')
 	{
 		size_exit_status(i, new_size, shell);
+		return ;
+	}
+	if (ft_strncmp(&str[(*i) + 1], "UID", 3) == 0)
+	{
+		size_uid(i, new_size, shell);
 		return ;
 	}
 	if (!((ft_isalpha(str[(*i) + 1])) || (str[(*i) + 1] == '_')))
@@ -67,4 +72,14 @@ void	size_exit_status(size_t *i, size_t *new_size, t_shell *shell)
 		(*new_size)++;
 	}
 	(*new_size)++;
+}
+
+void	size_uid(size_t *i, size_t *new_size, t_shell *shell)
+{
+	char	*uid;
+
+	uid = ft_itoa(shell->UID);
+	(*i) += 4;
+	(*new_size) += ft_strlen(uid);
+	free(uid);
 }
