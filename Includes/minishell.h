@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 14:02:20 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/26 14:02:24 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/26 17:51:21 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <errors.h>
 # include <expansion.h>
 # include <libft.h>
+# include <utils.h>
 
 struct	s_env;
 struct	s_cmd;
@@ -50,10 +51,6 @@ extern int	g_signal_status;
 
 void		start_minishell(int ac, char **av);
 void		end_of_minishell(t_shell *shell, char *line);
-
-void		full_cleanup(t_shell *shell);
-void		minishell_error(char *context, char *error_msg);
-int			ft_getuid(void);
 
 // init_shell.c
 t_shell		*shell_init(char **envp);

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 22:29:51 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/26 15:09:29 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/27 15:13:18 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int	size_head_value(char *str, size_t *i, t_shell *shell)
 	(*i) = start_key;
 	value = get_value(key, shell->env);
 	if (value == NULL)
+	{
+		free(key);
 		return (0);
+	}
 	result = ft_strlen(value);
 	free(key);
 	return (result);

@@ -6,13 +6,13 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/25 12:28:20 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/26 18:33:34 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_syntax_utils(t_tokens *tmp)
+static int	check_syntax_redir(t_tokens *tmp)
 {
 	if (tmp->next == NULL || tmp->next->data == NULL)
 		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
@@ -20,6 +20,15 @@ static int	check_syntax_utils(t_tokens *tmp)
 		&& (tmp->next->next == NULL || tmp->next->next->data == NULL))
 		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
 	else if (tmp->next != NULL && tmp->next->type != WORD)
+		return (minishell_error(ERROR_SYNTAXE, tmp->next->data), 1);
+	return (0);
+}
+
+static int	check_syntaxe_pipe(t_tokens *tmp)
+{
+	if (tmp->next == NULL)
+		return (minishell_error(ERROR_SYNTAXE, "|"), 1);
+	else if (tmp->next->type == PIPE)
 		return (minishell_error(ERROR_SYNTAXE, tmp->next->data), 1);
 	return (0);
 }
@@ -36,17 +45,16 @@ int	check_syntax(t_tokens *tokens)
 		if (tmp->type == REDIR_IN || tmp->type == REDIR_OUT
 			|| tmp->type == AREDIR_OUT || tmp->type == HREDIR_IN)
 		{
-			if (check_syntax_utils(tmp) == 1)
+			if (check_syntax_redir(tmp) == 1)
 				return (1);
 		}
 		else if (tmp->type == PIPE)
 		{
-			if (tmp->next == NULL)
-				return (minishell_error(ERROR_SYNTAXE, "|"), 1);
-			else if (tmp->next->type == PIPE)
-				return (minishell_error(ERROR_SYNTAXE, tmp->next->data), 1);
+			if (check_syntaxe_pipe(tmp) == 1)
+				return (1);
 		}
 		tmp = tmp->next;
 	}
 	return (0);
 }
+	

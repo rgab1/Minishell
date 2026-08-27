@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/25 16:51:35 by grivault         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:23:26 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 		dup2(shell->save_out, 1);
 		close(shell->save_in);
 		close(shell->save_out);
+		shell->save_in = -2;
+		shell->save_out = -2;
 	}
 }
 

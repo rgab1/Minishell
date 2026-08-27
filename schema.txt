@@ -6,6 +6,14 @@ Fix : Ajout d'un int pour verifier si | et i == 0 alors return error
 test avec valgrind : valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes --suppressions=./valgrind.supp ./minishell
 Il faut cree un fichier qui va permettre de supprimer les leaks de readline :
 
+Feat: Implementation pour expand le $UID qui, la donnee, est stocker dans shell.
+Style: move modify_exit_status (et sa fonction recursive) dans un nouveau fichier 'modify_exit_status'
+Style: creation d'un nouveau fichier pour y mettre le modify_uid
+
+Feat: WIP Ajout de l'enum t_flag_type pour regarder s'il y a un ! ou : au debut de la commande
+Style: Ajout d'un nouveau utils.h qui englobe ce qu'il y a dans le dossier Utils/
+
+
 valgrind.supp
 {
     ignore_readline_leaks
@@ -36,5 +44,4 @@ valgrind.supp
     obj:/bin/*
 }
 
-Il faut gerer le $UID lors de l'expansion,
 Il faut gerer le ! et le :

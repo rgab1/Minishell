@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/26 14:09:39 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/26 18:26:02 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_shell	*manage_shell(char *line, t_shell *shell)
 	tokens = manage_token(lex, shell);
 	free(lex);
 	print_lst(tokens);
-	if (check_syntax(tokens))
+	if (check_syntax(tokens) == 1)
 	{
 		free_tokens(tokens);
 		shell->exit_code = 2;
