@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/26 17:14:31 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/31 17:30:45 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_tokens
 {
 	char			*data;
 	t_token_type	type;
+	long long int	was_quotes;
 	struct s_tokens	*next;
 }					t_tokens;
 
@@ -62,7 +63,10 @@ int					manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab);
 t_cmd				*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab,
 						int *i_heredoc);
 int					sort_redir(t_tokens **tokens, t_cmd *cmd, int *i_heredoc);
+
+// check_syntaxe.c
 int					check_syntax(t_tokens *tokens);
+void				clear_impostor_tokens(t_tokens **current);
 
 // parse_utils.c
 int					ft_tokensize(t_tokens *lst);

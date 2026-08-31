@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:40:31 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/27 15:05:55 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/30 21:10:48 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	get_new_size_expand(t_exp *exp, t_tokens *tokens, t_shell *shell)
 	{
 		if (tokens->data[exp->i] == SINGLE_COT
 			|| tokens->data[exp->i] == DOUBLE_COT)
+		{
+			tokens->was_quotes++;
 			get_new_size_expand_quotes(exp, tokens);
+		}
 		else if (tokens->data[exp->i] == '$')
 			count_expand(tokens->data, &(exp->i), &(exp->new_size), shell);
 		else

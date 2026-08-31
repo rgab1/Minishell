@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/26 18:33:34 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/31 17:30:10 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,34 @@ static int	check_syntaxe_pipe(t_tokens *tmp)
 	return (0);
 }
 
+void	clear_impostor_tokens(t_tokens **current)
+{
+	t_tokens	*tmp;
+	t_tokens	*prev;
+	t_tokens	*next_nodes;
+
+	next_nodes = NULL;
+	tmp = (*current);
+	prev = NULL;
+	while (tmp)
+	{
+		if (tmp->data && tmp->data[0] == '\0' && tmp->was_quotes == 0)
+		{
+			next_nodes = tmp->next;
+			if (prev)
+				prev->next = next_nodes;
+			else
+				(*current) = next_nodes;
+			free(tmp->data);
+			free(tmp);
+			tmp = next_nodes;
+			continue ;
+		}
+		prev = tmp;
+		tmp = tmp->next;
+	}
+}
+
 int	check_syntax(t_tokens *tokens)
 {
 	t_tokens	*tmp;
@@ -57,4 +85,3 @@ int	check_syntax(t_tokens *tokens)
 	}
 	return (0);
 }
-	

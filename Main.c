@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/26 18:30:46 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/31 17:42:38 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ int	main(int ac, char **av, char **envp)
 		if (line[0] != '\0')
 			add_history(line);
 		shell = manage_shell(line, shell);
-		if (!shell)
-			break ;
-		if (shell->cmd)
-			execution(shell);
+		if (!shell->cmd)
+		{
+			free(line);
+			continue ;
+		}
+		execution(shell);
 		free(line);
 	}
 	end_of_minishell(shell, line);

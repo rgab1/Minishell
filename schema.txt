@@ -44,4 +44,13 @@ valgrind.supp
     obj:/bin/*
 }
 
-Il faut gerer le ! et le :
+Faille n°1 : La commande supprimée par ton parseur (Scénario A)
+Si tu fais bien ton travail et que tu supprimes un $VIDE sans guillemets, current->cmd[0] sera NULL.
+Regarde son code : il fait get_path(shell, current->cmd[0]); puis ft_strchr(current->cmd[0], '/').
+Il va envoyer NULL à ces fonctions, ce qui va faire exploser le programme (Segfault).
+
+    La correction pour lui : Tout au début de run_command, il doit ajouter une sécurité : if (!current->cmd || !current->cmd[0]) return (exit(0));. S'il n'y a pas de commande, on quitte proprement avec succès, sans rien afficher.
+
+Faille n°2 : La chaîne vide protégée (Scénario B)
+Si tu gardes le maillon parce qu'il y avait des guillemets (""), current->cmd[0] contiendra "" (la chaîne vide).
+Il va envoyer "" à get_path. Comme on l'a vu, get_path va probablement fusionner cela avec /usr/bin/ et renvoyer le chemin d'un dossier, ce qui causera le fameux Permission denied et le mauvais code d'erreur (126 au lieu de 127).

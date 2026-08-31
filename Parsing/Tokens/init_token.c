@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/26 17:05:01 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/30 21:07:29 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_tokens	*create_tokens(char *str, t_token_type type)
 		return (NULL);
 	new->data = str;
 	new->type = type;
+	new->was_quotes = 0;
 	new->next = NULL;
 	return (new);
 }
