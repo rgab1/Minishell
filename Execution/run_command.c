@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/22 18:20:00 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/06 15:44:08 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 
 	if (current->in_fd == -1 || current->out_fd == -1)
 		return (full_cleanup(shell), exit(1));
+	if (!current->cmd || !current->cmd[0])
+		return (free_envp(envp), full_cleanup(shell), exit(0));
 	path = get_path(shell, current->cmd[0]);
 	if (!path)
 	{
@@ -51,7 +53,7 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 	execve(path, current->cmd, envp);
 	minishell_error(current->cmd[0], strerror(errno));
 	exit_code = 127;
-	if (access(path, X_OK) != 0)
+	if (errno == EACCES || errno == EISDIR || errno == ENOEXEC)
 		exit_code = 126;
 	return (free(path), free_envp(envp), full_cleanup(shell), exit(exit_code));
 }

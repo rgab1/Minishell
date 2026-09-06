@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:17 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/03 18:35:13 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/06 20:36:40 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*get_path(t_shell *shell, char *cmd)
 	char	*part;
 	char	*full;
 
+	if (!cmd || cmd[0] == '\0' || !ft_strcmp(cmd, ".") || !ft_strcmp(cmd, ".."))
+		return (NULL);
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK) == 0)
