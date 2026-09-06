@@ -13,6 +13,9 @@ Style: creation d'un nouveau fichier pour y mettre le modify_uid
 Feat: WIP Ajout de l'enum t_flag_type pour regarder s'il y a un ! ou : au debut de la commande
 Style: Ajout d'un nouveau utils.h qui englobe ce qu'il y a dans le dossier Utils/
 
+Fix: correction dans free_cmd_star dans une condition, si out_fd != 2 (il y etais 2 fois d'affiler au lieu de verifier si -2 et -1)
+Fix: dans signal au lieux de mettre g_global_sig = 128 + int | -> g_global_sig = int | et dans shell->exit_code = g_global + 128
+
 
 valgrind.supp
 {

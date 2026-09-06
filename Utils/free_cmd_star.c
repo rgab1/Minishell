@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 16:01:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 06:27:43 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/06 21:32:13 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_cmd_star(t_cmd *cmd)
 	}
 	if (cmd->in_fd != -2 && cmd->in_fd != -1)
 		close(cmd->in_fd);
-	if (cmd->out_fd != -2 && cmd->out_fd != -2)
+	if (cmd->out_fd != -2 && cmd->out_fd != -1)
 		close(cmd->out_fd);
 	free(cmd);
 }
