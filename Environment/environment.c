@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:32:09 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 05:50:09 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/06 16:18:34 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,25 @@ char	**extract_key_value(char *env_str)
 	return (pair);
 }
 
+static void	incremment_shlvl(t_env **head)
+{
+	char	*shlvl_val;
+	char	*new_val;
+
+	shlvl_val = get_value("SHLVL", *head);
+	if (!shlvl_val)
+		set_value("SHLVL", "1", head);
+	else
+	{
+		new_val = ft_itoa(ft_atoi(shlvl_val) + 1);
+		if (new_val)
+		{
+			set_value("SHLVL", new_val, head);
+			free(new_val);
+		}
+	}
+}
+
 t_env	*env_init(char **envp)
 {
 	t_env	*head;
@@ -97,5 +116,6 @@ t_env	*env_init(char **envp)
 	head = NULL;
 	while (envp[i])
 		new_env_node(&head, extract_key_value(envp[i++]));
+	incremment_shlvl(&head);
 	return (head);
 }
