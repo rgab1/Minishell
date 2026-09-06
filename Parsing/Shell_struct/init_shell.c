@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/31 17:41:24 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/06 21:12:54 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_shell	*shell_init(char **envp)
 	shell->save_in = -2;
 	shell->save_out = -2;
 	shell->exit_code = 0;
-	shell->UID = ft_getuid();
+	shell->uid = ft_getuid();
 	return (shell);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 14:02:20 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/26 17:51:21 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/06 21:13:25 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_shell
 	char			*line;
 	int				save_in;
 	int				save_out;
-	int				UID;
+	int				uid;
 	int				exit_code;
 }			t_shell;
 

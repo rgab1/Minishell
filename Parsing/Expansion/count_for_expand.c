@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 22:29:51 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/27 15:13:18 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/06 21:13:48 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	size_uid(size_t *i, size_t *new_size, t_shell *shell)
 {
 	char	*uid;
 
-	uid = ft_itoa(shell->UID);
+	uid = ft_itoa(shell->uid);
 	(*i) += 4;
 	(*new_size) += ft_strlen(uid);
 	free(uid);
