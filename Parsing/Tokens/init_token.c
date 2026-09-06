@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/06 17:37:29 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/30 21:07:29 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_lex(char **tab)
-{
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		i++;
-		free(tab[i - 1]);
-	}
-	free(tab);
-}
 
 t_tokens	*create_tokens(char *str, t_token_type type)
 {
@@ -34,6 +21,7 @@ t_tokens	*create_tokens(char *str, t_token_type type)
 		return (NULL);
 	new->data = str;
 	new->type = type;
+	new->was_quotes = 0;
 	new->next = NULL;
 	return (new);
 }

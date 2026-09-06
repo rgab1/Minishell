@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_exp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 08:52:30 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:35:57 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/26 14:08:10 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_exp	*init_exp(void)
 	exp->i = 0;
 	exp->new_size = 0;
 	exp->final_str = NULL;
+	exp->in_quot = 0;
 	return (exp);
 }

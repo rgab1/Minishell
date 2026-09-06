@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/06 17:13:14 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/08/31 17:30:45 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_tokens
 {
 	char			*data;
 	t_token_type	type;
+	long long int	was_quotes;
 	struct s_tokens	*next;
 }					t_tokens;
 
@@ -45,7 +46,6 @@ t_tokens			*create_tokens(char *str, t_token_type type);
 void				ft_lstadd_token(t_tokens **lst, t_tokens *new);
 t_tokens			*manage_token(char **tab, t_shell *shell);
 void				expand_tokens(t_tokens *tokens, t_shell *shell);
-void				free_lex(char **tab);
 
 // browse_line.c
 size_t				manage_lex(const char **s, size_t start);
@@ -63,12 +63,14 @@ int					manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab);
 t_cmd				*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab,
 						int *i_heredoc);
 int					sort_redir(t_tokens **tokens, t_cmd *cmd, int *i_heredoc);
+
+// check_syntaxe.c
 int					check_syntax(t_tokens *tokens);
+void				clear_impostor_tokens(t_tokens **current);
 
 // parse_utils.c
 int					ft_tokensize(t_tokens *lst);
 void				add_str(t_tokens **tokens, t_cmd *cmd, int *j_tab);
-void				put_cmd(t_cmd *cmd);
 
 // repair_fd.c
 void				repair_fd_in(int fd, t_cmd *cmd);
@@ -85,11 +87,6 @@ int					change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd,
 // change_fd_heredoc
 int					make_heredoc(t_tokens **tokens, t_cmd *cmd);
 char				*name_file_hc(int *i_heredoc);
-
-// exit_free.c
-void				free_tokens(t_tokens *token);
-void				free_cmd_struct(t_cmd *cmd);
-void				free_cmd_star(t_cmd *cmd);
 
 /*
 char				*get_key(unsigned char *src, t_env *env, int *i);

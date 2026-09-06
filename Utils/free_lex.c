@@ -1,49 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_cmd_star.c                                    :+:      :+:    :+:   */
+/*   free_lex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/25 16:01:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/06 21:32:13 by hrhalmi          ###   ########.fr       */
+/*   Created: 2026/08/26 17:04:40 by hrhalmi           #+#    #+#             */
+/*   Updated: 2026/08/26 17:05:06 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
-void	free_cmd_struct(t_cmd *cmd)
-{
-	t_cmd	*tmp;
-
-	if (cmd)
-	{
-		while (cmd)
-		{
-			tmp = cmd->next;
-			free_cmd_star(cmd);
-			cmd = tmp;
-		}
-	}
-}
-
-void	free_cmd_star(t_cmd *cmd)
+void	free_lex(char **tab)
 {
 	size_t	i;
 
 	i = 0;
-	if (cmd->cmd)
+	while (tab[i])
 	{
-		while (cmd->cmd[i])
-		{
-			free(cmd->cmd[i]);
-			i++;
-		}
-		free(cmd->cmd);
+		i++;
+		free(tab[i - 1]);
 	}
-	if (cmd->in_fd != -2 && cmd->in_fd != -1)
-		close(cmd->in_fd);
-	if (cmd->out_fd != -2 && cmd->out_fd != -1)
-		close(cmd->out_fd);
-	free(cmd);
+	free(tab);
 }

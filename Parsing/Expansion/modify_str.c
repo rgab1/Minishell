@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 16:36:49 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 07:35:40 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/26 14:49:35 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	modify_expand(char *str, t_exp *exp, t_shell *shell)
 	{
 		if (ft_isdigit(str[exp->i + 1]))
 			exp->i += 2;
-		else if (str[exp->i + 1] == ESPACE || str[exp->i + 1] == TAB
-			|| str[exp->i + 1] == SINGLE_COT || str[exp->i + 1] == DOUBLE_COT)
+		else if (str[exp->i + 1] == SINGLE_COT)
+			exp->i++;
+		else if (str[exp->i + 1] == DOUBLE_COT && exp->in_quot == 0)
 			exp->i++;
 		else
 		{
@@ -63,26 +64,6 @@ void	add_expand(char *value, t_exp *exp)
 		i++;
 		exp->new_size++;
 	}
-}
-
-void	modify_exit_status(t_exp *exp, int exit_code)
-{
-	exp->i += 2;
-	if (exit_code == 0)
-	{
-		exp->final_str[exp->new_size] = '0';
-		exp->new_size++;
-		return ;
-	}
-	recursive_exit_status(&(exp->new_size), exp->final_str, exit_code);
-}
-
-void	recursive_exit_status(size_t *new_size, char *final_str, int exit_code)
-{
-	if (exit_code >= 10)
-		recursive_exit_status(new_size, final_str, exit_code / 10);
-	final_str[(*new_size)] = (exit_code % 10) + '0';
-	(*new_size) += 1;
 }
 
 // char	*get_key(unsigned char *src, t_env *env, int *i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_fd_heredoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/06 17:38:59 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/09/06 21:40:19 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ int	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 char	*name_file_hc(int *i_heredoc)
 {
 	char	*nbr_file;
+	char	*res;
 
 	nbr_file = ft_itoa(*i_heredoc);
-	return (ft_strjoin(".heredoc_", nbr_file));
+	res = ft_strjoin(".heredoc_", nbr_file);
+	free(nbr_file);
+	return (res);
 }

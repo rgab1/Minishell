@@ -6,22 +6,59 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 18:17:43 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/31 17:30:10 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int check_syntax_utils(t_tokens *tmp)
+static int	check_syntax_redir(t_tokens *tmp)
 {
 	if (tmp->next == NULL || tmp->next->data == NULL)
 		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
 	else if (tmp->type == REDIR_IN && tmp->next->type == REDIR_OUT
-			&& (tmp->next->next == NULL || tmp->next->next->data == NULL))
+		&& (tmp->next->next == NULL || tmp->next->next->data == NULL))
 		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
-	else if (tmp->next->type != WORD)
-		return (minishell_error(ERROR_SYNTAXE, tmp->data), 1);
+	else if (tmp->next != NULL && tmp->next->type != WORD)
+		return (minishell_error(ERROR_SYNTAXE, tmp->next->data), 1);
 	return (0);
+}
+
+static int	check_syntaxe_pipe(t_tokens *tmp)
+{
+	if (tmp->next == NULL)
+		return (minishell_error(ERROR_SYNTAXE, "|"), 1);
+	else if (tmp->next->type == PIPE)
+		return (minishell_error(ERROR_SYNTAXE, tmp->next->data), 1);
+	return (0);
+}
+
+void	clear_impostor_tokens(t_tokens **current)
+{
+	t_tokens	*tmp;
+	t_tokens	*prev;
+	t_tokens	*next_nodes;
+
+	next_nodes = NULL;
+	tmp = (*current);
+	prev = NULL;
+	while (tmp)
+	{
+		if (tmp->data && tmp->data[0] == '\0' && tmp->was_quotes == 0)
+		{
+			next_nodes = tmp->next;
+			if (prev)
+				prev->next = next_nodes;
+			else
+				(*current) = next_nodes;
+			free(tmp->data);
+			free(tmp);
+			tmp = next_nodes;
+			continue ;
+		}
+		prev = tmp;
+		tmp = tmp->next;
+	}
 }
 
 int	check_syntax(t_tokens *tokens)
@@ -36,13 +73,13 @@ int	check_syntax(t_tokens *tokens)
 		if (tmp->type == REDIR_IN || tmp->type == REDIR_OUT
 			|| tmp->type == AREDIR_OUT || tmp->type == HREDIR_IN)
 		{
-			if (check_syntax_utils(tmp) == 1)
+			if (check_syntax_redir(tmp) == 1)
 				return (1);
 		}
 		else if (tmp->type == PIPE)
 		{
-			if ((tmp->next == NULL || tmp->next->type == PIPE))
-				return (minishell_error(ERROR_SYNTAXE, "|"), 1);
+			if (check_syntaxe_pipe(tmp) == 1)
+				return (1);
 		}
 		tmp = tmp->next;
 	}

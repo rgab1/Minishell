@@ -1,148 +1,3 @@
-manage_count_cot
-subject : Not interpret unclosed quotes
-Donc modification du code et on enleve la condition si on ne trouve pas justement
-(je me suis pris la tete pour rien...)
-
-Meilleur gestion des symbols tels que hello|cat ou hello |cat ou hello| cat
-
-A FAIRE :
-Gerer la memoire des strings en faisant attention aux variables d'environment et le $?
-donc remplacer i=4 -> $USER en i=7 -> Hassmou
-Meme chose pour le $?
-
-J'avais pas mal avancer, j'avais fais le lexer, la tokenisation 
-puis le parse pour enfin le mettre dans une structure cmd, qui lui est aussi avec la struct env dans la struct shell. 
-Je n'avais pas encore toucher aux varables d'environnement ce qui ma fallut que je reprenne le projet 
-depuis le debut du lexer ce qui m'a valu pas mal de temps et je me suis rendu compter qu'il fallait que je change 
-toute la structure de mes programmes pour faire en sorte que $USER soit Hassmou 
-et donc supprimer le compteur de caractere pour $USER et enfin ajouter celui de Hassmou, pour avoir la taille final afin d'allouer de la memoire. 
-En faisant ca, je me suis aussi rendu compte que certaines commande comme "hello | cat", 
-je devais aussi gerer le "hello|cat" ainsi que "hello| cat" et ainsi de suite donc 
-j'ai du rechanger mon lexer pour avoir une bonne taille pour mon char **.
-
-Feat : ajout d'un exit status dans la struct t_shell 
-Et initialisation de cette structe avant la boucle infinie.
-
-Feat : variable supp deplacer index_in_cot -> manage_lex
-donc changement du calcule de fin dans index_in_cot 'add = (i - add) + value_env;' 
-
-about_env
-Fix : MAJ sur les fonctions en faisant appel aux autres fonctions isdigit ect,
-remplacement des parametres t_env *env par t_shell *shell
-Feat : ajout d'une condition si $? alors i += 2 et sup += 2. return strlen de ce exit_code 
-
-
-about_env
-Feat : Ajout de la fonction qui compter le nombre de caractere dans le shell->exit_code
-about create_tab
-Fix : Meilleur gestion du manage_count qui comptais a l'infinie si ""$?$USER" | ahsh'$USER'"$USER" AHAH"
-donc si il y avait '' puis directement "". Je n'avais pas gerer le cas ou il y aurait les 2 qui 
-s'enchainent vu qu'il y avait l'index qui faisait +1 si un quote etait finit.ainsi il ne voyait pas l'autre qui apparaissait.
-
-about create_tab and browse_line
-Fix : Suppression du fichier browse_line -> Grosse restructuration du lexer et de la tokenisation 
-= Maintenant on arrete de compter le nbr de caractere pour l'expansion, 
-juste on creer un tableau de string puis compter le nombre de caractere apres de la tokenisation lors de l'expansion
-donc suppression de la fonction index_in_cote (qui comptais les $) pour maintenant utiliser manage_count_cot qui de vient -> index_count_cote
-
-about manage_lex
-Fix : ajout d'une condition qui permet de savoir si Hello<World et donc de creer 3 string 
-pour separer la redir ou le pipe
-
-hello<world
-
-about get_value
-Fix : Ajout d'une condition lorsqu'on trouve que la strncmp head->key est good, on verifie si head->value est vrai pour eviter 
-de retourner une valeur NULL et que je puisee utiliser strlen(get_value(key)), pour eviter un segfault.
-
-about expand
-Feat : Ajout d'une fonctionnalite qui permet de compter le nombre de caractere 
-a allouer pour la string final sans les quot et en changeant les variables d'environment
-WIP
-
-about expand
-Feat : Ajout d'une fonctionnalite qui permet de copier tout les caracteres pour la string final sans
-quotes et sans $
-WIP
-Feat : Creation d'un nouveau dossier qui Expansions avec les fichieirs dedans correspondant
-
-about expand
-Feat : expansion.h
-Feat : Creation d'une nouvelle structure t_exp *exp (expand) avec des variables i, new_size et char * final_ str
-Feat : Fonction recursive qui copie le exit_status dans la final_str;
-WIP
-
-about expand
-Fix : Expansion terminer (sans avoir tester encore), creation de la token->data avec la string final sans 
-les quotes ou les dollars ect
-Fix : si probleme dans get_value return NULL
-Feat : creation d'un expansion.h meilleure structuration du projet (probleme en compilant Inclusion circulaire)
-WIP
-
-gerer get_value et mettre strdup car strlen(getvalue)
-
-Fix : Expansion completement terminer avec les tests
-Fix : return ft_strdup("") dans getvalue pour le strlen 
-Feat : Utils/free_exp
-Retour si erreur return (exemple malloc failed etc) a continuer
-WIP
-
-Fix : J'ai remis return NULL dans le get_value, ce qui me perturbais etait juste que strlen(NULL) = segfault
-Et donc j'ai juste mis une condition dans size_head_value if (!value) alors return (0);
-Fix : init le env avant le while(1) dans le main afin de ne pas le redefinir a chaque commande
-Fix : free char  **lex dans manage_shell apres avoir creer les tokens
-Feat/Fix: Alors beaucoup de changement, relecture du projet entier, mise en forme + gestion des erreurs a return.
-Feat : Check_syntaxe qui verifie la syntaxe
-Feat : creation fonction free_tokens
-Feat : creation free_cmd_struct 
-Feat : Apres une erreur ou quoi que ce soit d'autre je return (shell) pour continuer dans la boucle et eviter d'exit.
-Feat : exit_code maj dans certain cas, a continuer ! 
-et autres que j'ai oublier .... ahah
-WIP
-
-Fix : Gestion des erreurs a print WIP
-Feat : Ajout du Heredoc terminer (A voir les testes encore WIP)
-
-Fix : MAJ sur le Makefile
-Style : Utils/free_cmd.c -> Utils/free_cmd_star.c
-
-Fix : Heredoc completement fait chanegement fct change_fd_hredir_in j'ai changer l'utilisation du open
-    en remplacant les , par des operateur bit a bit '|'
-Feat : Ajout d'une boucle dans init_cmd qui sert a initialiser toutes les strings a NULL permettant d'eviter
-        un segfault lorsque erreur et  free_cmd_star 
-Fix : suppression du size_t redir dans sort_redir qui sert a rien, comparaison directement avec token->type == ''' 
-
-Fix : Changement dans change_fd regarde si token->data n'est pas null, changement aussi ajout des conditions if 
-    cmd->in_fd != -2 a l'interieur des condition if redir == REDIR_IN
-Fix : Incrementation pour le i_heredoc afin de bien nommer les fichiers
-Fix : avant le delimiteur etait 'EOF' changement pour tokens->data
-
-Feat : Juste apres readline on utilise add_history pour avoir l'historique de la commande
-Fix : int i_heredoc -> int *i_heredoc + Correction syntaxe si rien apres << (changement dans les conditions) delimiteur = entrer('\0)
-
-Feat : Ajout d'une variable global qu'on initialise a 0 dans le main et utilisation de signal() Pour associer les fonctions a chaque siganl correspondant
-Fix : Amelioration du heredoc qui saura interpreter les signaux
-Feat : Usage de la macro WIFSIGNALED(status) dans la partie execution que ce soit dans single_cmd ou dans run_pipeline pour avoir l'exit status
-    si l'enfant a ete tuer via un signal
-    On ignore les signaux SIGINT et SIGQUIT quand on est dans le process parent pour eviter de le tuer ahah
-    Ajout de la fonction signal(SIGINT, SIG_DFL) et signal(SIGQUIT, SIG_DFL) juste apres avoir creer les enfants afin de permettre de ne plus ignorer les siganux presents
-
-Feat : Appel de fonction execution dans le main, mise en ordre du projet
-Feat : Ajout d'une fonction au debut de la boucle dans le main qui va checker si la variable globale est bien a 0 sinon exit_code = g_signal_status;
-
-Fix : Suppression du char *namefile inutile dans la struct cmd et lorsqu'on free la cmd car on unlink le namefile dans la partie heredoc dans tout les cas
-Fix : Suppression de free_cmd a la fin de l'execution car full_cleanup s'en occupe
-Fix : free_tokens dans init_shell apres la creation  de la struct cmd (oui c'est un oublie ahah...)
-
-Fix : Mise de shell->cmd = NULL a la fin de la fonction execution pour eviter qu'il y ai un segfault lorsque l'on appel full_cleanup
-Feat : Creation de struct exec_builtins_utils qui va permettre de mettre une condition : si les in/out != -2 donc les in/out initiale sans changement ou > 2
-        donc en dehors du 0 = stdin 1 =stdout 2 = stderror
-
-Fix : verification avant de close dans free_cmd_struct si in/out_fd != -1/-2 pour close
-Fix : lorsque CTRL-D avant d'exit on fait appel a end_of_minishell pour tout free
-Fix : lors du lexer ajout de la verification de si i !=0 ainsi on peut regarder si str[i - 1] != space/tab (Pour compter le nombre de mots)
-Feat : Ajout de free(line) a la fin de la boucle afin de readline encore une fois (sans ca, causais des leaks)
-
 Fix : Ajout de plusieurs verification dans modify_expand() : si $0 donc non conforme aux va env alors je l'imprimais alors que non 
 (pareille pour $"hey" si i + 1 == tab/espace/cote/dbl_cote alors je fais juste i + 1 pour ignorer le $)
 
@@ -150,6 +5,17 @@ Fix : Ajout d'un int pour verifier si | et i == 0 alors return error
 
 test avec valgrind : valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes --suppressions=./valgrind.supp ./minishell
 Il faut cree un fichier qui va permettre de supprimer les leaks de readline :
+
+Feat: Implementation pour expand le $UID qui, la donnee, est stocker dans shell.
+Style: move modify_exit_status (et sa fonction recursive) dans un nouveau fichier 'modify_exit_status'
+Style: creation d'un nouveau fichier pour y mettre le modify_uid
+
+Feat: WIP Ajout de l'enum t_flag_type pour regarder s'il y a un ! ou : au debut de la commande
+Style: Ajout d'un nouveau utils.h qui englobe ce qu'il y a dans le dossier Utils/
+
+Fix: correction dans free_cmd_star dans une condition, si out_fd != 2 (il y etais 2 fois d'affiler au lieu de verifier si -2 et -1)
+Fix: dans signal au lieux de mettre g_global_sig = 128 + int | -> g_global_sig = int | et dans shell->exit_code = g_global + 128
+
 
 valgrind.supp
 {
@@ -180,3 +46,58 @@ valgrind.supp
     ...
     obj:/bin/*
 }
+
+"" /"$EXISTEPAS" > mon_fichier.txt 
+Dans le vrai Bash, cette commande va afficher command not found, 
+MAIS elle va quand même créer un fichier vide nommé mon_fichier.txt (ou l'écraser s'il existait).
+
+
+ le probleme ici est que j'ai du faire ctrl-c car le process ne se terminais jamais regarde :
+
+
+My_SHELL> cat | cat | cat | ls
+Built_in  Environment  Execution  hola  Includes  Libft  Main.c  Main.o  Makefile  minishell  Parsing  README.md  schema.txt  Signal  Utils  valgrind.supp
+
+C'est le rite de passage absolu du projet Minishell ! Ce que tu observes n'a rien à voir avec ton parseur ni avec les signaux. C'est un problème fondamental de gestion des File Descriptors (FD) dans la partie exécution de ton binôme.
+
+Ton programme ne plante pas, il fait exactement ce qu'on lui demande : il attend éternellement. Voici le vocabulaire et la mécanique système pour comprendre pourquoi les cat refusent de se terminer.
+1. Le Vocabulaire des Pipes
+
+    Vocabulaire - File Descriptor (FD) : Un numéro qui représente un fichier ou un flux ouvert. Chaque pipe créé avec la fonction pipe() génère deux FDs : un pour lire (le bout de lecture) et un pour écrire (le bout d'écriture).
+
+    Vocabulaire - End Of File (EOF) : C'est le signal "Fin de fichier". Un programme qui lit des données (comme cat) s'arrête automatiquement lorsqu'il reçoit un EOF.
+
+    La règle d'or du Pipe : Un pipe n'envoie un EOF à son lecteur que si et seulement si TOUS les bouts d'écriture de ce pipe sont fermés dans absolument tous les processus existants (le parent et tous les enfants).
+
+2. La Mécanique du blocage (Pourquoi ça freeze ?)
+
+Prenons ta commande cat | ls.
+
+    L'exécuteur crée un pipe.
+
+    Il fait un fork pour cat. Ce cat lit sur le pipe.
+
+    Il fait un fork pour ls. Ce ls écrit (théoriquement) sur le pipe (même s'il s'en fiche et écrit sur le terminal, le pipe est là).
+
+    cat commence à lire. Il a besoin d'un EOF pour s'arrêter et rendre la main.
+
+Le problème : Quand l'exécuteur (le Minishell principal) a fait son pipe(), il a ouvert un FD d'écriture et un FD de lecture pour lui-même. S'il oublie de faire un close() sur ce bout d'écriture dans son propre code (le processus parent), alors le bout d'écriture reste ouvert.
+Puisque le parent possède toujours un moyen d'écrire dans le pipe, le système d'exploitation se dit : "Attends, le parent va peut-être envoyer du texte plus tard". Donc, il n'envoie pas de EOF. Donc, cat attend éternellement.
+
+Dans ton cas (cat | cat | cat | ls), tu as 3 cat qui attendent chacun qu'on ferme le bout d'écriture de leur pipe respectif.
+3. La Solution Architecturale (Pour l'Exécuteur)
+
+Ton binôme doit être d'une rigueur absolue avec la fonction close(). Pour que la chaîne ne bloque jamais, il doit appliquer ces deux règles :
+
+Règle A : La propreté des Enfants
+Lorsqu'un processus enfant est créé, il hérite d'une copie de tous les FDs ouverts par le parent.
+Avant de faire execve, l'enfant doit fermer tous les bouts de pipes dont il ne se sert pas. Par exemple, si l'enfant 2 lit sur le "Pipe A" et écrit sur le "Pipe B", il doit impérativement faire un close() sur le bout d'écriture du "Pipe A" et sur le bout de lecture du "Pipe B", ainsi que sur tous les autres pipes existants.
+
+Règle B : La propreté du Parent (La plus importante)
+La boucle principale de l'exécuteur (celle qui fait les fork) doit impérativement faire un close() sur les deux bouts d'un pipe dès qu'elle n'en a plus besoin pour brancher un nouvel enfant.
+Si le parent garde un seul bout d'écriture ouvert par oubli, toute la chaîne restera paralysée.
+Vérifier les FDs ouverts
+
+
+Save_in 
+Save_out a gerer aussi A ne pas oublier

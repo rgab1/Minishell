@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/06 20:38:38 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/06 21:17:54 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <errors.h>
 # include <expansion.h>
 # include <libft.h>
+# include <utils.h>
 
 struct		s_env;
 struct		s_cmd;
@@ -42,7 +43,7 @@ typedef struct s_shell
 	char			*line;
 	int				save_in;
 	int				save_out;
-	int				UID;
+	int				uid;
 	int				exit_code;
 }			t_shell;
 
@@ -50,10 +51,6 @@ extern int	g_signal_status;
 
 void		start_minishell(int ac, char **av);
 void		end_of_minishell(t_shell *shell, char *line);
-
-void		full_cleanup(t_shell *shell);
-void		minishell_error(char *context, char *error_msg);
-int			ft_getuid(void);
 
 // init_shell.c
 t_shell		*shell_init(char **envp);

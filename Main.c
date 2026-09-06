@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 06:40:58 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/08/31 17:57:24 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	start_minishell(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
+	signal(SIGTSTP, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sigint_handler);
 }
@@ -63,10 +64,12 @@ int	main(int ac, char **av, char **envp)
 		if (line[0] != '\0')
 			add_history(line);
 		shell = manage_shell(line, shell);
-		if (!shell)
-			break ;
-		if (shell->cmd)
-			execution(shell);
+		if (!shell->cmd)
+		{
+			free(line);
+			continue ;
+		}
+		execution(shell);
 		free(line);
 	}
 	end_of_minishell(shell, line);

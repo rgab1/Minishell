@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   full_cleanup.c                                     :+:      :+:    :+:   */
+/*   modify_uid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 22:59:26 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/26 15:01:22 by hrhalmi          ###   ########.fr       */
+/*   Created: 2026/08/26 14:39:56 by hrhalmi           #+#    #+#             */
+/*   Updated: 2026/09/06 21:14:06 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	full_cleanup(t_shell *shell)
+void    modify_uid(t_exp *exp, t_shell *shell)
 {
-	if (!shell)
-		exit_error(ERROR_SHELL_NDEF_5, 5);
-	if (shell->env)
-		free_env(shell->env);
-	if (shell->cmd)
-		free_cmd_struct(shell->cmd);
-	if (shell->save_in > 2)
-		close(shell->save_in);
-	if (shell->save_out > 2)
-		close(shell->save_out);
-	free(shell);
+    int     i;
+    char    *str_uid;
+
+    i = 0;
+    str_uid = ft_itoa(shell->uid);
+    exp->i += 4;
+    while (str_uid[i])
+        exp->final_str[exp->new_size++] = str_uid[i++];
+    free(str_uid);
 }
