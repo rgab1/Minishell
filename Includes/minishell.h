@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/26 14:02:20 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/06 21:13:25 by hrhalmi          ###   ########.fr       */
+/*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
+/*   Updated: 2026/09/06 21:17:54 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # include <libft.h>
 # include <utils.h>
 
-struct	s_env;
-struct	s_cmd;
+struct		s_env;
+struct		s_cmd;
 
 typedef struct s_shell
 {

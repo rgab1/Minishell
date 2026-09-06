@@ -32,7 +32,7 @@ From there, you will be prompted with a custom shell prompt and can start typing
 Here are the main resources and documentation we used to build this project:
 *   [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html) - For understanding the exact behavior of shell built-ins and tokenization rules.
 *   `man readline` - For handling user input and command history.
-*   `man waitpid`, `man fork`, `man execve` - For process creation and management.
+*   `man signal`, `man fork`, `man execve` - For process creation and management.
 
 **AI Usage:**
 *   **Generative AI (e.g., NoteBookLLM / Gemini):** Used primarily to understand complex POSIX concepts and for debugging specific edge cases in memory management (e.g., explaining Valgrind output). AI was *not* used to generate the core logic or the code of the project itself.

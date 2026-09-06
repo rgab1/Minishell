@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 17:34:10 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/05 23:50:48 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/06 16:09:43 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ static void	numeric_error_print(char *arg)
 int	ft_exit(t_shell *shell)
 {
 	int	exit_code;
+	int	error;
 
+	error = 0;
 	ft_putstr_fd("exit\n", 2);
 	if (shell->cmd->cmd[1])
 	{
-		if (!is_numeric(shell->cmd->cmd[1]))
+		exit_code = ft_atoi_safe(shell->cmd->cmd[1], &error);
+		if (!is_numeric(shell->cmd->cmd[1]) || error == 1)
 		{
 			numeric_error_print(shell->cmd->cmd[1]);
 			full_cleanup(shell);
@@ -59,9 +62,7 @@ int	ft_exit(t_shell *shell)
 			minishell_error("exit", ERROR_MANY_ARGS);
 			return (1);
 		}
-		shell->exit_code = ft_atoi(shell->cmd->cmd[1]);
 	}
-	exit_code = shell->exit_code;
 	full_cleanup(shell);
 	return (exit(exit_code), 0);
 }
