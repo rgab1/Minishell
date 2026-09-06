@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:17 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/06 20:36:40 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/07 01:05:04 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ static char	**get_env_paths(t_shell *shell)
 	char	*path;
 
 	if (!shell || !shell->env)
-		return (ft_split(DEFAULT_PATH, ':'));
+		return (NULL);
+//		return (ft_split(DEFAULT_PATH, ':'));
 	path = get_value("PATH", shell->env);
 	if (!path)
-		return (ft_split(DEFAULT_PATH, ':'));
+		return (NULL);
+//		return (ft_split(DEFAULT_PATH, ':'));
 	return (ft_split(path, ':'));
 }
 

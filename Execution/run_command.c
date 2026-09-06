@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/06 15:44:08 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/07 01:08:43 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ static void	close_fds(t_cmd	*current)
 	}
 }
 
+static void	handle_cmd_error(t_cmd *current, char **envp, t_shell *shell)
+{
+	if (ft_strchr(current->cmd[0], '/'))
+		minishell_error(current->cmd[0], ERROR_NO_FILE);
+	else
+		minishell_error(current->cmd[0], ERROR_CMD_NOT_FOUND);
+	free_envp(envp);
+	return (full_cleanup(shell), exit(127));
+}
+
 void	run_command(t_cmd *current, char **envp, t_shell *shell)
 {
 	char	*path;
@@ -37,14 +47,7 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 		return (free_envp(envp), full_cleanup(shell), exit(0));
 	path = get_path(shell, current->cmd[0]);
 	if (!path)
-	{
-		if (ft_strchr(current->cmd[0], '/'))
-			minishell_error(current->cmd[0], ERROR_NO_FILE);
-		else
-			minishell_error(current->cmd[0], ERROR_CMD_NOT_FOUND);
-		free_envp(envp);
-		return (full_cleanup(shell), exit(127));
-	}
+		handle_cmd_error(current, envp, shell);
 	if (current->in_fd > 2)
 		dup2(current->in_fd, 0);
 	if (current->out_fd > 2)
