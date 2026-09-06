@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/25 16:51:35 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/06 20:17:01 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ static void	exec_builtin_utils(t_shell *shell)
 		dup2(shell->cmd->in_fd, 0);
 	if (shell->cmd->out_fd != -2 && shell->cmd->out_fd > 2)
 		dup2(shell->cmd->out_fd, 1);
+}
+
+static void	restore_fds(t_shell *shell)
+{
+	dup2(shell->save_in, 0);
+	dup2(shell->save_out, 1);
+	close(shell->save_in);
+	close(shell->save_out);
+	shell->save_in = -2;
+	shell->save_out = -2;
 }
 
 static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
@@ -49,10 +59,7 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 		shell->save_out = dup(1);
 		exec_builtin_utils(shell);
 		shell->exit_code = builtins[func_index](shell);
-		dup2(shell->save_in, 0);
-		dup2(shell->save_out, 1);
-		close(shell->save_in);
-		close(shell->save_out);
+		restore_fds(shell);
 	}
 }
 
@@ -68,6 +75,8 @@ int	is_builtin(t_shell *shell, int *pid)
 		exit_error(ERROR_CMD_NDEF_6, 6);
 	if (!shell->cmd->cmd)
 		exit_error(ERROR_CMD_EMPTY_7, 7);
+	if (!shell->cmd->cmd[0])
+		return (0);
 	i = 0;
 	while (builtins[i])
 	{
