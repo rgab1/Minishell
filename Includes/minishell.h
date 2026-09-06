@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/25 17:29:54 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/06 20:38:38 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include <expansion.h>
 # include <libft.h>
 
-struct	s_env;
-struct	s_cmd;
+struct		s_env;
+struct		s_cmd;
 
 typedef struct s_shell
 {

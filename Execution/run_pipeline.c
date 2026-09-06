@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/25 16:42:06 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/06 20:36:01 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	close_fds(t_shell *shell)
 		shell->cmd->out_fd = -2;
 	}
 }
+
 void	run_pipeline(t_shell *shell, int *pid)
 {
 	int		fd[2];
