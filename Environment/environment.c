@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:32:09 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/06 16:18:34 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/07 20:30:36 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,25 @@ t_env	*env_init(char **envp)
 {
 	t_env	*head;
 	size_t	i;
+	char	*cwd;
 
 	i = 0;
 	head = NULL;
 	while (envp[i])
 		new_env_node(&head, extract_key_value(envp[i++]));
 	incremment_shlvl(&head);
+	if (!get_value("PATH", head))
+		set_value("PATH", DEFAULT_PATH, &head);
+	if (!get_value("PWD", head))
+	{
+		cwd = getcwd(NULL, 0);
+		if (cwd)
+		{
+			set_value("PWD", cwd, &head);
+			free(cwd);
+		}
+	}
+	if (!get_value("_", head))
+		set_value("_", "/usr/bin/env", &head);
 	return (head);
 }
