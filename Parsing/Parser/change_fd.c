@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/07 01:23:09 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 02:15:26 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ int	change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 	if (cmd->in_fd == -1)
 	{
 		unlink(namefile);
+		perror(namefile);
 		free(namefile);
-		return (perror((*tokens)->data), 1);
+		return (1);
 	}
 	if (make_heredoc(tokens, cmd) == -1)
 	{

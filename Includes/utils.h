@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 17:06:25 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/08/26 17:14:11 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 02:20:48 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_tokens(t_tokens *tokens);
 void	free_tokens(t_tokens *tokens);
 
 /*ft_getuid.c*/
-int	ft_getuid(void);
+int		ft_getuid(void);
 
 /*full_cleanup.c*/
 void	full_cleanup(t_shell *shell);

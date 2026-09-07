@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 05:17:59 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/27 14:46:11 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 02:20:09 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		recursive_exit_status(size_t *new_size, char *final_str,
 				int exit_code);
 
 /*modify_uid.c*/
-void    	modify_uid(t_exp *exp, t_shell *shell);
+void		modify_uid(t_exp *exp, t_shell *shell);
 
 /*count_for_expand.c*/
 void		count_expand(char *str, size_t *i, size_t *new_size,

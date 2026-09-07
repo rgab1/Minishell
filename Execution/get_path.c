@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:17 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/07 01:05:04 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/07 02:17:10 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ static char	**get_env_paths(t_shell *shell)
 
 	if (!shell || !shell->env)
 		return (NULL);
-//		return (ft_split(DEFAULT_PATH, ':'));
 	path = get_value("PATH", shell->env);
 	if (!path)
 		return (NULL);
-//		return (ft_split(DEFAULT_PATH, ':'));
 	return (ft_split(path, ':'));
 }
 

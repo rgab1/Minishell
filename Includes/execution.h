@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:46:43 by grivault          #+#    #+#             */
-/*   Updated: 2026/08/26 17:58:15 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 02:21:09 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-typedef enum	e_flag_code_type
+typedef enum e_flag_code_type
 {
 	NOTHING,
 	PEXCAMATION,
