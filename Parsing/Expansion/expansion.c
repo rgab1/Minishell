@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:40:31 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/30 21:10:48 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 19:04:51 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ void	get_new_size_expand_quotes(t_exp *exp, t_tokens *tokens)
 		exp->i++;
 		if (tokens->data[exp->i] && exp->in_quot == 0)
 		{
-			while (tokens->data[exp->i] != SINGLE_COT)
+			while (tokens->data[exp->i] && tokens->data[exp->i] != SINGLE_COT)
 			{
 				exp->i++;
 				exp->new_size++;
 			}
-			exp->i++;
+			if (tokens->data[exp->i])
+				exp->i++;
 		}
 	}
 	else if (tokens->data[exp->i] == DOUBLE_COT)
@@ -109,9 +110,10 @@ void	set_newdata_quotes(t_exp *exp, t_tokens *tokens)
 		exp->i++;
 		if (tokens->data[exp->i] && exp->in_quot == 0)
 		{
-			while (tokens->data[exp->i] != SINGLE_COT)
+			while (tokens->data[exp->i] && tokens->data[exp->i] != SINGLE_COT)
 				exp->final_str[exp->new_size++] = tokens->data[exp->i++];
-			exp->i++;
+			if (tokens->data[exp->i])
+				exp->i++;
 		}
 	}
 	else if (tokens->data[exp->i] == DOUBLE_COT)

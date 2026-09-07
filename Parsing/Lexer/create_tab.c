@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/07 05:51:18 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 18:55:38 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ void	index_count_cot(const char *str, size_t *i)
 	if (str[*i] == SINGLE_COT)
 	{
 		(*i)++;
-		while (str[*i] != SINGLE_COT)
+		while (str[*i] && str[*i] != SINGLE_COT)
 			(*i)++;
 	}
 	else if (str[*i] == DOUBLE_COT)
 	{
 		(*i)++;
-		while (str[*i] != DOUBLE_COT)
+		while (str[*i] && str[*i] != DOUBLE_COT)
 			(*i)++;
 	}
-	(*i)++;
+	if (str[*i])
+		(*i)++;
 }
 
 size_t	manage_lex(const char **s, size_t start)

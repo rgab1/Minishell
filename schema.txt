@@ -16,6 +16,10 @@ Style: Ajout d'un nouveau utils.h qui englobe ce qu'il y a dans le dossier Utils
 Fix: correction dans free_cmd_star dans une condition, si out_fd != 2 (il y etais 2 fois d'affiler au lieu de verifier si -2 et -1)
 Fix: dans signal au lieux de mettre g_global_sig = 128 + int | -> g_global_sig = int | et dans shell->exit_code = g_global + 128
 
+Feat: Suppression des quotes dans le heredoc
+Style: Norminette faite sur tout le projet
+Fix: Suppression d'une varibale qui ne nous servait pas dans la struct cmd->flags X 
+Fix: Suppression de tout les printf for debug
 
 valgrind.supp
 {
