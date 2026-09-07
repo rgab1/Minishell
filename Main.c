@@ -6,25 +6,13 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 17:30:21 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/31 17:57:24 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 05:49:03 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int		g_signal_status = 0;
-
-void	print_lst(t_tokens *nodes)
-{
-	if (nodes == NULL)
-		return ;
-	while (nodes->next != NULL)
-	{
-		printf("content = %s; make type_nbr = %d\n", nodes->data, nodes->type);
-		nodes = nodes->next;
-	}
-	printf("content = %s; type_nbr = %d\n", nodes->data, nodes->type);
-}
 
 void	start_minishell(int ac, char **av)
 {
@@ -41,6 +29,17 @@ void	end_of_minishell(t_shell *shell, char *line)
 		free(line);
 	rl_clear_history();
 	full_cleanup(shell);
+}
+
+void	in_minishell(t_shell *shell, char *line)
+{
+	check_g_status(shell);
+	if (line[0] != '\0')
+		add_history(line);
+	shell = manage_shell(line, shell);
+	if (!shell->cmd)
+		return ;
+	execution(shell);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -60,16 +59,7 @@ int	main(int ac, char **av, char **envp)
 			printf("exit\n");
 			break ;
 		}
-		check_g_status(shell);
-		if (line[0] != '\0')
-			add_history(line);
-		shell = manage_shell(line, shell);
-		if (!shell->cmd)
-		{
-			free(line);
-			continue ;
-		}
-		execution(shell);
+		in_minishell(shell, line);
 		free(line);
 	}
 	end_of_minishell(shell, line);

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/07 03:06:54 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 05:42:53 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void				ft_lstadd_token(t_tokens **lst, t_tokens *new);
 t_tokens			*manage_token(char **tab, t_shell *shell);
 void				expand_tokens(t_tokens *tokens, t_shell *shell);
 
+// remove_quotes_from_heredoc
+void				remove_quotes(char **str);
+void				browse_quotes(char *new_str, char *str);
+
 // browse_line.c
 size_t				manage_lex(const char **s, size_t start);
 
@@ -83,7 +87,8 @@ int					change_fd_redir(t_tokens **tokens, size_t redir,
 int					change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd);
 int					change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd,
 						int *i_heredoc);
-int					change_heredoc_extension(t_tokens **tokens, t_cmd *cmd, char *namefile);
+int					change_heredoc_extension(t_tokens **tokens, t_cmd *cmd,
+						char *namefile);
 
 // change_fd_heredoc
 int					make_heredoc(t_tokens **tokens, t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/26 18:29:47 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 05:50:28 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_cmd	*init_cmd(int len_tok)
 		node->cmd[i++] = NULL;
 	node->in_fd = -2;
 	node->out_fd = -2;
-	node->flags = NOTHING;
 	node->next = NULL;
 	return (node);
 }

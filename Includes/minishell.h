@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/06 21:17:54 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 05:49:16 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ extern int	g_signal_status;
 
 void		start_minishell(int ac, char **av);
 void		end_of_minishell(t_shell *shell, char *line);
+void		in_minishell(t_shell *shell, char *line);
 
 // init_shell.c
 t_shell		*shell_init(char **envp);
 t_shell		*manage_shell(char *line, t_shell *shell);
+void		create_cmd(t_tokens *tokens, t_shell *shell);
 
 // Signaux.c
 void		sigint_handler(int sig);

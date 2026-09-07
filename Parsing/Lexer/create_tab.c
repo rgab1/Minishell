@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/22 22:04:55 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 05:51:18 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ char	**split_star(char const *str)
 	if (!str)
 		return (NULL);
 	word_count = count_word(str);
-	printf("%ld\n", word_count);
 	if (word_count == 0)
 		return (NULL);
 	tab = malloc(sizeof(char *) * (word_count + 1));

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/07 01:20:00 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 03:46:45 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 			return (0);
 		}
 		if (g_signal_status != 0)
+		{
+			free(line);
 			return (-1);
+		}
 		else if (ft_strcmp(line, (*tokens)->data) == 0)
 		{
 			free(line);

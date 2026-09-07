@@ -23,7 +23,7 @@ SRC_PARSING = Expansion/count_for_expand.c Expansion/init_struct_exp.c \
 			Parser/change_fd.c Parser/change_fd_heredoc.c \
 			Parser/check_syntax.c Parser/parse.c Parser/parse_utils.c \
 			Shell_struct/init_shell.c \
-			Tokens/init_token.c
+			Tokens/init_token.c Tokens/remove_quotes_from_heredoc.c
 
 SRC_SIGNAL = signal.c
 

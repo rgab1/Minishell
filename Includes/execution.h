@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:46:43 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/07 02:21:09 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 05:50:19 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_cmd
 	char				**cmd;
 	int					in_fd;
 	int					out_fd;
-	t_flag_type			flags;
 	struct s_cmd		*next;
 }						t_cmd;
 
