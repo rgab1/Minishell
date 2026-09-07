@@ -6,7 +6,7 @@
 #    By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/24 11:06:44 by grivault          #+#    #+#              #
-#    Updated: 2026/07/08 19:40:36 by grivault         ###   ########.fr        #
+#    Updated: 2026/09/07 21:41:56 by grivault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC_MEM = ft_memmove.c ft_memset.c ft_memchr.c ft_memcmp.c ft_memcpy.c \
 		  ft_bzero.c ft_calloc.c 
 
 SRC_MISC = ft_atoi.c ft_atoi_safe.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
-		   ft_isdigit.c ft_isprint.c ft_itoa.c get_next_line.c ft_tablen.c 
+		   ft_isdigit.c ft_isprint.c ft_itoa.c get_next_line.c ft_tablen.c \
+		   ft_atoll_safe.c
 
 SRC_PRINT = ft_putendl_fd.c ft_putnbr_fd.c ft_putchar_fd.c ft_putstr_fd.c \
 			ft_printf.c puterror.c exit_error.c

@@ -6,31 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 17:34:10 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/06 23:25:34 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/07 22:15:30 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static int	is_numeric(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 static void	numeric_error_print(char *arg)
 {
@@ -43,20 +23,20 @@ static void	numeric_error_print(char *arg)
 
 int	ft_exit(t_shell *shell)
 {
-	int	exit_code;
-	int	error;
+	long long	exit_code;
+	int			error;
 
 	error = 0;
 	exit_code = shell->exit_code;
 	ft_putstr_fd("exit\n", 2);
 	if (shell->cmd->cmd[1])
 	{
-		exit_code = ft_atoi_safe(shell->cmd->cmd[1], &error);
-		if (!is_numeric(shell->cmd->cmd[1]) || error == 1)
+		exit_code = ft_atoll_safe(shell->cmd->cmd[1], &error);
+		if (error == 1)
 		{
 			numeric_error_print(shell->cmd->cmd[1]);
 			full_cleanup(shell);
-			exit(255);
+			exit(2);
 		}
 		if (shell->cmd->cmd[2])
 		{
