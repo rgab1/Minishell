@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/06 21:40:19 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 01:20:00 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*name_file_hc(int *i_heredoc)
 	char	*res;
 
 	nbr_file = ft_itoa(*i_heredoc);
-	res = ft_strjoin(".heredoc_", nbr_file);
+	res = ft_strjoin(".my_heredoc_", nbr_file);
 	free(nbr_file);
 	return (res);
 }

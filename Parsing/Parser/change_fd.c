@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/07 00:15:54 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/07 01:23:09 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,12 @@ int	change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 	namefile = name_file_hc(i_heredoc);
 	(*i_heredoc)++;
 	cmd->in_fd = open(namefile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (cmd->in_fd == -1)
+	{
+		unlink(namefile);
+		free(namefile);
+		return (perror((*tokens)->data), 1);
+	}
 	if (make_heredoc(tokens, cmd) == -1)
 	{
 		close(cmd->in_fd);
@@ -105,3 +111,8 @@ int	change_fd_hredir_in(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
 	free(namefile);
 	return (0);
 }
+
+// int	change_fd_hredir_in_u (t_tokens **tokens, t_cmd *cmd)
+// {
+	
+// }
