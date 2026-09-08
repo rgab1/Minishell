@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 05:28:01 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/08 04:37:51 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 19:06:18 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ void	browse_quotes(char *new_str, char *str)
 	}
 	new_str[j] = '\0';
 }
-	

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/08 05:18:29 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 19:07:17 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	check_max_heredc(t_tokens *tokens)
 {
-	int	i_heredc;
-	t_tokens *tmp;
+	int			i_heredc;
+	t_tokens	*tmp;
 
 	i_heredc = 0;
 	tmp = tokens;
@@ -42,8 +42,8 @@ static int	check_syntax_redir(t_tokens *tmp)
 	else if (tmp->type == HREDIR_IN
 		&& (tmp->next->next && tmp->next->next->type == HREDIR_IN))
 	{
-			if (check_max_heredc(tmp) == 1)
-				return (1);
+		if (check_max_heredc(tmp) == 1)
+			return (1);
 	}
 	return (0);
 }
