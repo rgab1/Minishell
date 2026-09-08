@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/07 05:50:28 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 04:09:30 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,13 @@ t_cmd	*create_cmd_struct(t_tokens *nodes)
 
 	j_tab = 0;
 	i_heredoc = 0;
+	cmd = init_cmd(ft_tokensize(nodes));
+	if (cmd == NULL)
+		return (NULL);
+	tmp = cmd;
 	while (nodes)
 	{
-		if (j_tab == 0)
-		{
-			cmd = init_cmd(ft_tokensize(nodes));
-			if (cmd == NULL)
-				return (NULL);
-			tmp = cmd;
-		}
-		else if (manage_pipe(&nodes, &cmd, &j_tab) == -1)
+		if (manage_pipe(&nodes, &cmd, &j_tab) == -1)
 			return (free_cmd_struct(tmp), NULL);
 		cmd = manage_cmd(&nodes, cmd, &j_tab, &i_heredoc);
 		if (cmd == NULL)
