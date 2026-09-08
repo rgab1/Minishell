@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/07 05:42:53 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 03:24:09 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int					change_heredoc_extension(t_tokens **tokens, t_cmd *cmd,
 // change_fd_heredoc
 int					make_heredoc(t_tokens **tokens, t_cmd *cmd);
 char				*name_file_hc(int *i_heredoc);
+int					line_null_by_sigint_heredc(char *line);
 
 /*
 char				*get_key(unsigned char *src, t_env *env, int *i);

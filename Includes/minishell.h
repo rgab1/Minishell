@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 22:18:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/07 05:49:16 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 03:12:35 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void		create_cmd(t_tokens *tokens, t_shell *shell);
 // Signaux.c
 void		sigint_handler(int sig);
 void		check_g_status(t_shell *shell);
+void		sigint_heredoc_handler(int sig);
 
 #endif
