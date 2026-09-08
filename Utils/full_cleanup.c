@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 22:59:26 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/08 04:11:56 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 19:00:04 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	full_cleanup(t_shell *shell)
 		close(shell->save_in);
 	if (shell->save_out > 2)
 		close(shell->save_out);
-	// close(0);
-	// close(1);
-	// close(2);
+	close(0);
+	close(1);
+	close(2);
 	free(shell);
 }

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/06 21:19:24 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 19:34:41 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,9 @@ static void	exec_builtin(t_shell *shell, int *pid, size_t func_index)
 
 	if (*pid == 0)
 	{
+		close_siblings_fds(shell, shell->cmd);
 		dup_fds(shell->cmd);
 		exit_code = builtins[func_index](shell);
-		close(0);
-		close(1);
-		close(2);
 		return (full_cleanup(shell), exit(exit_code));
 	}
 	else

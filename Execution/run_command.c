@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/07 01:08:43 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/08 19:18:16 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,24 @@ static void	handle_cmd_error(t_cmd *current, char **envp, t_shell *shell)
 	return (full_cleanup(shell), exit(127));
 }
 
+void	close_siblings_fds(t_shell *shell, t_cmd *current)
+{
+	t_cmd	*tmp;
+
+	tmp = shell->cmd;
+	while (tmp)
+	{
+		if (tmp != current)
+		{
+			if (tmp->in_fd > 2)
+				(close(tmp->in_fd), tmp->in_fd = -2);
+			if (tmp->out_fd > 2)
+				(close(tmp->out_fd), tmp->out_fd = -2);
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	run_command(t_cmd *current, char **envp, t_shell *shell)
 {
 	char	*path;
@@ -48,6 +66,7 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 	path = get_path(shell, current->cmd[0]);
 	if (!path)
 		handle_cmd_error(current, envp, shell);
+	close_siblings_fds(shell, current);
 	if (current->in_fd > 2)
 		dup2(current->in_fd, 0);
 	if (current->out_fd > 2)

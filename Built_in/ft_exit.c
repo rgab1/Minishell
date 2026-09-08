@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 17:34:10 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/08 17:57:43 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/08 19:03:49 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	ft_exit(t_shell *shell)
 		if (error == 1)
 		{
 			numeric_error_print(shell->cmd->cmd[1]);
-			full_cleanup(shell);
-			exit(2);
+			(full_cleanup(shell), exit(2));
 		}
 		if (shell->cmd->cmd[2])
 		{
@@ -45,6 +44,5 @@ int	ft_exit(t_shell *shell)
 			return (1);
 		}
 	}
-	full_cleanup(shell);
-	return (exit(exit_code), 0);
+	return (full_cleanup(shell), exit(exit_code), 0);
 }

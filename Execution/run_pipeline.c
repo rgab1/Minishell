@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/06 20:36:01 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/08 19:45:46 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static void	pipe_assignement(int *fd, t_cmd *current)
 {
 	pipe(fd);
-	current->out_fd = fd[1];
-	current->next->in_fd = fd[0];
+	if (current->out_fd == -2)
+		current->out_fd = fd[1];
+	if (current->next->in_fd == -2)
+		current->next->in_fd = fd[0];
 }
 
 static void	close_fds(t_shell *shell)
