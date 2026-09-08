@@ -6,13 +6,13 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/08 03:24:13 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 20:46:51 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	make_heredoc(t_tokens **tokens, t_cmd *cmd)
+int	make_heredoc(t_tokens **tokens, t_shell *shell)
 {
 	char	*line;
 
@@ -33,11 +33,31 @@ int	make_heredoc(t_tokens **tokens, t_cmd *cmd)
 			signal(SIGINT, sigint_handler);
 			break ;
 		}
-		ft_putstr_fd(line, cmd->in_fd);
-		ft_putchar_fd('\n', cmd->in_fd);
-		free(line);
+		manage_expand_heredc(tokens, shell, line);
 	}
 	return (0);
+}
+
+void	manage_expand_heredc(t_tokens **tokens, t_shell *shell, char *line)
+{
+	t_tokens token_leurre;
+
+	if ((*tokens)->was_quotes == 0)
+	{
+		token_leurre.data = line;
+		token_leurre.type = WORD;
+		token_leurre.was_quotes = 0;
+		manage_expand(&token_leurre, shell);
+		ft_putstr_fd(token_leurre.data, shell->cmd->in_fd);
+		ft_putchar_fd('\n', shell->cmd->in_fd);
+		free(token_leurre.data);
+	}
+	else
+	{
+		ft_putstr_fd(line, shell->cmd->in_fd);
+		ft_putchar_fd('\n', shell->cmd->in_fd);
+		free(line);
+	}
 }
 
 int	line_null_by_sigint_heredc(char *line)

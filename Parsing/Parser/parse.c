@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/08 04:09:30 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 21:17:14 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,27 @@ t_cmd	*init_cmd(int len_tok)
 	return (node);
 }
 
-t_cmd	*create_cmd_struct(t_tokens *nodes)
+t_cmd	*create_cmd_struct(t_tokens *nodes, t_shell *shell)
 {
 	int		j_tab;
 	int		i_heredoc;
-	t_cmd	*cmd;
 	t_cmd	*tmp;
 
 	j_tab = 0;
 	i_heredoc = 0;
-	cmd = init_cmd(ft_tokensize(nodes));
-	if (cmd == NULL)
+	shell->cmd = init_cmd(ft_tokensize(nodes));
+	if (shell->cmd == NULL)
 		return (NULL);
-	tmp = cmd;
+	tmp = shell->cmd;
 	while (nodes)
 	{
-		if (manage_pipe(&nodes, &cmd, &j_tab) == -1)
+		if (manage_pipe(&nodes, &shell->cmd, &j_tab) == -1)
 			return (free_cmd_struct(tmp), NULL);
-		cmd = manage_cmd(&nodes, cmd, &j_tab, &i_heredoc);
-		if (cmd == NULL)
+		shell->cmd = manage_cmd(&nodes, shell, &j_tab, &i_heredoc);
+		if (shell->cmd == NULL)
 			return (free_cmd_struct(tmp), NULL);
 	}
-	cmd->cmd[j_tab] = NULL;
+	shell->cmd->cmd[j_tab] = NULL;
 	return (tmp);
 }
 
@@ -72,30 +71,30 @@ int	manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab)
 	return (0);
 }
 
-t_cmd	*manage_cmd(t_tokens **tokens, t_cmd *cmd, int *j_tab, int *i_heredoc)
+t_cmd	*manage_cmd(t_tokens **tokens, t_shell *shell, int *j_tab, int *i_heredoc)
 {
 	while (*tokens && (*tokens)->type != PIPE)
 	{
 		if ((*tokens)->type == WORD)
-			add_str(tokens, cmd, j_tab);
+			add_str(tokens, shell->cmd, j_tab);
 		else
 		{
-			if (sort_redir(tokens, cmd, i_heredoc) == -1)
+			if (sort_redir(tokens, shell, i_heredoc) == -1)
 				return (NULL);
 		}
 		*tokens = (*tokens)->next;
 	}
-	return (cmd);
+	return (shell->cmd);
 }
 
-int	sort_redir(t_tokens **tokens, t_cmd *cmd, int *i_heredoc)
+int	sort_redir(t_tokens **tokens, t_shell *shell, int *i_heredoc)
 {
 	if ((*tokens)->type == REDIR_IN || (*tokens)->type == REDIR_OUT
 		|| (*tokens)->type == AREDIR_OUT || (*tokens)->type == HREDIR_IN)
 	{
 		if ((*tokens)->next == NULL || (*tokens)->next->data == NULL)
 			return (minishell_error(ERROR_SYNTAXE, (*tokens)->next->data), -1);
-		if (manage_fd(tokens, cmd, i_heredoc) == -1)
+		if (manage_fd(tokens, shell, i_heredoc) == -1)
 			return (-1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/07 03:34:17 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 20:07:37 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_shell	*manage_shell(char *line, t_shell *shell)
 
 void	create_cmd(t_tokens *tokens, t_shell *shell)
 {
-	shell->cmd = create_cmd_struct(tokens);
+	shell->cmd = create_cmd_struct(tokens, shell);
 	free_tokens(tokens);
 	if (!shell->cmd)
 		shell->exit_code = 1;
