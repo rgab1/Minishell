@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/07 05:37:52 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 04:21:25 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void	expand_tokens(t_tokens *tokens, t_shell *shell)
 			if (tmp->next && tmp->next->type == WORD)
 			{
 				tmp = tmp->next;
+				if (ft_strchr(tmp->data, SINGLE_COT)
+					|| ft_strchr(tmp->data, DOUBLE_COT))
+					tmp->was_quotes = 1;
 				remove_quotes(&tmp->data);
 			}
 		}

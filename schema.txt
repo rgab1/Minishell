@@ -24,6 +24,13 @@ Fix: Suppression de tout les printf for debug
 Feat: Fonction dans signal qui va permettre de close le fd 0 afin de le canal de communication entre readline et le fd 0, ainsi on fait appel a open("/dev/tty", O_RDONLY)
 qui va permettre d'ouvrir le fd0 et de l'assiger a l'alias du terminal actuel du proccessus
 
+Fix: Maj faite lors de la creation de cmd, on initialise directement le premier noeud a l'exterieur
+de la boucle et on arrete de se baser sur j_tab qui lui se base sur les word (donc <<h | echo hello : ici le heredoc est fait on arrive sur la pipeline ou j_tab == 0 et creer une cmd a l'infinie...)
+Fix: mise des closes fd dans full_cleanup en commentaire (j'attend de voir avec mon binome pour savoir ou est ce que nous devons close les fd)
+
+Fix: Maj faite a la fin de la creation des tokens lorsque je verifie dans expand_token si le word est
+un delimiteur je mets was_quotes=1 pour eviter que le clear_imposteur_token ne le supprime 
+
 valgrind.supp
 {
     ignore_readline_leaks
