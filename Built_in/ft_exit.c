@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 17:34:10 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/07 22:15:30 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:57:43 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	ft_exit(t_shell *shell)
 
 	error = 0;
 	exit_code = shell->exit_code;
-	ft_putstr_fd("exit\n", 2);
+	if (shell->save_in != -2)
+		ft_putstr_fd("exit\n", 2);
 	if (shell->cmd->cmd[1])
 	{
 		exit_code = ft_atoll_safe(shell->cmd->cmd[1], &error);

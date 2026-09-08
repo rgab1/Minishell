@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 21:23:03 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/07 22:22:22 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/08 18:17:15 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,14 @@ long long	ft_atoll_safe(const char *str, int *error)
 		if (str[i++] == '-')
 			sign = -1;
 	if (!str[i])
-	{
-		*error = 1;
-		return (0);
-	}
+		return (*error = 1, 0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-		{
-			*error = 1;
-			return (0);
-		}
+			return (*error = 1, 0);
 		result = result * 10 + (str[i++] - '0');
 		if (result > 9223372036854775807ULL + (sign == -1))
-		{
-			*error = 1;
-			return (0);
-		}
+			return (*error = 1, 0);
 	}
 	return ((long long)(result * sign));
 }
