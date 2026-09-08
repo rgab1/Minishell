@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 22:06:52 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/31 04:47:03 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/09/08 05:05:01 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // minishell_error function messages
 # define ERROR_SYNTAXE "Syntaxe error near unexpected token" // a changer
 # define ERROR_CTRL_D_HEREDOC "warning: here-document delimited by end-of-file"
+# define ERROR_MAX_HEREDOC "maximum here-document count exceeded"
 # define ERROR_HOME_NOT_SET "HOME not set"
 # define ERROR_OLDPWD_NOT_SET "OLDPWD not set"
 # define ERROR_CMD_NOT_FOUND "command not found"

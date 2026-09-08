@@ -6,11 +6,29 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/08/31 17:30:10 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/08 05:18:29 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	check_max_heredc(t_tokens *tokens)
+{
+	int	i_heredc;
+	t_tokens *tmp;
+
+	i_heredc = 0;
+	tmp = tokens;
+	while (tmp)
+	{
+		if (i_heredc >= 17)
+			return (minishell_error(ERROR_MAX_HEREDOC, NULL), 1);
+		if (tmp->type == HREDIR_IN)
+			i_heredc++;
+		tmp = tmp->next;
+	}
+	return (0);
+}
 
 static int	check_syntax_redir(t_tokens *tmp)
 {
@@ -21,6 +39,12 @@ static int	check_syntax_redir(t_tokens *tmp)
 		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
 	else if (tmp->next != NULL && tmp->next->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, tmp->next->data), 1);
+	else if (tmp->type == HREDIR_IN
+		&& (tmp->next->next && tmp->next->next->type == HREDIR_IN))
+	{
+			if (check_max_heredc(tmp) == 1)
+				return (1);
+	}
 	return (0);
 }
 
