@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/08 19:18:16 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/08 21:32:37 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 	int		exit_code;
 
 	if (current->in_fd == -1 || current->out_fd == -1)
-		return (full_cleanup(shell), exit(1));
+		return (free_envp(envp), full_cleanup(shell), exit(1));
 	if (!current->cmd || !current->cmd[0])
 		return (free_envp(envp), full_cleanup(shell), exit(0));
 	path = get_path(shell, current->cmd[0]);
