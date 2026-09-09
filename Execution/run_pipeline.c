@@ -6,7 +6,7 @@
 /*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/09 20:24:20 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/09 20:32:38 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ void	run_pipeline(t_shell *shell, int *pid)
 		{
 			signal(SIGINT, SIG_DFL);
 			signal(SIGQUIT, SIG_DFL);
-			if (shell->cmd->next)
-				if (fd[0] != -2)
-					close(fd[0]);
 			is_builtin(shell, pid);
 			run_command(shell->cmd, get_envp(shell), shell);
 		}
