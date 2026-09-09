@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 19:59:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 05:50:32 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/09 14:34:39 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ int	set_value(char *key, char *value, t_env **head)
 	{
 		if (!ft_strncmp(key, temp->key, key_len + 1))
 		{
-			free(temp->value);
-			temp->value = ft_strdup(value);
+			if (value)
+			{
+				free(temp->value);
+				temp->value = ft_strdup(value);
+			}
 			return (0);
 		}
 		temp = temp->next;
