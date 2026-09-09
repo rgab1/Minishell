@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:25:35 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/08 19:34:41 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/09 14:27:28 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ int	is_builtin(t_shell *shell, int *pid)
 	while (builtins[i])
 	{
 		if (ft_strncmp(shell->cmd->cmd[0], builtins[i], 10) == 0)
+		{
+			if (shell->cmd->in_fd == -1 || shell->cmd->out_fd == -1)
+				return (shell->exit_code = 1, 1);
 			return (exec_builtin(shell, pid, i), 1);
+		}
 		i++;
 	}
 	return (0);
