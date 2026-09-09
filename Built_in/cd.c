@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:08:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/05 22:46:29 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/09 14:09:46 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	cd(t_shell *shell)
 {
 	char	*path;
 
+	if (shell->cmd->cmd[2])
+		return (minishell_error("cd", ERROR_MANY_ARGS), 2);
 	path = path_resolution(shell->cmd->cmd[1], shell->env);
 	if (!path)
 		return (1);
