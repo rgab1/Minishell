@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/07 18:55:38 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/09 23:15:02 by hassmou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ size_t	manage_lex(const char **s, size_t start)
 			i++;
 		return (i);
 	}
-	while ((*s)[i] && ((*s)[i] != ESPACE && (*s)[i] != TAB) && ((*s)[i] != '<'
-			&& (*s)[i] != '>' && (*s)[i] != '|'))
+	while ((*s)[i] && ((*s)[i] != ESPACE && (*s)[i] != TAB && (*s)[i] != '\n')
+			&& ((*s)[i] != '<' && (*s)[i] != '>' && (*s)[i] != '|'))
 	{
 		if ((*s)[i] == SINGLE_COT || (*s)[i] == DOUBLE_COT)
 			index_count_cot(*s, &i);
@@ -63,12 +63,12 @@ size_t	count_word(char const *s)
 	i = 0;
 	while (s[i])
 	{
-		while (s[i] && (s[i] == ESPACE || s[i] == TAB))
+		while (s[i] && (s[i] == ESPACE || s[i] == TAB || s[i] == '\n'))
 			i++;
 		if (!s[i])
 			break ;
 		count++;
-		while (s[i] && (s[i] != ESPACE && s[i] != TAB))
+		while (s[i] && (s[i] != ESPACE && s[i] != TAB && s[i] != '\n'))
 		{
 			if (s[i] == SINGLE_COT || s[i] == DOUBLE_COT)
 				index_count_cot(s, &i);
@@ -86,7 +86,7 @@ char	*ft_next_word(const char **s)
 	char	*word;
 
 	i = 0;
-	while ((*s)[i] && ((*s)[i] == ESPACE || (*s)[i] == TAB))
+	while ((*s)[i] && ((*s)[i] == ESPACE || (*s)[i] == TAB || (*s)[i] == '\n'))
 		i++;
 	start = i;
 	i = manage_lex(s, start);
@@ -115,7 +115,7 @@ char	**split_star(char const *str)
 	{
 		tab[i] = ft_next_word(&str);
 		i++;
-		while (*str == ESPACE || *str == TAB)
+		while (*str == ESPACE || *str == TAB || *str == '\n')
 			str++;
 	}
 	tab[i] = NULL;
