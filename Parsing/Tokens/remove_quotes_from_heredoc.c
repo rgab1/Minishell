@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 05:28:01 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/08 19:06:18 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/10 18:50:29 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,27 @@ void	browse_quotes(char *new_str, char *str)
 	while (str[i])
 	{
 		if (str[i] == '\'' && in_dq == 0)
-		{
-			in_sq++;
-			i++;
-		}
+			change_in_sq(&in_sq, &i);
 		else if (str[i] == '\"' && in_sq == 0)
-		{
-			in_dq++;
-			i++;
-		}
+			change_in_dq(&in_dq, &i);
 		else
 			new_str[j++] = str[i++];
 	}
 	new_str[j] = '\0';
+}
+
+void	change_in_sq(int *in_sq, size_t *i)
+{
+	(*in_sq)++;
+	if ((*in_sq) == 2)
+		(*in_sq) = 0;
+	(*i)++;
+}
+
+void	change_in_dq(int *in_dq, size_t *i)
+{
+	(*in_dq)++;
+	if ((*in_dq) == 2)
+		(*in_dq) = 0;
+	(*i)++;
 }

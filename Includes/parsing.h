@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/08 21:25:35 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/10 18:50:37 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void				expand_tokens(t_tokens *tokens, t_shell *shell);
 // remove_quotes_from_heredoc
 void				remove_quotes(char **str);
 void				browse_quotes(char *new_str, char *str);
+void				change_in_sq(int *in_sq, size_t *i);
+void				change_in_dq(int *in_dq, size_t *i);
 
 // browse_line.c
 size_t				manage_lex(const char **s, size_t start);

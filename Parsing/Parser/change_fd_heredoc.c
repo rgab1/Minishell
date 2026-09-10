@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/08 20:46:51 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/10 18:38:55 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	manage_expand_heredc(t_tokens **tokens, t_shell *shell, char *line)
 		token_leurre.data = line;
 		token_leurre.type = WORD;
 		token_leurre.was_quotes = 0;
+		token_leurre.next = NULL;
 		manage_expand(&token_leurre, shell);
 		ft_putstr_fd(token_leurre.data, shell->cmd->in_fd);
 		ft_putchar_fd('\n', shell->cmd->in_fd);
