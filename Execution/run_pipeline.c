@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_pipeline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/09 20:32:38 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/10 19:00:39 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	pipe_assignement(int *fd, t_cmd *current)
 		fd[0] = -2;
 	}
 }
-
+	
 static void	close_fds(t_shell *shell)
 {
 	if (shell->cmd->in_fd > 2)
@@ -59,6 +59,7 @@ void	run_pipeline(t_shell *shell, int *pid)
 		{
 			signal(SIGINT, SIG_DFL);
 			signal(SIGQUIT, SIG_DFL);
+			signal(SIGPIPE, SIG_IGN);
 			is_builtin(shell, pid);
 			run_command(shell->cmd, get_envp(shell), shell);
 		}
