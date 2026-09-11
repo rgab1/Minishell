@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:49:06 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/10 19:00:39 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 18:55:52 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	pipe_assignement(int *fd, t_cmd *current)
 		fd[0] = -2;
 	}
 }
-	
+
 static void	close_fds(t_shell *shell)
 {
 	if (shell->cmd->in_fd > 2)

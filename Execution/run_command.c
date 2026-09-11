@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 17:48:57 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/08 21:32:37 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/11 18:47:10 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static void	close_fds(t_cmd	*current)
 static void	handle_cmd_error(t_cmd *current, char **envp, t_shell *shell)
 {
 	if (ft_strchr(current->cmd[0], '/'))
-		minishell_error(current->cmd[0], ERROR_NO_FILE);
+		minishell_error(NULL, ERROR_NO_FILE, current->cmd[0]);
 	else
-		minishell_error(current->cmd[0], ERROR_CMD_NOT_FOUND);
+		minishell_error(NULL, ERROR_CMD_NOT_FOUND, current->cmd[0]);
 	free_envp(envp);
 	return (full_cleanup(shell), exit(127));
 }
@@ -73,7 +73,7 @@ void	run_command(t_cmd *current, char **envp, t_shell *shell)
 		dup2(current->out_fd, 1);
 	close_fds(current);
 	execve(path, current->cmd, envp);
-	minishell_error(current->cmd[0], strerror(errno));
+	minishell_error(NULL, strerror(errno), current->cmd[0]);
 	exit_code = 127;
 	if (errno == EACCES || errno == EISDIR || errno == ENOEXEC)
 		exit_code = 126;
