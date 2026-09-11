@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/11 19:23:52 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 19:25:20 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	sort_redir(t_tokens **tokens, t_shell *shell, int *i_heredoc)
 		|| (*tokens)->type == AREDIR_OUT || (*tokens)->type == HREDIR_IN)
 	{
 		if ((*tokens)->next == NULL || (*tokens)->next->data == NULL)
-			return (minishell_error(NULL, ERROR_SYNTAXE,"newline"), -1);
+			return (minishell_error(NULL, ERROR_SYNTAXE, "newline"), -1);
 		if (manage_fd(tokens, shell, i_heredoc) == -1)
 			return (-1);
 	}
