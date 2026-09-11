@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 05:17:59 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/07 02:20:09 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 18:12:58 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_exp
 t_exp		*init_exp(void);
 
 /*Expansion.c*/
-void		manage_expand(t_tokens *tokens, t_shell *shell);
+int			manage_expand(t_tokens *tokens, t_shell *shell);
 void		get_new_size_expand(t_exp *exp, t_tokens *tokens, t_shell *shell);
 void		get_new_size_expand_quotes(t_exp *exp, t_tokens *tokens);
 void		set_newdata_token(t_exp *exp, t_tokens *tokens, t_shell *shell);
