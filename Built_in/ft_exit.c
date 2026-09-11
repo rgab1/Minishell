@@ -6,20 +6,11 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 17:34:10 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/08 19:03:49 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/11 18:35:19 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	numeric_error_print(char *arg)
-{
-	ft_putstr_fd("minishell: exit: ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(ERROR_NUM_ARG, 2);
-	ft_putstr_fd("\n", 2);
-}
 
 int	ft_exit(t_shell *shell)
 {
@@ -35,12 +26,12 @@ int	ft_exit(t_shell *shell)
 		exit_code = ft_atoll_safe(shell->cmd->cmd[1], &error);
 		if (error == 1)
 		{
-			numeric_error_print(shell->cmd->cmd[1]);
+			minishell_error("exit", ERROR_NUM_ARG, shell->cmd->cmd[1]);
 			(full_cleanup(shell), exit(2));
 		}
 		if (shell->cmd->cmd[2])
 		{
-			minishell_error("exit", ERROR_MANY_ARGS);
+			minishell_error("exit", ERROR_MANY_ARGS, NULL);
 			return (1);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 17:06:25 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/11 16:42:59 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 18:20:34 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int		ft_getuid(void);
 void	full_cleanup(t_shell *shell);
 
 /*minishell_error.c*/
-void	minishell_error(char *context, char *error_msg);
+void	minishell_error(char *context, char *error_msg, char *failed_str);
 
 #endif

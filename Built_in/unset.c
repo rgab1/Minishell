@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 21:04:10 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/05 23:38:30 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/11 18:32:50 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	unset(t_shell *shell)
 	{
 		if (!is_valid_identifier(shell->cmd->cmd[i]))
 		{
-			minishell_error(shell->cmd->cmd[i], ERROR_IDENTIFIER);
+			minishell_error("unset", ERROR_IDENTIFIER, shell->cmd->cmd[i]);
 			exit_status = 1;
 		}
 		else

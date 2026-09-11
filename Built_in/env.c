@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:40:49 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/05 23:55:04 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/11 18:36:49 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	env(t_shell *shell)
 	t_env	*head;
 
 	if (shell->cmd->cmd[1])
-		return (minishell_error("env", ERROR_MANY_ARGS), 127);
+		return (minishell_error("env", ERROR_MANY_ARGS, NULL), 127);
 	head = shell->env;
 	while (head)
 	{

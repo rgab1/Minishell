@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 21:09:27 by grivault          #+#    #+#             */
-/*   Updated: 2026/07/06 05:45:48 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/11 18:31:45 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	export(t_shell *shell)
 		pair = extract_key_value(shell->cmd->cmd[i]);
 		if (!is_valid_identifier(pair[0]))
 		{
-			minishell_error(shell->cmd->cmd[i], ERROR_IDENTIFIER);
+			minishell_error("export", ERROR_IDENTIFIER, shell->cmd->cmd[i]);
 			exit_status = 1;
 		}
 		else

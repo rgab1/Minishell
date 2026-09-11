@@ -6,7 +6,7 @@
 /*   By: grivault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 18:08:29 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/09 14:09:46 by grivault         ###   ########.fr       */
+/*   Updated: 2026/09/11 18:41:15 by grivault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static char	*path_resolution(char *path, t_env *head)
 	if (!path)
 	{
 		if (!home_path)
-			return (minishell_error("cd", ERROR_HOME_NOT_SET), NULL);
+			return (minishell_error("cd", ERROR_HOME_NOT_SET, NULL), NULL);
 		return (ft_strdup(home_path));
 	}
 	if (path[0] == '~')
 	{
 		if (!home_path)
-			return (minishell_error("cd", ERROR_HOME_NOT_SET), NULL);
+			return (minishell_error("cd", ERROR_HOME_NOT_SET, NULL), NULL);
 		return (ft_strjoin(home_path, path + 1));
 	}
 	if (ft_strncmp(path, "-", 2) == 0)
@@ -60,12 +60,13 @@ int	cd(t_shell *shell)
 	char	*path;
 
 	if (shell->cmd->cmd[2])
-		return (minishell_error("cd", ERROR_MANY_ARGS), 2);
+		return (minishell_error("cd", ERROR_MANY_ARGS, NULL), 2);
 	path = path_resolution(shell->cmd->cmd[1], shell->env);
 	if (!path)
 		return (1);
 	if (chdir(path) != 0)
-		return (minishell_error("cd", strerror(errno)), free(path), 1);
+		return (minishell_error("cd", strerror(errno), shell->cmd->cmd[1])
+				, free(path), 1);
 	if (shell->cmd->cmd[1] && ft_strncmp(shell->cmd->cmd[1], "-", 2) == 0)
 		ft_printf("%s\n", path);
 	update_wd_vars(&shell->env);
