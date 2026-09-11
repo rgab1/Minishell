@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 22:06:52 by grivault          #+#    #+#             */
-/*   Updated: 2026/09/08 05:05:01 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 16:46:38 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define ERROR_MANY_ARGS "too many arguments"
 
 // exit_error function messages
-# define ERROR_MALLOC_FAILED_4 "Malloc failed\n"
+# define ERROR_MALLOC_FAILED_4 "Malloc failed"
 # define ERROR_SHELL_NDEF_5 "Shell is not defined\n"
 # define ERROR_CMD_NDEF_6 "Cmd is not defined\n"
 # define ERROR_CMD_EMPTY_7 "Cmd char is NULL\n"

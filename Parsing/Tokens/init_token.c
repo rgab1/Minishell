@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/08 04:21:25 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 17:32:23 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,22 @@ void	ft_lstadd_token(t_tokens **lst, t_tokens *new)
 	temp->next = new;
 }
 
+t_tokens	*compare_for_create_token(char **tab, int i)
+{
+	if (ft_strcmp(tab[i], "|") == 0)
+		return (create_tokens(tab[i], PIPE));
+	else if (ft_strncmp(tab[i], "<<", 2) == 0)
+		return (create_tokens(tab[i], HREDIR_IN));
+	else if (ft_strncmp(tab[i], ">>", 2) == 0)
+		return (create_tokens(tab[i], AREDIR_OUT));
+	else if (ft_strncmp(tab[i], "<", 1) == 0)
+		return (create_tokens(tab[i], REDIR_IN));
+	else if (ft_strncmp(tab[i], ">", 1) == 0)
+		return (create_tokens(tab[i], REDIR_OUT));
+	else
+		return (create_tokens(tab[i], WORD));
+}
+
 t_tokens	*manage_token(char **tab, t_shell *shell)
 {
 	int			i;
@@ -50,29 +66,20 @@ t_tokens	*manage_token(char **tab, t_shell *shell)
 	t_tokens	*lst;
 
 	lst = NULL;
+	temp = NULL;
 	i = 0;
 	while (tab[i])
 	{
-		if (ft_strcmp(tab[i], "|") == 0)
-			temp = create_tokens(tab[i], PIPE);
-		else if (ft_strncmp(tab[i], "<<", 2) == 0)
-			temp = create_tokens(tab[i], HREDIR_IN);
-		else if (ft_strncmp(tab[i], ">>", 2) == 0)
-			temp = create_tokens(tab[i], AREDIR_OUT);
-		else if (ft_strncmp(tab[i], "<", 1) == 0)
-			temp = create_tokens(tab[i], REDIR_IN);
-		else if (ft_strncmp(tab[i], ">", 1) == 0)
-			temp = create_tokens(tab[i], REDIR_OUT);
-		else
-			temp = create_tokens(tab[i], WORD);
+		temp = compare_for_create_token(tab, i);
 		ft_lstadd_token(&lst, temp);
 		i++;
 	}
-	expand_tokens(lst, shell);
+	if (expand_tokens(lst, shell))
+		return (NULL);
 	return (lst);
 }
 
-void	expand_tokens(t_tokens *tokens, t_shell *shell)
+int	expand_tokens(t_tokens *tokens, t_shell *shell)
 {
 	t_tokens	*tmp;
 
@@ -91,7 +98,12 @@ void	expand_tokens(t_tokens *tokens, t_shell *shell)
 			}
 		}
 		else
-			manage_expand(tmp, shell);
+		{
+			if (manage_expand(tmp, shell) == -1)
+				return (free_tokens_error(tokens, shell), -1);
+		}
 		tmp = tmp->next;
 	}
+	return (0);
 }
+

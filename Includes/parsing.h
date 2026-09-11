@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/10 18:50:37 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 17:32:48 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void				search_pipe(char const *s, size_t *i, size_t *count);
 // init_token.c
 t_tokens			*create_tokens(char *str, t_token_type type);
 void				ft_lstadd_token(t_tokens **lst, t_tokens *new);
+t_tokens			*compare_for_create_token(char **tab, int i);
 t_tokens			*manage_token(char **tab, t_shell *shell);
-void				expand_tokens(t_tokens *tokens, t_shell *shell);
+int					expand_tokens(t_tokens *tokens, t_shell *shell);
 
 // remove_quotes_from_heredoc
 void				remove_quotes(char **str);
