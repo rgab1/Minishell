@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/11 17:56:29 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 19:02:58 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	make_heredoc(t_tokens **tokens, t_shell *shell)
 			if (line_null_by_sigint_heredc(line) == -1)
 				return (-1);
 			signal(SIGINT, sigint_handler);
-			return (minishell_error(ERROR_CTRL_D_HEREDOC, (*tokens)->data), 0);
+			return (minishell_error("warning", ERROR_CTRL_D_HEREDOC,
+				(*tokens)->data), 0);
 		}
 		else if (ft_strcmp(line, (*tokens)->data) == 0)
 		{

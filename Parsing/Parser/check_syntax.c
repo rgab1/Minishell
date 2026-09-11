@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 15:31:02 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/08 19:07:17 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 19:03:24 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_max_heredc(t_tokens *tokens)
 	while (tmp)
 	{
 		if (i_heredc >= 17)
-			return (minishell_error(ERROR_MAX_HEREDOC, NULL), 1);
+			return (minishell_error(NULL, ERROR_MAX_HEREDOC, NULL), 1);
 		if (tmp->type == HREDIR_IN)
 			i_heredc++;
 		tmp = tmp->next;
@@ -33,12 +33,12 @@ static int	check_max_heredc(t_tokens *tokens)
 static int	check_syntax_redir(t_tokens *tmp)
 {
 	if (tmp->next == NULL || tmp->next->data == NULL)
-		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
+		return (minishell_error(NULL, ERROR_SYNTAXE, "newline"), 1);
 	else if (tmp->type == REDIR_IN && tmp->next->type == REDIR_OUT
 		&& (tmp->next->next == NULL || tmp->next->next->data == NULL))
-		return (minishell_error(ERROR_SYNTAXE, "newline"), 1);
+		return (minishell_error(NULL, ERROR_SYNTAXE, "newline"), 1);
 	else if (tmp->next != NULL && tmp->next->type != WORD)
-		return (minishell_error(ERROR_SYNTAXE, tmp->next->data), 1);
+		return (minishell_error(NULL, ERROR_SYNTAXE, tmp->next->data), 1);
 	else if (tmp->type == HREDIR_IN
 		&& (tmp->next->next && tmp->next->next->type == HREDIR_IN))
 	{
@@ -51,9 +51,9 @@ static int	check_syntax_redir(t_tokens *tmp)
 static int	check_syntaxe_pipe(t_tokens *tmp)
 {
 	if (tmp->next == NULL)
-		return (minishell_error(ERROR_SYNTAXE, "|"), 1);
+		return (minishell_error(NULL, ERROR_SYNTAXE, "|"), 1);
 	else if (tmp->next->type == PIPE)
-		return (minishell_error(ERROR_SYNTAXE, tmp->next->data), 1);
+		return (minishell_error(NULL, ERROR_SYNTAXE, tmp->next->data), 1);
 	return (0);
 }
 
@@ -91,7 +91,7 @@ int	check_syntax(t_tokens *tokens)
 
 	tmp = tokens;
 	if (tmp && tmp->type == PIPE)
-		return (minishell_error(ERROR_SYNTAXE, "|"), 1);
+		return (minishell_error(NULL, ERROR_SYNTAXE, "|"), 1);
 	while (tmp)
 	{
 		if (tmp->type == REDIR_IN || tmp->type == REDIR_OUT

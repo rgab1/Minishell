@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:40:31 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/11 16:31:10 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 18:58:33 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	manage_expand(t_tokens *tokens, t_shell *shell)
 	get_new_size_expand(exp, tokens, shell);
 	exp->final_str = malloc(sizeof(char) * (exp->new_size + 1));
 	if (!exp->final_str)
-		return (minishell_error("malloc", ERROR_MALLOC_FAILED_4), -1);
+		return (minishell_error("malloc", ERROR_MALLOC_FAILED_4, NULL), -1);
 	exp->new_size = 0;
 	exp->i = 0;
 	exp->in_quot = 0;

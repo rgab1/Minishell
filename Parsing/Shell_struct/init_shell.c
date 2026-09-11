@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:22:47 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/08 20:07:37 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 18:59:11 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_shell	*shell_init(char **envp)
 
 	shell = malloc(sizeof(t_shell));
 	if (!shell)
-		return (minishell_error("Malloc", ERROR_MALLOC_FAILED_4), NULL);
+		return (minishell_error("Malloc", ERROR_MALLOC_FAILED_4, NULL), NULL);
 	shell->env = env_init(envp);
 	shell->cmd = NULL;
 	shell->line = NULL;

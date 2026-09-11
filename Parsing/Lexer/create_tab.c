@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 01:01:22 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/09 23:15:02 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/09/11 18:59:01 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	**split_star(char const *str)
 		return (NULL);
 	tab = malloc(sizeof(char *) * (word_count + 1));
 	if (!tab)
-		return (minishell_error("Malloc ", ERROR_MALLOC_FAILED_4), NULL);
+		return (minishell_error("Malloc ", ERROR_MALLOC_FAILED_4, NULL), NULL);
 	i = 0;
 	while (i < word_count)
 	{
