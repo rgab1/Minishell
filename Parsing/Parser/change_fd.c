@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 19:16:18 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/10 00:47:19 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/09/11 17:58:18 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	change_fd_redir(t_tokens **tokens, size_t redir, t_cmd *cmd)
 	if (*tokens == NULL || (*tokens)->data == NULL || (*tokens)->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, NULL), -1);
 	if (cmd->in_fd == -1 || cmd->out_fd == -1)
-    	return (0);
+		return (0);
 	if (redir == REDIR_IN)
 	{
 		if (cmd->in_fd != -2)
@@ -70,7 +70,7 @@ int	change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd)
 	if (*tokens == NULL || (*tokens)->data == NULL || (*tokens)->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, NULL), -1);
 	if (cmd->in_fd == -1 || cmd->out_fd == -1)
-    	return (0);
+		return (0);
 	if (cmd->out_fd != -2)
 	{
 		close(cmd->out_fd);
@@ -88,7 +88,7 @@ int	change_fd_hredir_in(t_tokens **tokens, t_shell *shell, int *i_heredoc)
 	if (*tokens == NULL || (*tokens)->type != WORD)
 		return (minishell_error(ERROR_SYNTAXE, NULL), -1);
 	if (shell->cmd->in_fd == -1 || shell->cmd->out_fd == -1)
-    	return (0);
+		return (0);
 	if (shell->cmd->in_fd != -2)
 	{
 		close(shell->cmd->in_fd);

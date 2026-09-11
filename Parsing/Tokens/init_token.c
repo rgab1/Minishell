@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:25:07 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/11 17:32:23 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 17:55:46 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,3 @@ int	expand_tokens(t_tokens *tokens, t_shell *shell)
 	}
 	return (0);
 }
-

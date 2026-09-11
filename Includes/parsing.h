@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 08:28:38 by hrhalmi           #+#    #+#             */
-/*   Updated: 2026/09/11 17:32:48 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 17:59:36 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_cmd				*create_cmd_struct(t_tokens *nodes, t_shell *shell);
 int					manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab);
 t_cmd				*manage_cmd(t_tokens **tokens, t_shell *shell, int *j_tab,
 						int *i_heredoc);
-int					sort_redir(t_tokens **tokens, t_shell *shell, int *i_heredoc);
+int					sort_redir(t_tokens **tokens, t_shell *shell,
+						int *i_heredoc);
 
 // check_syntaxe.c
 int					check_syntax(t_tokens *tokens);
@@ -84,20 +85,22 @@ void				repair_fd_in(int fd, t_cmd *cmd);
 void				repair_fd_out(int fd, t_cmd *cmd);
 
 // change_fd.c
-int						manage_fd(t_tokens **tokens, t_shell *shell, int *i_heredoc);
-int						change_fd_redir(t_tokens **tokens, size_t redir,
-						t_cmd *cmd);
-int						change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd);
-int						change_fd_hredir_in(t_tokens **tokens, t_shell *shell,
+int					manage_fd(t_tokens **tokens, t_shell *shell,
 						int *i_heredoc);
-int						change_heredoc_extension(t_tokens **tokens, t_shell *shell,
+int					change_fd_redir(t_tokens **tokens, size_t redir,
+						t_cmd *cmd);
+int					change_fd_aredir_out(t_tokens **tokens, t_cmd *cmd);
+int					change_fd_hredir_in(t_tokens **tokens, t_shell *shell,
+						int *i_heredoc);
+int					change_heredoc_extension(t_tokens **tokens, t_shell *shell,
 						char *namefile);
 
 // change_fd_heredoc
 int					make_heredoc(t_tokens **tokens, t_shell *shell);
 char				*name_file_hc(int *i_heredoc);
 int					line_null_by_sigint_heredc(char *line);
-void				manage_expand_heredc(t_tokens **tokens, t_shell *shell, char *line);
+void				manage_expand_heredc(t_tokens **tokens, t_shell *shell,
+						char *line);
 
 /*
 char				*get_key(unsigned char *src, t_env *env, int *i);

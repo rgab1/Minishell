@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassmou <hassmou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 10:15:34 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/09 23:15:33 by hassmou          ###   ########.fr       */
+/*   Updated: 2026/09/11 17:57:14 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	search_symbols(char const *s, size_t *i, size_t *count)
 
 void	search_redir_in(char const *s, size_t *i, size_t *count)
 {
-	if ((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB
-		&& s[(*i) - 1] != '\n')
+	if ((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB && s[(*i)
+			- 1] != '\n')
 		(*count)++;
 	(*i)++;
 	if (s[(*i)] && s[(*i)] == '<')
@@ -39,8 +39,8 @@ void	search_redir_in(char const *s, size_t *i, size_t *count)
 
 void	search_redir_out(char const *s, size_t *i, size_t *count)
 {
-	if ((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB
-		&& s[(*i) - 1] != '\n')
+	if ((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB && s[(*i)
+			- 1] != '\n')
 		(*count)++;
 	(*i)++;
 	if (s[(*i)] && s[(*i)] == '>')
@@ -52,9 +52,8 @@ void	search_redir_out(char const *s, size_t *i, size_t *count)
 
 void	search_pipe(char const *s, size_t *i, size_t *count)
 {
-	if (((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB
-		&& s[(*i) - 1] != '\n')
-		&& s[(*i) - 1] != '|')
+	if (((*i) != 0 && s[(*i) - 1] != ESPACE && s[(*i) - 1] != TAB && s[(*i)
+				- 1] != '\n') && s[(*i) - 1] != '|')
 		(*count)++;
 	(*i)++;
 	if (s[(*i)] && s[(*i)] != ESPACE && s[(*i)] != TAB && s[(*i)] != '\n')

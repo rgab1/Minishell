@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 21:46:40 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/08 21:17:14 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 17:56:08 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	manage_pipe(t_tokens **nodes, t_cmd **cmd, int *j_tab)
 	return (0);
 }
 
-t_cmd	*manage_cmd(t_tokens **tokens, t_shell *shell, int *j_tab, int *i_heredoc)
+t_cmd	*manage_cmd(t_tokens **tokens, t_shell *shell, int *j_tab,
+	int *i_heredoc)
 {
 	while (*tokens && (*tokens)->type != PIPE)
 	{

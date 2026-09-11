@@ -6,7 +6,7 @@
 /*   By: hrhalmi <hrhalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 05:06:57 by hassmou           #+#    #+#             */
-/*   Updated: 2026/09/10 18:38:55 by hrhalmi          ###   ########.fr       */
+/*   Updated: 2026/09/11 17:56:29 by hrhalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	make_heredoc(t_tokens **tokens, t_shell *shell)
 
 void	manage_expand_heredc(t_tokens **tokens, t_shell *shell, char *line)
 {
-	t_tokens token_leurre;
+	t_tokens	token_leurre;
 
 	if ((*tokens)->was_quotes == 0)
 	{
